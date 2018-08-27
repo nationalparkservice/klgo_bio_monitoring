@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# klgo.cws.assessment
+# klgo_bio_monitoring
 
 This repository contains the data and code for our paper:
 
@@ -31,7 +31,7 @@ Reynolds, Joel H., Ward, Madeleine (`r format(Sys.Date(), "%Y")`). _Compendium o
 
 You can download the compendium as a zip from from this URL: </archive/master.zip>
 
-Or you can install this compendium as an R package, klgo.cws.assessment, from GitHub with:
+Or you can install this compendium as an R package, klgo_bio_monitoring, from GitHub with:
 ### Licenses
 
 **Text and figures :**  [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
