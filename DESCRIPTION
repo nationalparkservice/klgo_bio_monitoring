@@ -1,0 +1,27 @@
+Package: klgo.cws.assessment
+Version: 0.0.0.9000
+Title: Assessment of the Coastal Waterbird Monitoring Program at Klondike Goldrush NHP
+Description: This research compendium contains an assessment of the Klondike Goldrush National Historical Park's 
+"Coastal Waterbird Survey", a program staff have conducted since 2003 for monitoring coastal waterbird species 
+distribution and abundance multiple times each year from late April through late September.  The assessment 
+addressed four broad topics following the major Phases of a monitoring program (Reynolds et al. 2016): 
+(i) why - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring 
+well articulated? Do they remain relevant and important?
+(ii) how - [Data Collection Design] Does the monitoring data collection design effectively addresses the 
+information objectives? Given interim learning regarding system characteristics and improvements in measurement 
+technologies, are the information goals (including accuracy and precision goals), actually feasible? If so, can 
+the data collection be made more efficient, reducing the observation burden on staff resources?  
+(iii) how - [Data Analysis Design] Do the data analysis methods effectively address the information objectives?
+Are more informative analyses available given interim improvements in methods? 
+(iv) how - [Workflows & Reporting] Are workflows and related software systems in place to allow timely, and efficient, 
+data management, analysis updating, reporting, and distribution of findings to target audiences of information users?  
+The assessment addressed all four topics but focused predominantly on topics (i), (ii), and (iii), with
+suggested follow on analyses to consider addressing under topic (iv).
+
+Authors@R: person("Joel", "Reynolds", "joel_reynolds@nps.gov", c("aut", "cre")),
+person("Madeleine", "Ward", "wardmadeleinec@gmail.com", c("aut", "cre"))
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Imports: bookdown, knitr, ggplot2, tidy
