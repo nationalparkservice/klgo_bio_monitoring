@@ -2,7 +2,7 @@
 title: "Assessment of the KLGO Coastal Waterbird Survey Monitoring Program"
 author:
   - name: Joel H. Reynolds^[U.S. National Park Service, Alaska Region, Natural Resources Science Team]
-  - name: Madeleine Ward^[Swathmore College, Dept. of Mathematics and Statistics]
+  - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: word_document
 
