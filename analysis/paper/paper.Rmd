@@ -107,13 +107,13 @@ This protocol addresses one monitoring question with three objectives: (1) what 
 
 Though not explicitly characterized in the protocol or reports reviewed for this assessment (Table 1), the following target audiences and information users were identified through conversations with KLGO staff, partners, and other waterbird researchers and stakeholders in Alaska.
 
-Recommendations:
+### Recommendations:
 
 Potential Follow Up Activities:
 
- 
-Define the Target Audiences for the information and their Objectives in using the information
-Decision Makers
+Define the _Target Audiences_ for the information and their Objectives in using the information
+
+_Decision Makers_
 Who are target audiences for this information?
 Who uses it or may use it?
 Local contact: C. Elaine Furbish, Skagway Bird Club, Google Site
@@ -126,7 +126,7 @@ Used in quarterly regional ‘significant bird observations’, which in turn is
 Queries to Heather Renner & Robin Corcoran re: PSG-type users, etc.
 Opportunity for community based monitoring to track projected spp impacts of climate change, change in phenology, occurrence, abundance, etc.?
 
-Decisions
+_Decisions_
 What types of decisions is it / will it be used for?
 (specify for each target audience/ end user)
 No specific decisions
@@ -206,7 +206,7 @@ Include a written summary of the literature upon which the conceptual model is b
 
 Summarize the management or policy decisions the monitoring is to inform (if any) based on 3.c.
 
-Phase 2 - Monitoring & Analysis Design
+## Phase 2 - Monitoring & Analysis Design
 HOW monitor? Clarify the various design choices.
  
 Clarify rationale for monitoring versus some other means of addressing the information objectives (e.g., literature review, controlled experiment, etc.), and type of monitoring being undertaken (status & trends or surveillance, threshold, effectiveness, or adaptive management).
@@ -215,9 +215,7 @@ Clarify rationale for monitoring versus some other means of addressing the infor
 Questions: Why? What are information goals & objectives?
 What sort of observations would trigger action? What actions?
 
-
-
-Survey Design 
+### Survey Design 
 Species: 
 Targets: loons, grebes, cormorants, herons, ducks, geese, plovers, sandpipers, gull, alcids, [kingfishers]
 Questions: clarify role of kingfishers.
@@ -227,8 +225,8 @@ Questions: are these all migratory? Any year-round residents? Any of special con
 Any especially problematic for detection on water or identification of spp?
 
 
-Target Frame - space, time, scale, target populations
-Spatial: Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
+*Target Frame* - space, time, scale, target populations
+*Spatial* Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
 
 
 Hahr & Trapp (2004), pg 13: Areas of coastline that were visible from public access points
@@ -252,15 +250,17 @@ the observation points and census units were created for use in the park’s GIS
 All data, original data forms, and field notes were archived at KLGO.
 
 
-Temporal: ??how define ‘season’??
-Questions: what is cue to start of survey season?
-Diagnostic analysis => check initial counts x spp
+*Temporal* ??how define ‘season’??
 
-Sample Frame - 
+Questions: what is cue to start of survey season?
+*Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
+
+*Sample Frame* 
 Spatial: same coverage as Target Frame. Area split into eight survey areas (see Hahr & Trapp 2004).
 Questions: Access to all units? Ease of observation of different units? Ease of distinguishing boundaries?
-Diagnostic analysis => value of all units - only some spp in unit X?; “unit by species occurrence” relationships?
-Sample Selection process - any strata or clusters? Two-stage processes? Probabilistic selection? [get in to enumerative vs analytical distinction of Deming?]
+*Madeleine later* Diagnostic analysis => value of all units - only some spp in unit X?; “unit by species occurrence” relationships?
+
+*Sample Selection process* - any strata or clusters? Two-stage processes? Probabilistic selection? [get in to enumerative vs analytical distinction of Deming?]
 Currently survey all of frame (‘census’ of units); no spatial sampling uncertainty. 
 All spatial uncertainty comes from Observation Process and detection issues.
 Temporal sampling uncertainty remains.
@@ -269,9 +269,8 @@ Questions: feasible to reduce # of units? See Qs above about ‘unique contribut
 Diagnostic analysis => any ‘representative’ units? How would that be defined?
 
 
-Survey timing 
+*Survey timing* 
 Per season -
-
 
 Questions: how define when to begin surveys? Zeros? Triggering events?
 Potential confounding factors? (changes in phenology, ClCh); important objective or confounder? Design options for addressing?
@@ -323,22 +322,29 @@ Audubon AK spp of concern? See Audubon Climate Report. Relevant spp (intersectio
 
 
 
-Observation Process
+###Observation Process
 Question: 
 How determine boundaries? Visual markers.
 How handle movement of birds into and out of unit? Check SOPs but basically ‘until things stop’. Problem is that that is an accumulating approach that will bias high areas with lots of productive habitat and/or well timed relative to changing tidal conditions and sequencing of survey.
 How handle tendency to record everything of note: e.g., recording observations in neighboring units when really supposed to be focused on this unit. E.g., variation in time observing and effort observing across units & sampling events. This fails to track actual observation activity (time) devoted to each unit as well as preferential bias to overestimate use in areas. Think about Forsell & Zweifelhofer?  Chat w/ Emily & Mark Otto & Andy?
-Covariates - captured & not captured. Value, use in analyses; more reliable alternative data sources; alignment of spatial scales of interest and time scales of interest.
+#### Covariates 
+- captured & not captured. Value, use in analyses; more reliable alternative data sources; alignment of spatial scales of interest and time scales of interest.
+
 Lack of control over time at each site; portion spent traveling between observation points, variation in number of observation points for each site.
+
 Variation in survey effort across sites, across per unit area, across surveys (days), etc.
+
 Major weather conditions (Northerlies, Southerlies) - simplify conditions to these
 Unit 1 - recording and impact of presence & # of cruise ships in dock, helicopter tours, etc., etc., other human disturbances.
+
 Distinguish value of covariates for act of (i) presence/absence assessment, (ii) abundance count, (iii) composition & breeding state.
+
 Check SOP to clarify categorization of conditions.
+
 Temp and wind greatly burden data collection process (slowing down greatly).
 Variation in observer #, training, and skill across surveys, across years
 
-Diagnostic analyses =>
+*Madeleine early* Diagnostic analyses =>
 .distribution of time duration at each site by date and year
 .correlation across units?
 .average surface area per unit
@@ -346,7 +352,7 @@ Diagnostic analyses =>
 .distribution of observers by survey date by year
 .distribution of observer experience(?)  by survey date by year?
 
-Detection issues associated with survey conditions
+#### Detection issues associated with survey conditions
 .species specific counts w/in season by weather conditions and wave conditions
 .species occurrence by wave conditions & weather conditions
 .species age and composition by wave conditions & weather conditions 
@@ -388,7 +394,7 @@ UAVs?
 Observer training & behavior classification
 Training materials from Kodiak or Homer or Cordova or Haines or Juneau or Yakutat or…?
 
-Species identification issues
+####Species identification issues
 Priority ID concerns:
 Commonly encountered species that can be difficult
 Work with Elaine & Heather & Laura to develop list of commonly confused species based on those commonly encountered (database or Skagway Bird Club sightings)
@@ -405,7 +411,7 @@ Summary Metrics
 Confounding factors & Covariates
 
 
-Analysis Design
+###Analysis Design
 Priority 
 Summaries of interest 
 (tie to Conceptual Model and Information Objectives)
@@ -429,7 +435,7 @@ Reiterate targets for ‘local’ inference vrs contribution to regional trends 
 1 Biotech conducts just this & amphi monitoring.
 
 
-Data Management & Reporting Structures / Software / Workflows
+### Data Management & Reporting Structures / Software / Workflows
 Data Models
 Design Requirements / User reporting needs
 
