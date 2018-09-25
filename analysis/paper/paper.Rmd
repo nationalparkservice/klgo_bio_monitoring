@@ -1,20 +1,20 @@
 ---
 title: "Assessment of the KLGO Coastal Waterbird Survey Monitoring Program"
 author:
-  - name: Joel H. Reynolds^[U.S. National Park Service, Alaska Region, Natural Resources Science Team]
-  - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
+ - name: Joel H. Reynolds^[U.S. National Park Service, Alaska Region, Natural Resources Science Team]
+ - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: word_document
+output: 
+ word_document:
+  toc: TRUE
+#  number_sections: TRUE
+bibliography: KLGOCWS_References.bib
+link-citations: yes
+ 
+abstract: The Coastal Waterbird Survey has been conducted, with varying levels of effort and in-season frequency, since 2003 [@Surdyk2018]. The area of interest has been divided into eight contiguous survey units; on each survey, at each unit the number, age, composition (sex), breeding status, and noteworthy behavioral observations are recorded for each species [@Anonymous2009]. Given the constraints on personnel, time, and budgets, it is imperative that surveys be conducted efficiently in terms of both choice of sampling design and choice of sampling effort. Now that KLGO has multiple years of experience implementing the protocol, it is timely to step back and assess how things are going. We review the current survey program’s objectives,  design, identify statistical issues, and recommend potential solutions. Major topics include …. The study concludes with a series of recommended tasks that the park should undertake to improve the coastal waterbird survey’s efficiency and effectiveness.
 
-abstract: |
-The Coastal Waterbird Survey has been conducted, with varying levels of effort and in-season frequency, since 2003 (CITE). The area of interest has been divided into eight contiguous survey units; on each survey, at each unit the number, age, composition (sex), breeding status, and noteworthy behavioral observations are recorded for each species (KLGO 2009b).
-
-Given the constraints on personnel, time, and budgets, it is imperative that surveys be conducted efficiently in terms of both choice of sampling design and choice of sampling effort. Now that KLGO has multiple years of experience implementing the protocol, it is timely to step back and assess how things are going. We review the current survey program’s objectives,  design, identify statistical issues, and recommend potential solutions. Major topics include …. The study concludes with a series of recommended tasks that the park should undertake to improve the coastal waterbird survey’s efficiency and effectiveness.
-
-keywords: |
-  keyword 1; keyword 2; keyword 3
-highlights: |
-  These are the highlights. 
+keywords:
+ keyword 1; keyword 2; keyword 3
 ---
 
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
@@ -30,17 +30,16 @@ knitr::opts_chunk$set(
   fig.path = "../figures/"
 )
 
-library(klgo.cws.assessment) # Or use devtools::load_all('.', quiet = T) if your code is in script files, rather than as functions in the `/R` diretory
 ```
 
 # Introduction
-Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program ([@Lindenmeyer 2009]) and are an important and distinct phase to promote program, and institutional, learning and evolution ([@Reynolds2016]).  
+Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer 2009] and are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016].  
 
-Assessing a monitoring program focuses on four broad topics  following the major Phases of a monitoring program (ibid): 
-(i) why - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?
-(ii) how - [Data Collection Design] Does the monitoring data collection design effectively addresses the information objectives? Given interim learning regarding system characteristics and improvements in measurement technologies, are the information goals (including accuracy and precision goals), actually feasible? If so, can the data collection be made more efficient, reducing the observation burden on staff resources?  
-(iii) how - [Data Analysis Design] Do the data analysis methods effectively address the information objectives? Are more informative analyses available given interim improvements in methods? 
-(iv) how - [Workflows & Reporting] Are workflows and related software systems in place to allow timely, and efficient, data management, analysis updating, reporting, and distribution of findings to target audiences of information users?  
+Assessing a monitoring program focuses on four broad topics  following the major Phases of a monitoring program (ibid):  
+1. _why_ - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?  
+2. _how_ - [Data Collection Design] Does the monitoring data collection design effectively addresses the information objectives? Given interim learning regarding system characteristics and improvements in measurement technologies, are the information goals (including accuracy and precision goals), actually feasible? If so, can the data collection be made more efficient, reducing the observation burden on staff resources?  
+3. _how_ - [Data Analysis Design] Do the data analysis methods effectively address the information objectives? Are more informative analyses available given interim improvements in methods?  
+4. _how_ - [Workflows & Reporting] Are workflows and related software systems in place to allow timely, and efficient, data management, analysis updating, reporting, and distribution of findings to target audiences of information users?  
 
 This assessment addressed all four topics, but focused predominantly on topics (i) Problem Framing & Information Objectives, (ii) Data Collection Design, and (iii) Data Analysis Design.  Since the former topic (Problem Framing & Information Objectives) determines the relevancy of many of the potential assessment actions related to the latter topics (Data Collection and Analysis Designs, Workflows & Reporting), therefore  the assessment was drafted as a first stage of an iterative effort, providing high level feedback, including listings of potential detailed syntheses and workflow enhancement activities (such as improved database interface, automation of annual analyses and updating of syntheses, etc.).  With this foundation, further dialogue with KLGO staff regarding relevant Problem Framing & Information Objectives and other priorities will determine which follow-on activities to pursue. 
 
@@ -51,31 +50,28 @@ This assessment addressed all four topics, but focused predominantly on topics (
 
 # Background
 
-```{r demo, eval = FALSE}
-1 + 1
-```
 
 # Methods
-This assessment compared the CWS monitoring program against a recommended checklist of monitoring program components (Appendix 1).  The checklist was developed from published literature (Reynolds 2012; Reynolds et al. 2016). It identifies multiple component decisions associated with each of the major Phases of a monitoring program (briefly overviewed above).  For each component, the relevant aspects of the current CWS were reviewed, potential issues identified, potentially informative diagnostic analyses suggested, and recommendations provided.  The characterization of the CWS was based on KLGO protocols and reports (Table 1), a site visit (6/4-6/2018) and personal communications with the KLGO Natural Resources Program Manager (Jami Belt, winter and spring 2018), KLGO Resources Manager (Anne Matsov, summer 2018) and long-standing survey participants (Elaine Furbish, Skagway Bird Club, spring and summer 2018).
+This assessment compared the CWS monitoring program against a recommended checklist of monitoring program components (Appendix 1).  The checklist was developed from published literature [@Reynolds2012; @Reynolds2016]. It identifies multiple component decisions associated with each of the major Phases of a monitoring program (briefly overviewed above).  For each component, the relevant aspects of the current CWS were reviewed, potential issues identified, potentially informative diagnostic analyses suggested, and recommendations provided.  The characterization of the CWS was based on KLGO protocols and reports (Table 1), a site visit (6/4-6/2018) and personal communications with the KLGO Natural Resources Program Manager (Jami Belt, winter and spring 2018), KLGO Resources Manager (Anne Matsov, summer 2018) and long-standing survey participants (Elaine Furbish, Skagway Bird Club, spring and summer 2018).
 
 # Assessment Results
 ## Phase 1 - Problem Framing and Information Objectives
 *WHY* monitor? What potential decisions and issues should the observations inform?
 
 
-The management problem or question motivating the need for information about coastal waterbirds provides the foundation for the survey’s data collection and analysis designs (Fancy et al. 2009).  It clarifies the underlying goal of the monitoring program and answers “Why is this an important problem or question?”. 
+The management problem or question motivating the need for information about coastal waterbirds provides the foundation for the survey’s data collection and analysis designs [@Fancy2009].  It clarifies the underlying goal of the monitoring program and answers “Why is this an important problem or question?”. 
 
-A robust problem definition should include, among other aspects, the temporal and geographic scope of the problem; who has the authority to make decisions that could resolve or address the problem; what information about the resource is needed to improve the decision making (the information needs); and who are the stakeholders that are impacted by the decision and/or interested in the monitoring information. Stakeholder identification should include interested parties and their information needs in both near-term - for example, park interpretation and visitor education activities, as well as long-term - for example, regional-scale changes in migration patterns or assessment and improvement of projected climate change impacts on avifauna (e.g., Wu et al. 2018). A good understanding of multiple information needs and pathways to influence decision making will guide the required data analyses and reporting and outreach. 
+A robust problem definition should include, among other aspects, the temporal and geographic scope of the problem; who has the authority to make decisions that could resolve or address the problem; what information about the resource is needed to improve the decision making (the information needs); and who are the stakeholders that are impacted by the decision and/or interested in the monitoring information. Stakeholder identification should include interested parties and their information needs in both near-term - for example, park interpretation and visitor education activities, as well as long-term - for example, regional-scale changes in migration patterns or assessment and improvement of projected climate change impacts on avifauna [e.g., @Wu2018]. A good understanding of multiple information needs and pathways to influence decision making will guide the required data analyses and reporting and outreach. 
 
-The information needs are what the monitoring effort aims to address (Reynolds 2012). 
-Even when the focus is simply the status and trend of a resource, there is an unstated expectation that someone will endeavor to achieve or maintain a desirable state or reverse an undesirable trend (Reynolds et al. 2016). Whomever has that responsibility and authority (person, office, or organization) is a priority stakeholder. They should not only receive the reports but also allowed an opportunity to clarify their information needs, including the desired precision and quality of information, the timing and format of reporting, and better understand what information is feasible to obtain (Averill et al. 2010).
+The information needs are what the monitoring effort aims to address [@Reynolds2012]. 
+Even when the focus is simply the status and trend of a resource, there is an unstated expectation that someone will endeavor to achieve or maintain a desirable state or reverse an undesirable trend [@Reynolds2016]. Whomever has that responsibility and authority (person, office, or organization) is a priority stakeholder. They should not only receive the reports but also allowed an opportunity to clarify their information needs, including the desired precision and quality of information, the timing and format of reporting, and better understand what information is feasible to obtain (Averill et al. 2010).
 
 ### Assessment findings:
-The 2003 coastal waterbird inventory and survey design were developed to address a top priority bird inventory need of the Southeast Alaska Inventory and Monitoring Network (Sharman et al. 2000) - namely, an inventory of waterfowl/shorebirds at KLGO (Hahr and Trapp 2004).  This was deemed a priority due to the area’s expected avifaunal richness (NABCI 2000) and the limited availability of reliable observation records - mainly consisting of systematic surveys conducted by NPS staff in the early 1980s (Hahr and Trapp 2004).
+The 2003 coastal waterbird inventory and survey design were developed to address a top priority bird inventory need of the Southeast Alaska Inventory and Monitoring Network (Sharman et al. 2000) - namely, an inventory of waterfowl/shorebirds at KLGO [@Hahr2004].  This was deemed a priority due to the area’s expected avifaunal richness (NABCI 2000) and the limited availability of reliable observation records - mainly consisting of systematic surveys conducted by NPS staff in the early 1980s [@Hahr2004].
 
 The goal of the inventory was to document the occurrence of 90% of the species of waterbirds likely to occur in KLGO (ibid). The principal objectives were “ to develop scientifically valid sampling designs for inventorying waterbirds and breeding landbirds in KLGO, and to collect baseline information on bird species occurrence, distribution, abundance, and habitat associations in the park…[to] ...provide park managers with timely information that facilitates land management planning, helps track wildlife population and ecosystem change over time, and keeps resource managers apprised of changes that may require action before a crisis occurs” (ibid).
 
-The coastal waterbird surveys have been continued since 2003 (Surdyk and XXXX 2018)
+The coastal waterbird surveys have been continued since 2003 [@Surdyk2018].
 
 Hahr and Trapp (2004) Quotes:
 upper Taiya Inlet
@@ -229,7 +225,7 @@ Any especially problematic for detection on water or identification of spp?
 *Spatial* Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
 
 
-Hahr & Trapp (2004), pg 13: Areas of coastline that were visible from public access points
+[@Hahr2004], pg 13: Areas of coastline that were visible from public access points
 between Skagway and the Taiya River delta were divided into eight census units
 and surveyed once per week in late April and May and bi-weekly during late
 summer and fall (August – mid September) (Figure 5). Surveys were conducted
@@ -256,7 +252,7 @@ Questions: what is cue to start of survey season?
 *Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
 
 *Sample Frame* 
-Spatial: same coverage as Target Frame. Area split into eight survey areas (see Hahr & Trapp 2004).
+Spatial: same coverage as Target Frame. Area split into eight survey areas [see @Hahr2004].
 Questions: Access to all units? Ease of observation of different units? Ease of distinguishing boundaries?
 *Madeleine later* Diagnostic analysis => value of all units - only some spp in unit X?; “unit by species occurrence” relationships?
 
