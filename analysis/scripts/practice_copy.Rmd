@@ -1,0 +1,36 @@
+---
+title: "Practice"
+author: "Madeleine"
+date: "9/19/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#libraries
+library(readr)
+library(dbplyr)
+library(dplyr)
+library(odbc)
+#path is local
+#specify odbc as backend
+#might also need to specify driver?
+data_base <- DBI::dbConnect(odbc::odbc(), path = "~/klgo_bio_monitoring/analysis/data/raw_data")
+```
+
+```{r}
+#name tables
+dbListTables(data_base)
+#all code like this gets blanks
+test <- dbGetQuery(data_base, SELECT * FROM "Field_Data")
+
+#creates data frame - can use tidyverse instead?
+#here's an example
+field_data <- dbReadTable(data_base, "Field_Data")
+new_data <- field_data %>%
+  group_by(Species, Breeding_Status) %>%
+  summarize(count = n())
+```
