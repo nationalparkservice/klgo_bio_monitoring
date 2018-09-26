@@ -1,0 +1,7 @@
+ID,Composition,Description
+1,"M","Male"
+2,"F","Female"
+3,"Juv","Juvenile"
+4,"F/Juv","Either Female or Juvenile (plumage indecipherable)"
+5,"Mix","Mixed sexes (specific count not possible)"
+6,"Unk","Unknown"

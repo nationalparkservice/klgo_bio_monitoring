@@ -1,0 +1,6 @@
+ID,Age,Description
+1,"Ad","Adult"
+2,"Imm","Immature"
+3,"Juv","Juvenile"
+4,"Mix","Mixed ages (specific count not possible)"
+5,"Unk","Unknown"

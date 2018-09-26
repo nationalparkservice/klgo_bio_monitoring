@@ -1,0 +1,4 @@
+ID,code,tide_state
+1,"R","Rising"
+2,"F","Falling"
+3,"U","Unknown"
