@@ -30,6 +30,8 @@ knitr::opts_chunk$set(
   fig.path = "../figures/"
 )
 
+library(dply);library(ggplot2);library(dbplyr);
+
 ```
 
 # Introduction
@@ -212,6 +214,17 @@ Questions: Why? What are information goals & objectives?
 What sort of observations would trigger action? What actions?
 
 ### Survey Design 
+
+*Target Frame* - space, time, scale, target populations
+*Spatial* Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
+
+```{r DataInput, eval=TRUE, echo=FALSE, cache=TRUE}
+if (system("git config user.email")=="mward2@swarthmore.edu") source("./scripts/data_retrievalSwarthmore.R")
+else source("./scripts/data_retrievalNPS.R")
+
+
+```
+
 Species: 
 Targets: loons, grebes, cormorants, herons, ducks, geese, plovers, sandpipers, gull, alcids, [kingfishers]
 Questions: clarify role of kingfishers.
@@ -219,10 +232,6 @@ Questions: clarify role of kingfishers.
 Incidental: 48 other spp
 Questions: are these all migratory? Any year-round residents? Any of special concern? 
 Any especially problematic for detection on water or identification of spp?
-
-
-*Target Frame* - space, time, scale, target populations
-*Spatial* Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
 
 
 [@Hahr2004], pg 13: Areas of coastline that were visible from public access points
