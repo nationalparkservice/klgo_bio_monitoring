@@ -219,10 +219,12 @@ What sort of observations would trigger action? What actions?
 *Spatial* Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
 
 ```{r DataInput, eval=TRUE, echo=FALSE, cache=TRUE}
-if (system("git config user.email")=="mward2@swarthmore.edu") source("./scripts/data_retrievalSwarthmore.R")
-else source("./scripts/data_retrievalNPS.R")
+# if (system("git config user.email")=="mward2@swarthmore.edu") source("./scripts/data_retrievalSwarthmore.R")
+# else source("./scripts/data_retrievalNPS.R")
 
-
+###########
+# MADELEINE WILL REPLACE WITH CODE TO VARIOUS TABLES FROM CSV FILES
+###########
 ```
 
 Species: 
@@ -448,7 +450,11 @@ Design Requirements / User reporting needs
 Elaine: Can put stuff in but can’t get it out of existing ACCESS db. Problematic. Bottleneck for analyses and summaries.
 Ebird - boundaries don’t include Skagway burough. Rather, formerly unincorporated area including Skagway, Haines, and Angoon - too broad, not useful.
 
-Recommendations: work with GIS shop to clean up db, improve reporting & query support; shiny app; reproducible research scripts to generate automatic reports? Shiny app to interface?
+The current database is written in Microsoft Access version XX for 32-bit operating systems. Software and machine operating systems have advanced enough for this to cause unnecessary burdens for accessing and importing the data for analysis and reporting in common statistical analysis environments (e.g., R). Recommend the Park request the ARO GIS shop to convert the database to an uptodate software. 
+
+*JOEL: Talk to Angie about what this would entail.*
+
+_Recommendations_ work with GIS shop to clean up db, improve reporting & query support; shiny app; reproducible research scripts to generate automatic reports? Shiny app to interface?
 
 
 
