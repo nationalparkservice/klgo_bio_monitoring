@@ -7,9 +7,16 @@
 ########
 
 path = "./analysis/data/raw_data/CSVs/"
-file_names <- dir(path)
+
+#retrieve file names with full path included
+file_names <- dir(path, full.names = TRUE)
 library(readr)
 for(i in 1:length(file_names)){
-  print(file_names[i])
-  read_csv(file_names[i]) #this gets an error
+
+  #remove path and .csv from tibble name
+  title <- gsub(".*/", "", file_names[i])
+  title <- gsub(".csv", "", title)
+
+  #assign tibble names to data frames
+  assign(title, read_csv(file_names[i]))
 }
