@@ -1,20 +1,30 @@
 ---
 title: "Assessment of the KLGO Coastal Waterbird Survey Monitoring Program"
 author:
- - name: Joel H. Reynolds^[U.S. National Park Service, Alaska Region, Natural Resources Science Team]
- - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
+- name: Joel H. Reynolds^[U.S. National Park Service, Alaska Region, Natural Resources
+    Science Team]
+- name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: 
- word_document:
-  toc: TRUE
-#  number_sections: TRUE
-bibliography: KLGOCWS_References.bib
+output:
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
+keywords: keyword 1; keyword 2; keyword 3
 link-citations: yes
- 
-abstract: The Coastal Waterbird Survey has been conducted, with varying levels of effort and in-season frequency, since 2003 [@Surdyk2018]. The area of interest has been divided into eight contiguous survey units; on each survey, at each unit the number, age, composition (sex), breeding status, and noteworthy behavioral observations are recorded for each species [@Anonymous2009]. Given the constraints on personnel, time, and budgets, it is imperative that surveys be conducted efficiently in terms of both choice of sampling design and choice of sampling effort. Now that KLGO has multiple years of experience implementing the protocol, it is timely to step back and assess how things are going. We review the current survey program’s objectives,  design, identify statistical issues, and recommend potential solutions. Major topics include …. The study concludes with a series of recommended tasks that the park should undertake to improve the coastal waterbird survey’s efficiency and effectiveness.
-
-keywords:
- keyword 1; keyword 2; keyword 3
+bibliography: KLGOCWS_References.bib
+abstract: The Coastal Waterbird Survey has been conducted, with varying levels of
+  effort and in-season frequency, since 2003 [@Surdyk2018]. The area of interest has
+  been divided into eight contiguous survey units; on each survey, at each unit the
+  number, age, composition (sex), breeding status, and noteworthy behavioral observations
+  are recorded for each species [@Anonymous2009]. Given the constraints on personnel,
+  time, and budgets, it is imperative that surveys be conducted efficiently in terms
+  of both choice of sampling design and choice of sampling effort. Now that KLGO has
+  multiple years of experience implementing the protocol, it is timely to step back
+  and assess how things are going. We review the current survey programâ€™s objectives,  design,
+  identify statistical issues, and recommend potential solutions. Major topics include
+  â€¦. The study concludes with a series of recommended tasks that the park should
+  undertake to improve the coastal waterbird surveyâ€™s efficiency and effectiveness.
 ---
 
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
@@ -30,9 +40,11 @@ knitr::opts_chunk$set(
   fig.path = "../figures/"
 )
 
-library(dply);library(ggplot2);library(dbplyr);
+library(dplyr);library(ggplot2);library(dbplyr);library(readr)
 
 ```
+# Things To Discuss
+- add all libraries used in scripts to 'setup' code chunk (just above) rather than just loading in script so that it is easy to see what needs to be loaded before you can successfully knit.
 
 # Introduction
 Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer 2009] and are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016].  
@@ -60,7 +72,6 @@ This assessment compared the CWS monitoring program against a recommended checkl
 ## Phase 1 - Problem Framing and Information Objectives
 *WHY* monitor? What potential decisions and issues should the observations inform?
 
-
 The management problem or question motivating the need for information about coastal waterbirds provides the foundation for the survey’s data collection and analysis designs [@Fancy2009].  It clarifies the underlying goal of the monitoring program and answers “Why is this an important problem or question?”. 
 
 A robust problem definition should include, among other aspects, the temporal and geographic scope of the problem; who has the authority to make decisions that could resolve or address the problem; what information about the resource is needed to improve the decision making (the information needs); and who are the stakeholders that are impacted by the decision and/or interested in the monitoring information. Stakeholder identification should include interested parties and their information needs in both near-term - for example, park interpretation and visitor education activities, as well as long-term - for example, regional-scale changes in migration patterns or assessment and improvement of projected climate change impacts on avifauna [e.g., @Wu2018]. A good understanding of multiple information needs and pathways to influence decision making will guide the required data analyses and reporting and outreach. 
@@ -81,8 +92,7 @@ The park contains excellent breeding and migration habitat for landbirds and wat
 
 We recommend that bird species distributions, habitat associations, and abundances continue to be monitored in the park’s regionally and internationally important bird habitats, and that KLGO continue to contribute to the ALMS effort. 
 
-The park should formalize a waterbird migration monitoring protocol for the Taiya River estuary and seek assistance from local area birders to expand this effort beyond the park boundary in order to encompass more of the upper Taiya Inlet. Many of the undocumented bird species on the park’s expected species list are waterbirds, most notably shorebirds. Monitoring of spring waterbird migration, especially during the brief period when shorebirds are present, is highly
-recommended. Adding additional bird species to the park’s list will be difficult because the remaining undocumented species are apparently uncommon, may occur in low numbers, or appear irregularly or accidentally in the park.
+The park should formalize a waterbird migration monitoring protocol for the Taiya River estuary and seek assistance from local area birders to expand this effort beyond the park boundary in order to encompass more of the upper Taiya Inlet. Many of the undocumented bird species on the park’s expected species list are waterbirds, most notably shorebirds. Monitoring of spring waterbird migration, especially during the brief period when shorebirds are present, is highly recommended. Adding additional bird species to the park’s list will be difficult because the remaining undocumented species are apparently uncommon, may occur in low numbers, or appear irregularly or accidentally in the park.
 
 There are no federally listed Threatened or Endangered bird species in KLGO; however, nine Alaska WatchList species have been documented in the park (Table 4). The WatchList identifies at-risk Alaskan bird populations that may be facing population decline, limited geographic range, habitat loss and other threats but are not already protected under the federal Endangered Species Act.
 
@@ -141,18 +151,12 @@ KLGO:
 (easy) - changes in occurrence (spp, season scale); changes in phenology (migration timing, by spp; breeding timing, by spp); broad (order of magnitude) changes in abundance (index); broad (?) changes in composition (by spp & timing of survey)?; species occurrence x unit (~habitat?) - refine expected lists per survey and develop targeted SOP training materials; 
 (harder) - finer changes in abundance; finer changes in composition and age; ??? 
 
-
 What Objectives are the decision makers hoping to achieve by using this information?
-
 
 Over what spatial scales is the information being used? 
 e.g., at the park, in the community, regional scale, flyway scale, nationally, internationally
 For each spatial scale of interest, what are the associated time scales of interest for detecting changes?
 E.g., annual, w/in season, spring vs fall, etc.
-
-
-
-
 
 From another report but quotes from Olsen et al. (1999):
 Olsen (et al. 1999) noted that “Most of the thought that goes into a monitoring program should occur at this preliminary planning stage. The objectives guide, if not completely determine the scope of inference of the study and the data collected, both of which are crucial for attaining the stated objectives.” Olsen goes on to say that a “clear and concise statement of monitoring objectives is essential to realize the necessary compromises, select appropriate locations for inclusion in the study, take relevant and meaningful measurements at these locations, and perform analyses that will provide a basis for the conclusions necessary for meeting the stated objectives.”
