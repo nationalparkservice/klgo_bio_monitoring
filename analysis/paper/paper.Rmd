@@ -47,17 +47,15 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr)
 - add all libraries used in scripts to 'setup' code chunk (just above) rather than just loading in script so that it is easy to see what needs to be loaded before you can successfully knit.
 
 # Introduction
-Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer 2009] and are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016].  
+Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer 2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
 
-Assessing a monitoring program focuses on four broad topics  following the major Phases of a monitoring program (ibid):  
+Assessing a monitoring program focuses on four broad topics following the major Phases of a monitoring program (ibid):  
 1. _why_ - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?  
 2. _how_ - [Data Collection Design] Does the monitoring data collection design effectively addresses the information objectives? Given interim learning regarding system characteristics and improvements in measurement technologies, are the information goals (including accuracy and precision goals), actually feasible? If so, can the data collection be made more efficient, reducing the observation burden on staff resources?  
-3. _how_ - [Data Analysis Design] Do the data analysis methods effectively address the information objectives? Are more informative analyses available given interim improvements in methods?  
+3. _how_ - [Data Analysis Design] Do the data analysis methods effectively address the information objectives? Do the data analysis methods properly account for impactful features of the data collection design? Are more informative analyses available given interim improvements in methods?  
 4. _how_ - [Workflows & Reporting] Are workflows and related software systems in place to allow timely, and efficient, data management, analysis updating, reporting, and distribution of findings to target audiences of information users?  
 
-This assessment addressed all four topics, but focused predominantly on topics (i) Problem Framing & Information Objectives, (ii) Data Collection Design, and (iii) Data Analysis Design.  Since the former topic (Problem Framing & Information Objectives) determines the relevancy of many of the potential assessment actions related to the latter topics (Data Collection and Analysis Designs, Workflows & Reporting), therefore  the assessment was drafted as a first stage of an iterative effort, providing high level feedback, including listings of potential detailed syntheses and workflow enhancement activities (such as improved database interface, automation of annual analyses and updating of syntheses, etc.).  With this foundation, further dialogue with KLGO staff regarding relevant Problem Framing & Information Objectives and other priorities will determine which follow-on activities to pursue. 
-
-<!-- relation to existing NPS I&M methods & formats? -->
+This assessment addressed all four topics, but focused predominantly on topics (i) Problem Framing & Information Objectives, (ii) Data Collection Design, and (iii) Data Analysis Design.  Since 'Problem Framing & Information Objectives' determine the relevancy of many of the potential assessment actions related to the other topics,  the assessment was drafted as a first stage of an iterative effort, providing high level feedback, including listings of potential detailed syntheses and workflow enhancement activities (such as improved database interface, automation of annual analyses and updating of syntheses, etc.).  With this foundation, further dialogue with KLGO staff regarding relevant 'Problem Framing & Information Objectives' and other priorities will determine which follow-on activities to pursue. 
 
 <!-- Key Findings / Next Steps -->
 
@@ -66,7 +64,7 @@ This assessment addressed all four topics, but focused predominantly on topics (
 
 
 # Methods
-This assessment compared the CWS monitoring program against a recommended checklist of monitoring program components (Appendix 1).  The checklist was developed from published literature [@Reynolds2012; @Reynolds2016]. It identifies multiple component decisions associated with each of the major Phases of a monitoring program (briefly overviewed above).  For each component, the relevant aspects of the current CWS were reviewed, potential issues identified, potentially informative diagnostic analyses suggested, and recommendations provided.  The characterization of the CWS was based on KLGO protocols and reports (Table 1), a site visit (6/4-6/2018) and personal communications with the KLGO Natural Resources Program Manager (Jami Belt, winter and spring 2018), KLGO Resources Manager (Anne Matsov, summer 2018) and long-standing survey participants (Elaine Furbish, Skagway Bird Club, spring and summer 2018).
+The CWS monitoring program was compared against a recommended checklist of monitoring program components developed from published literature (Appendix 1). It identifies multiple component decisions associated with each of the major Phases of a monitoring program (briefly overviewed above).  For each component, the relevant aspects of the current CWS were reviewed, potential issues identified, potentially informative diagnostic analyses suggested, and recommendations provided.  The characterization of the CWS was based on KLGO protocols and reports (Table 1), a site visit (6/4-6/2018) and personal communications with the KLGO Natural Resources Program Manager (Jami Belt, winter and spring 2018), KLGO Resources Manager (Anne Matsov, summer 2018) and long-standing survey participants (Elaine Furbish, Skagway Bird Club, spring and summer 2018).
 
 # Assessment Results
 ## Phase 1 - Problem Framing and Information Objectives
@@ -76,44 +74,35 @@ The management problem or question motivating the need for information about coa
 
 A robust problem definition should include, among other aspects, the temporal and geographic scope of the problem; who has the authority to make decisions that could resolve or address the problem; what information about the resource is needed to improve the decision making (the information needs); and who are the stakeholders that are impacted by the decision and/or interested in the monitoring information. Stakeholder identification should include interested parties and their information needs in both near-term - for example, park interpretation and visitor education activities, as well as long-term - for example, regional-scale changes in migration patterns or assessment and improvement of projected climate change impacts on avifauna [e.g., @Wu2018]. A good understanding of multiple information needs and pathways to influence decision making will guide the required data analyses and reporting and outreach. 
 
-The information needs are what the monitoring effort aims to address [@Reynolds2012]. 
-Even when the focus is simply the status and trend of a resource, there is an unstated expectation that someone will endeavor to achieve or maintain a desirable state or reverse an undesirable trend [@Reynolds2016]. Whomever has that responsibility and authority (person, office, or organization) is a priority stakeholder. They should not only receive the reports but also allowed an opportunity to clarify their information needs, including the desired precision and quality of information, the timing and format of reporting, and better understand what information is feasible to obtain (Averill et al. 2010).
+The information needs are what the monitoring effort aims to address [@Reynolds2012]. Even when the focus is simply the status and trend of a resource, there is an unstated expectation that someone will endeavor to achieve or maintain a desirable state or reverse an undesirable trend [@Reynolds2016]. Whomever has that responsibility and authority (person, office, or organization) is a priority stakeholder. They should not only receive the reports but also allowed an opportunity to clarify their information needs, including the desired precision and quality of information, the timing and format of reporting, and better understand what information is feasible to obtain (Averill et al. 2010).
 
 ### Assessment findings:
-The 2003 coastal waterbird inventory and survey design were developed to address a top priority bird inventory need of the Southeast Alaska Inventory and Monitoring Network (Sharman et al. 2000) - namely, an inventory of waterfowl/shorebirds at KLGO [@Hahr2004].  This was deemed a priority due to the area’s expected avifaunal richness (NABCI 2000) and the limited availability of reliable observation records - mainly consisting of systematic surveys conducted by NPS staff in the early 1980s [@Hahr2004].
+The 2003 coastal waterbird inventory and survey design was developed to address "a top priority bird inventory (need)" of the Southeast Alaska Inventory and Monitoring Network (Sharman et al. 2000) - namely, an inventory of waterfowl/shorebirds at KLGO [@Hahr2004].  This was deemed a priority due to the area’s expected avifaunal richness [@NABCI2000] and the limited availability of reliable observation records - mainly consisting of systematic surveys conducted by NPS staff in the early 1980s [@Hahr2004].
 
-The goal of the inventory was to document the occurrence of 90% of the species of waterbirds likely to occur in KLGO (ibid). The principal objectives were “ to develop scientifically valid sampling designs for inventorying waterbirds and breeding landbirds in KLGO, and to collect baseline information on bird species occurrence, distribution, abundance, and habitat associations in the park…[to] ...provide park managers with timely information that facilitates land management planning, helps track wildlife population and ecosystem change over time, and keeps resource managers apprised of changes that may require action before a crisis occurs” (ibid).
+The inventory's stated goal was to document the occurrence of 90% of the species of waterbirds likely to occur in KLGO (ibid). The principal objectives were “to develop scientifically valid sampling designs for inventorying waterbirds and breeding landbirds in KLGO, and to collect baseline information on bird species occurrence, distribution, abundance, and habitat associations in the park…[to] ...provide park managers with timely information that facilitates land management planning, helps track wildlife population and ecosystem change over time, and keeps resource managers apprised of changes that may require action before a crisis occurs” (ibid).  While no Threatened or Endangered bird species were known to occur in KLGO, as of 2004, nine species on the Alaska Watchlist had been documented in the park (ibid), thus suggesting potential priority information needs associated with monitoring for changes in those species occurrence and abundance.  Potential secondary objectives mentioned include "investigations into the breeding ecology, phenology, reproductive success and population age structure of KLGO breeding birds" (ibid). Later reports mention additional objectives of estimating changes in species occurrence and composition [@St.Pierre2015], characterizing timing of peak spring waterbird migration and its relation to spring eulachon runs [@Surdyk2017]. 
+
+Stakeholders mentioned or implied in park reports include park superintendent and related managers, those charged with monitoring regional and internationally important bird habitats, the Skagway Bird Club, the Alaska Landbird Monitoring Survey and the Boreal Partners in Flight.   
 
 The coastal waterbird surveys have been continued since 2003 [@Surdyk2018].
 
-Hahr and Trapp (2004) Quotes:
-upper Taiya Inlet
-The park contains excellent breeding and migration habitat for landbirds and waterbirds, most notably the Taiya River riparian Sitka spruce-cottonwood forests and the Taiya River estuary.
 
-We recommend that bird species distributions, habitat associations, and abundances continue to be monitored in the park’s regionally and internationally important bird habitats, and that KLGO continue to contribute to the ALMS effort. 
-
-The park should formalize a waterbird migration monitoring protocol for the Taiya River estuary and seek assistance from local area birders to expand this effort beyond the park boundary in order to encompass more of the upper Taiya Inlet. Many of the undocumented bird species on the park’s expected species list are waterbirds, most notably shorebirds. Monitoring of spring waterbird migration, especially during the brief period when shorebirds are present, is highly recommended. Adding additional bird species to the park’s list will be difficult because the remaining undocumented species are apparently uncommon, may occur in low numbers, or appear irregularly or accidentally in the park.
-
-There are no federally listed Threatened or Endangered bird species in KLGO; however, nine Alaska WatchList species have been documented in the park (Table 4). The WatchList identifies at-risk Alaskan bird populations that may be facing population decline, limited geographic range, habitat loss and other threats but are not already protected under the federal Endangered Species Act.
-
-Investigations into the breeding ecology, phenology, reproductive success, and population age structure of KLGO breeding birds would also yield valuable information on the status of these species, especially those identified on the Alaska WatchList. We intend to use the results of these inventories to create a revised bird checklist and an atlas database for the Taiya and Skagway River watersheds in collaboration with the Skagway Bird Club. The forthcoming Vital Signs Monitoring Program will be a great opportunity for KLGO natural resource managers to review the park’s nascent landbird inventory and monitoring program and determine its future direction.
-
-2014 St. Pierre (2015?) 
-+ new inventory additions
-+ spp composition
-
-2015 Surdyk (2016?)
-Long-term monitoring and baseline inventories help managers to make decisions that meet the National Park Service goal to maintain intact ecosystems in their natural state (Hahr and Trapp 2004).
-
-Timing of peak spring waterbird migration to coincide with eulochon run.
-
-2016 Surdyk & ??? (2017)
-better understand the relationship between waterbird migration and spring eulachon runs.
+QUOTES
+Hahr and Trapp (2004):
+We intend to use the results of these inventories to create a revised bird checklist and an atlas database for the Taiya and Skagway River watersheds in collaboration with the Skagway Bird Club.
 
 This protocol addresses one monitoring question with three objectives: (1) what is the annual nest density and reproductive (fledgling) success in known Hawaiian petrel colonies, (2) what are the long-term trends in colony distribution and density monitored in approximate 5-year intervals, and (3) are these affected by predator control? The first goal of monitoring is to obtain unbiased estimates of Hawaiian petrel nest density and reproductive (fledging) success from known colonies in HAVO and HALE in order to detect changes in colony growth or decline. The second goal of monitoring is to periodically (approximately every five years) obtain unbiased estimates of nest density from potential Hawaiian petrel habitat. This information can be used to assess changes in density and distribution of subcolonies across the landscape. The third goal is to estimate nest density and fledging success in areas undergoing different management regimes to assess effectiveness of management. Benchmark levels of these estimates could serve as warnings of the need for modified management or further investigation of these colonies. 
 
 
 Though not explicitly characterized in the protocol or reports reviewed for this assessment (Table 1), the following target audiences and information users were identified through conversations with KLGO staff, partners, and other waterbird researchers and stakeholders in Alaska.
+(current)
+- park
+- Skagway Bird Club; compiles for addition to 'significant bird observations in SE AK', which gets compiled in to AK sumamries for 'North American Birds' (mainly spp lists)
+(potential)
+- BPIF
+- PSG
+- Audubon Alaska (for IDing Important Bird Areas - though require accurate density estimates)
+- Audubon North America - cliamte species distribution models (Nicole Michel, Brooke Bateman, etc.); esp if associated w/ repeat sites & effort data (date, time of day, duration, distance/area covered) - see Nicole email 6/7/2018. Watchlist of projected changes - [@Wu2018]
+
 
 ### Recommendations:
 
@@ -226,7 +215,10 @@ What sort of observations would trigger action? What actions?
 # if (system("git config user.email")=="mward2@swarthmore.edu") source("./scripts/data_retrievalSwarthmore.R")
 # else source("./scripts/data_retrievalNPS.R")
 
-source("./analysis/scripts/data_retrievalCSVs.R")
+#NOTE: working directory when knitting markup is /analysis/paper. So relative pathway needs to be ../scripts etc.
+
+source("../scripts/data_retrievalCSVs.R")
+
 ```
 
 Species: 
