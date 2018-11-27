@@ -256,6 +256,10 @@ All data, original data forms, and field notes were archived at KLGO.
 Questions: what is cue to start of survey season?
 *Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
 
+```{r}
+source("../scripts/data_exploration.R")
+```
+
 *Sample Frame* 
 Spatial: same coverage as Target Frame. Area split into eight survey areas [see @Hahr2004].
 Questions: Access to all units? Ease of observation of different units? Ease of distinguishing boundaries?
