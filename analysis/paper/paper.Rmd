@@ -420,7 +420,42 @@ Confounding factors & Covariates
 Priority 
 Summaries of interest 
 (tie to Conceptual Model and Information Objectives)
-Associated analyses
+Associated analyses:
+
+Number of species sighted per year: 2003-2016 (source 2 found 2003-2009)
+.Waterbird and non-waterbird species
+.Positive association between species richness and year of survey, when excluding year 2014, which started later than usual. R-squared = .54.
+.Species richness within year: 2016
+.Individual and max. numbers of observed counts for each species for year 2016, with first and last sightings noted.
+.Peak abundance/species richness identified with observed species counts and individual sightings across surveys during 2016 season
+.Peak abundance (May 4) observed to be in tandem with spring euchalon (April 21-)
+.Species richness peaked May 4-11
+
+Observer bias: variation in number of surveys and length of monitoring season
+.2010: No seasonal technician; only sporadic surveys
+.2014: Surveys begun 1 month late (May 22)
+.Across years: observer turnover rate, varying experience
+
+Number of surveys across census units per year (2003-2009) & distribution of survey dates
+
+Percent of expected waterbird and breeding landbird species (174) confirmed (158; 91%)
+
+Diversity
+.Simpson’s Diversity Index (1/D) (2003-2009): heavily sensitive to species richness
+.Q statistic (2003-2009)
+.Simpson evenness measure: (1/D)/# species, where values approaching 1 signal more equal distribution (not sensitive to species richness)
+
+Comparisons across census units:
+.Unit characteristics
+.Area of unit (square km)
+.Shoreline habitat (meters)
+.Waterbird characteristics:
+.Average number of waterbirds per survey per square km
+.Diversity measures
+Analysis across dates each year:
+.Number of species; number of birds
+.Diversity measures
+
 Reporting schedule
 Questions: Who does the analyses? Interest in setting up as Reproducible Research draft report? 
 General delay in reporting? When normally completed? 

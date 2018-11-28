@@ -11,8 +11,6 @@ library(dplyr)
 library(lubridate)
 library(tidyr)
 
-## @knitr data_before_2007
-
 #species_before_2007 <-
   #combine species observation with species names
   #left_join(species_datafrom_Excel, tlu_species_codes,
@@ -34,8 +32,6 @@ library(tidyr)
 
 #to do: make row for # of days past first survey date?
 
-
-## @knitr data2007
 species_data_2007 <- left_join(tbl_Field_Data, tbl_Events,
                                by = "Event_ID") %>%
   left_join(tlu_species_codes,
@@ -73,3 +69,7 @@ plot <- ggplot(species_data_2007, aes(x=as.factor(Days_since_first), y=`Num_ Obs
 for (i in seq(1, length(unique(species_data_2007$Species)), 6)) {
   print(plot)
 }
+
+
+#time series
+#
