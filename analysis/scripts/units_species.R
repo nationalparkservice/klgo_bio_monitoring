@@ -6,9 +6,6 @@
 # Last Edit: 2018 Oct 22
 ########
 
-library(stringr)
-
-
 tbl_Locations$GIS_Location_ID <- str_sub(tbl_Locations$GIS_Location_ID,start=-1)
 
 species_units <-

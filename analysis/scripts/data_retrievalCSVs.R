@@ -10,7 +10,7 @@ path = "./analysis/data/raw_data/CSVs/"
 
 #retrieve file names with full path included
 file_names <- dir(path, full.names = TRUE)
-library(readr)
+
 for(i in 1:length(file_names)){
 
   #remove path and .csv from tibble name

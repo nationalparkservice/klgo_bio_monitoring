@@ -1,15 +1,12 @@
 # check dates and unit of first non-zero counts each year
 # for each spp (relative to first survey date)
 ############
-# This script uses library("dplyr") to wrangle species data.
+# This script uses libraries "dplyr", "lubridate", and "tidyr" to wrangle species data;
+# and uses library "ggplot2" to visualize the data.
 ########
 # Madeleine Ward
 # Last Edit: 2018 Oct 22
 ########
-
-library(dplyr)
-library(lubridate)
-library(tidyr)
 
 #species_before_2007 <-
   #combine species observation with species names
@@ -72,4 +69,17 @@ for (i in seq(1, length(unique(species_data_2007$Species)), 6)) {
 
 
 #time series
-#
+#dot plot
+ggplot(species_data_2007, aes(as.factor(Year), `Num_ Observed`)) +
+  geom_boxplot() +
+  geom_dotplot(#binaxis='y',
+               #stackdir='center',
+               #dotsize = .5,
+               #fill="red"
+    ) +
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) +
+  labs(title="Box plot + Dot plot",
+       subtitle="City Mileage vs Class: Each dot represents 1 row in source data",
+       caption="Source: mpg",
+       x="Class of Vehicle",
+       y="City Mileage")
