@@ -40,7 +40,7 @@ knitr::opts_chunk$set(
   fig.path = "../figures/"
 )
 
-library(dplyr);library(ggplot2);library(dbplyr);library(readr)
+library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);library(tidyr);library(lubridate);library(ggthemes);library(ggforce)
 
 ```
 # Things To Discuss
@@ -258,6 +258,7 @@ Questions: what is cue to start of survey season?
 
 ```{r}
 source("../scripts/data_exploration.R")
+source("../scripts/units_species.R")
 ```
 
 *Sample Frame* 

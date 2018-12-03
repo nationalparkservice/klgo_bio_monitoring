@@ -51,24 +51,36 @@ species_data_2007 <- left_join(tbl_Field_Data, tbl_Events,
   #take first observation from each year
   #filter(row_number()==1)
 
-species_data_2007$type <-
-ifelse(species_data_2007$`Num_ Observed` < mean(species_data_2007$`Num_ Observed`), "below", "above")
+#species_data_2007$type <-
+#ifelse(species_data_2007$`Num_ Observed` < mean(species_data_2007$`Num_ Observed`), "below", "above")
 
-#unfinished
-plot <- ggplot(species_data_2007, aes(x=as.factor(Days_since_first), y=`Num_ Observed`)) +
+#faceted by species?
+ggplot(species_data_2007,
+       aes(as.factor(Days_since_first),
+           `Num_ Observed`)) +
   geom_bar(stat='identity', aes(fill = as.factor(Year))) +
-  labs(title="Ordered Bar Chart",
-       subtitle="Make Vs Avg. Mileage",
-       caption="source: mpg") +
-  theme(axis.text.x = element_text(angle=65, vjust=0.6)) +
-  facet_wrap(~Species)
+  #theme(axis.text.x = element_text(angle=65, vjust=0.6)) +
+  #paginate
+  facet_wrap_paginate(~Species, ncol = 1)
 
-for (i in seq(1, length(unique(species_data_2007$Species)), 6)) {
-  print(plot)
-}
+#another way to paginate
+#for (i in seq(1, length(unique(species_data_2007$Species)), 6)) {
+ # print(plot)
+#}
 
+#first count every year?
+ggplot(species_data_2007 %>%
+         ungroup() %>%
+         group_by(Species, Year) %>%
+         arrange(Days_since_first) %>%
+         top_n(1), aes(as.numeric(Days_since_first),
+               `Num_ Observed`,
+               color = as.factor(Year))) +
+  #using facet_wrap_paginate() from ggforce
+  #to distribute over pages
+  facet_wrap_paginate(~Species, ncol = 1)
 
-#time series
+#time series?
 #dot plot
 ggplot(species_data_2007, aes(as.factor(Year), `Num_ Observed`)) +
   geom_boxplot() +
@@ -76,10 +88,4 @@ ggplot(species_data_2007, aes(as.factor(Year), `Num_ Observed`)) +
                #stackdir='center',
                #dotsize = .5,
                #fill="red"
-    ) +
-  theme(axis.text.x = element_text(angle=65, vjust=0.6)) +
-  labs(title="Box plot + Dot plot",
-       subtitle="City Mileage vs Class: Each dot represents 1 row in source data",
-       caption="Source: mpg",
-       x="Class of Vehicle",
-       y="City Mileage")
+    )
