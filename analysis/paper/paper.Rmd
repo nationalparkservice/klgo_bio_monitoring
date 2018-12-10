@@ -216,9 +216,8 @@ What sort of observations would trigger action? What actions?
 # else source("./scripts/data_retrievalNPS.R")
 
 #NOTE: working directory when knitting markup is /analysis/paper. So relative pathway needs to be ../scripts etc.
-
-source("../scripts/data_retrievalCSVs.R")
-
+getwd()
+source("./analysis/scripts/data_retrievalCSVs.R")
 ```
 
 Species: 
@@ -256,9 +255,9 @@ All data, original data forms, and field notes were archived at KLGO.
 Questions: what is cue to start of survey season?
 *Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
 
-```{r}
-source("../scripts/data_exploration.R")
-source("../scripts/units_species.R")
+```{r, eval=TRUE}
+source("./analysis/scripts/data_exploration.R")
+#source("../scripts/units_species.R")
 ```
 
 *Sample Frame* 
@@ -527,5 +526,5 @@ The current Git commit details are:
 ```{r}
 # what commit is this file at? You may need to change the path value
 # if your Rmd is not in analysis/paper/
-git2r::repository("../..")
+#git2r::repository("../..")
 ```

@@ -1,0 +1,939 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{eurosym}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Assessment of the KLGO Coastal Waterbird Survey Monitoring Program},
+            pdfkeywords={keyword 1; keyword 2; keyword 3},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Assessment of the KLGO Coastal Waterbird Survey Monitoring Program}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{true \\ true}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{10 December, 2018}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+The Coastal Waterbird Survey has been conducted, with varying levels of
+effort and in-season frequency, since 2003 (Surdyk and Evans
+\protect\hyperlink{ref-Surdyk2018}{2018}). The area of interest has been
+divided into eight contiguous survey units; on each survey, at each unit
+the number, age, composition (sex), breeding status, and noteworthy
+behavioral observations are recorded for each species (Anonymous
+\protect\hyperlink{ref-Anonymous2009}{2009}). Given the constraints on
+personnel, time, and budgets, it is imperative that surveys be conducted
+efficiently in terms of both choice of sampling design and choice of
+sampling effort. Now that KLGO has multiple years of experience
+implementing the protocol, it is timely to step back and assess how
+things are going. We review the current survey programâ\euro{}™s
+objectives, design, identify statistical issues, and recommend potential
+solutions. Major topics include â\euro{}¦. The study concludes with a
+series of recommended tasks that the park should undertake to improve
+the coastal waterbird surveyâ\euro{}™s efficiency and effectiveness.
+\end{abstract}
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Things To Discuss}\label{things-to-discuss}
+
+\begin{itemize}
+\tightlist
+\item
+  add all libraries used in scripts to `setup' code chunk (just above)
+  rather than just loading in script so that it is easy to see what
+  needs to be loaded before you can successfully knit.
+\end{itemize}
+
+\section{Introduction}\label{introduction}
+
+Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO)
+have surveyed coastal waterbird species distribution and abundance
+multiple times each year from late April through late September (Coastal
+Waterbird Survey or `CWS'; (Surdyk and Evans
+\protect\hyperlink{ref-Surdyk2018}{2018})). This is sufficient history
+to warrant stepping back and assessing the monitoring program. Such
+assessments are key to an adaptive monitoring program ({\textbf{???}}),
+are an important and distinct phase to promote program, and
+institutional, learning and evolution (Reynolds et al.
+\protect\hyperlink{ref-Reynolds2016}{2016}), and align with guidance
+from NPS' Inventory and Monitoring Division ({\textbf{???}}, Mitchell et
+al. (\protect\hyperlink{ref-Mitchell2018}{2018})).
+
+Assessing a monitoring program focuses on four broad topics following
+the major Phases of a monitoring program (ibid):\\
+1. \emph{why} - {[}Problem Framing \& Information Objectives{]} Are the
+management objective(s) motivating the monitoring well articulated? Do
+they remain relevant and important?\\
+2. \emph{how} - {[}Data Collection Design{]} Does the monitoring data
+collection design effectively addresses the information objectives?
+Given interim learning regarding system characteristics and improvements
+in measurement technologies, are the information goals (including
+accuracy and precision goals), actually feasible? If so, can the data
+collection be made more efficient, reducing the observation burden on
+staff resources?\\
+3. \emph{how} - {[}Data Analysis Design{]} Do the data analysis methods
+effectively address the information objectives? Do the data analysis
+methods properly account for impactful features of the data collection
+design? Are more informative analyses available given interim
+improvements in methods?\\
+4. \emph{how} - {[}Workflows \& Reporting{]} Are workflows and related
+software systems in place to allow timely, and efficient, data
+management, analysis updating, reporting, and distribution of findings
+to target audiences of information users?
+
+This assessment addressed all four topics, but focused predominantly on
+topics (i) Problem Framing \& Information Objectives, (ii) Data
+Collection Design, and (iii) Data Analysis Design. Since `Problem
+Framing \& Information Objectives' determine the relevancy of many of
+the potential assessment actions related to the other topics, the
+assessment was drafted as a first stage of an iterative effort,
+providing high level feedback, including listings of potential detailed
+syntheses and workflow enhancement activities (such as improved database
+interface, automation of annual analyses and updating of syntheses,
+etc.). With this foundation, further dialogue with KLGO staff regarding
+relevant `Problem Framing \& Information Objectives' and other
+priorities will determine which follow-on activities to pursue.
+
+\section{Background}\label{background}
+
+\section{Methods}\label{methods}
+
+The CWS monitoring program was compared against a recommended checklist
+of monitoring program components developed from published literature
+(Appendix 1). It identifies multiple component decisions associated with
+each of the major Phases of a monitoring program (briefly overviewed
+above). For each component, the relevant aspects of the current CWS were
+reviewed, potential issues identified, potentially informative
+diagnostic analyses suggested, and recommendations provided. The
+characterization of the CWS was based on KLGO protocols and reports
+(Table 1), a site visit (6/4-6/2018) and personal communications with
+the KLGO Natural Resources Program Manager (Jami Belt, winter and spring
+2018), KLGO Resources Manager (Anne Matsov, summer 2018) and
+long-standing survey participants (Elaine Furbish, Skagway Bird Club,
+spring and summer 2018).
+
+\section{Assessment Results}\label{assessment-results}
+
+\subsection{Phase 1 - Problem Framing and Information
+Objectives}\label{phase-1---problem-framing-and-information-objectives}
+
+\emph{WHY} monitor? What potential decisions and issues should the
+observations inform?
+
+The management problem or question motivating the need for information
+about coastal waterbirds provides the foundation for the survey's data
+collection and analysis designs (Fancy, Gross, and Carter
+\protect\hyperlink{ref-Fancy2009}{2009}). It clarifies the underlying
+goal of the monitoring program and answers ``Why is this an important
+problem or question?''.
+
+A robust problem definition should include, among other aspects, the
+temporal and geographic scope of the problem; who has the authority to
+make decisions that could resolve or address the problem; what
+information about the resource is needed to improve the decision making
+(the information needs); and who are the stakeholders that are impacted
+by the decision and/or interested in the monitoring information.
+Stakeholder identification should include interested parties and their
+information needs in both near-term - for example, park interpretation
+and visitor education activities, as well as long-term - for example,
+regional-scale changes in migration patterns or assessment and
+improvement of projected climate change impacts on avifauna (e.g., Wu et
+al. \protect\hyperlink{ref-Wu2018}{2018}). A good understanding of
+multiple information needs and pathways to influence decision making
+will guide the required data analyses and reporting and outreach.
+
+The information needs are what the monitoring effort aims to address
+(Reynolds \protect\hyperlink{ref-Reynolds2012}{2012}). Even when the
+focus is simply the status and trend of a resource, there is an unstated
+expectation that someone will endeavor to achieve or maintain a
+desirable state or reverse an undesirable trend (Reynolds et al.
+\protect\hyperlink{ref-Reynolds2016}{2016}). Whomever has that
+responsibility and authority (person, office, or organization) is a
+priority stakeholder. They should not only receive the reports but also
+allowed an opportunity to clarify their information needs, including the
+desired precision and quality of information, the timing and format of
+reporting, and better understand what information is feasible to obtain
+(Averill et al. 2010).
+
+\subsubsection{Assessment findings:}\label{assessment-findings}
+
+The 2003 coastal waterbird inventory and survey design was developed to
+address ``a top priority bird inventory (need)'' of the Southeast Alaska
+Inventory and Monitoring Network (Sharman et al. 2000) - namely, an
+inventory of waterfowl/shorebirds at KLGO (Hahr et al.
+\protect\hyperlink{ref-Hahr2004}{2004}). This was deemed a priority due
+to the area's expected avifaunal richness ((NABCI)
+\protect\hyperlink{ref-NABCI2000}{2000}) and the limited availability of
+reliable observation records - mainly consisting of systematic surveys
+conducted by NPS staff in the early 1980s (Hahr et al.
+\protect\hyperlink{ref-Hahr2004}{2004}).
+
+The inventory's stated goal was to document the occurrence of 90\% of
+the species of waterbirds likely to occur in KLGO (ibid). The principal
+objectives were ``to develop scientifically valid sampling designs for
+inventorying waterbirds and breeding landbirds in KLGO, and to collect
+baseline information on bird species occurrence, distribution,
+abundance, and habitat associations in the park\ldots{}{[}to{]}
+\ldots{}provide park managers with timely information that facilitates
+land management planning, helps track wildlife population and ecosystem
+change over time, and keeps resource managers apprised of changes that
+may require action before a crisis occurs'' (ibid). While no Threatened
+or Endangered bird species were known to occur in KLGO, as of 2004, nine
+species on the Alaska Watchlist had been documented in the park (ibid),
+thus suggesting potential priority information needs associated with
+monitoring for changes in those species occurrence and abundance.
+Potential secondary objectives mentioned include ``investigations into
+the breeding ecology, phenology, reproductive success and population age
+structure of KLGO breeding birds'' (ibid). Later reports mention
+additional objectives of estimating changes in species occurrence and
+composition (St. Pierre \protect\hyperlink{ref-St.Pierre2015}{2015}),
+characterizing timing of peak spring waterbird migration and its
+relation to spring eulachon runs (Surdyk
+\protect\hyperlink{ref-Surdyk2017}{2017}).
+
+Stakeholders mentioned or implied in park reports include park
+superintendent and related managers, those charged with monitoring
+regional and internationally important bird habitats, the Skagway Bird
+Club, the Alaska Landbird Monitoring Survey and the Boreal Partners in
+Flight.
+
+The coastal waterbird surveys have been continued since 2003 (Surdyk and
+Evans \protect\hyperlink{ref-Surdyk2018}{2018}).
+
+QUOTES Hahr and Trapp (2004): We intend to use the results of these
+inventories to create a revised bird checklist and an atlas database for
+the Taiya and Skagway River watersheds in collaboration with the Skagway
+Bird Club.
+
+This protocol addresses one monitoring question with three objectives:
+(1) what is the annual nest density and reproductive (fledgling) success
+in known Hawaiian petrel colonies, (2) what are the long-term trends in
+colony distribution and density monitored in approximate 5-year
+intervals, and (3) are these affected by predator control? The first
+goal of monitoring is to obtain unbiased estimates of Hawaiian petrel
+nest density and reproductive (fledging) success from known colonies in
+HAVO and HALE in order to detect changes in colony growth or decline.
+The second goal of monitoring is to periodically (approximately every
+five years) obtain unbiased estimates of nest density from potential
+Hawaiian petrel habitat. This information can be used to assess changes
+in density and distribution of subcolonies across the landscape. The
+third goal is to estimate nest density and fledging success in areas
+undergoing different management regimes to assess effectiveness of
+management. Benchmark levels of these estimates could serve as warnings
+of the need for modified management or further investigation of these
+colonies.
+
+Though not explicitly characterized in the protocol or reports reviewed
+for this assessment (Table 1), the following target audiences and
+information users were identified through conversations with KLGO staff,
+partners, and other waterbird researchers and stakeholders in Alaska.
+(current) - park - Skagway Bird Club; compiles for addition to
+`significant bird observations in SE AK', which gets compiled in to AK
+sumamries for `North American Birds' (mainly spp lists) (potential) -
+BPIF - PSG - Audubon Alaska (for IDing Important Bird Areas - though
+require accurate density estimates) - Audubon North America - cliamte
+species distribution models (Nicole Michel, Brooke Bateman, etc.); esp
+if associated w/ repeat sites \& effort data (date, time of day,
+duration, distance/area covered) - see Nicole email 6/7/2018. Watchlist
+of projected changes - (Wu et al. \protect\hyperlink{ref-Wu2018}{2018})
+
+\subsubsection{Recommendations:}\label{recommendations}
+
+Potential Follow Up Activities:
+
+Define the \emph{Target Audiences} for the information and their
+Objectives in using the information
+
+\emph{Decision Makers} Who are target audiences for this information?
+Who uses it or may use it? Local contact: C. Elaine Furbish, Skagway
+Bird Club, Google Site Predominantly historical park; limited resource
+staff and capacity Visible natural resource of interest to local
+community and visitors; interp and educational opportunity; topic of
+information requests; provides `community service' given absence of any
+other agency with natural resource staff; Annual report (time lag?);
+National Resource Condition Assessment; other? State of the Park?
+Potential for contribution to regional, flyway, and WASO programs (e.g.,
+CCRP \& Audubon climate watch, etc.) Current sightings passed to local
+bird club \& used by avian-interested visitors Used in quarterly
+regional `significant bird observations', which in turn is used to
+develop the Alaska-wide summary for the journal North American Birds
+(published by the American Birding Association
+\url{http://www.aba.org/nab} ) and includes `\ldots{}sightings of birds
+that are out of range or out of season or occur regularly in small
+numbers, noteworthy breeding records, unusually large or small numbers
+of a particular species, unusual migration dates, etc\ldots{}.' (S. C.
+Heinl, 2017, Summary of SE AK Bird Observations, June-July 2017,
+accessed 2018 June 6). Queries to Heather Renner \& Robin Corcoran re:
+PSG-type users, etc. Opportunity for community based monitoring to track
+projected spp impacts of climate change, change in phenology,
+occurrence, abundance, etc.?
+
+\emph{Decisions} What types of decisions is it / will it be used for?
+(specify for each target audience/ end user) No specific decisions
+Current: KLGO - spp lists, phenology of occurrence (guidance to
+visitors), trends in richness (NRCA), abundance? Skagway bird club - spp
+list, current occurrences (activity re: rare \& unusual) SE AK /
+Regional - spp lists; unusual sightings, etc. (spp occurrences \& broad
+seasonal timing). AKR - WASO/NPS - ??CCRP?? Question to Gregor \& Mel
+(AK Audubon). Could be used for garnering community engagement in
+Climate Watch \& other national efforts associated with Audubon's
+Climate Report. Not used in continental analyses. ``One key message that
+I want to emphasize is that the focus of this work was purely on climate
+suitability. What this means, as we indicate in the briefs'
+``Important'' box up front and ``Caveats'' section further back, is that
+significant changes in climate suitability, as measured here, will not
+always result in a species response, and all projections should be
+interpreted as potential trends. Multiple other factors mediate
+responses to climate change, including habitat availability, ecological
+processes and biotic interactions, dispersal capacity, species'
+evolutionary adaptive capacity, and phenotypic plasticity (e.g.,
+behavioral adjustments). Ultimately, models can tell us where to focus
+our concern and which species are most likely to be affected, but
+monitoring is the only way to validate these projections and should
+inform any on-the-ground conservation action.'' Gregor Schuurman, email
+to DENA
+
+Potential: KLGO: (easy) - changes in occurrence (spp, season scale);
+changes in phenology (migration timing, by spp; breeding timing, by
+spp); broad (order of magnitude) changes in abundance (index); broad (?)
+changes in composition (by spp \& timing of survey)?; species occurrence
+x unit (\textasciitilde{}habitat?) - refine expected lists per survey
+and develop targeted SOP training materials; (harder) - finer changes in
+abundance; finer changes in composition and age; ???
+
+What Objectives are the decision makers hoping to achieve by using this
+information?
+
+Over what spatial scales is the information being used? e.g., at the
+park, in the community, regional scale, flyway scale, nationally,
+internationally For each spatial scale of interest, what are the
+associated time scales of interest for detecting changes? E.g., annual,
+w/in season, spring vs fall, etc.
+
+From another report but quotes from Olsen et al. (1999): Olsen (et al.
+1999) noted that ``Most of the thought that goes into a monitoring
+program should occur at this preliminary planning stage. The objectives
+guide, if not completely determine the scope of inference of the study
+and the data collected, both of which are crucial for attaining the
+stated objectives.'' Olsen goes on to say that a ``clear and concise
+statement of monitoring objectives is essential to realize the necessary
+compromises, select appropriate locations for inclusion in the study,
+take relevant and meaningful measurements at these locations, and
+perform analyses that will provide a basis for the conclusions necessary
+for meeting the stated objectives.''
+
+Fancy, Gross, and Carter (2009): The development of monitoring
+objectives, which provide additional focus about the purpose or desired
+outcome of the monitoring effort, was an iterative process that
+sometimes required several years to refine. Early in the design process,
+monitoring objectives were stated in more general terms, such as
+``Determine trends in the incidence of disease and infestation in
+selected plant communities and populations'', whereas the final
+monitoring plan and protocols provided monitoring objectives that met
+the test of being realistic, specific, and measurable (e.g., ``Estimate
+trends in the proportion, severity, and survivorship of limber pine
+trees infected with white pine blister rust at Craters of the Moon
+National Monument''; Garrett et al. 2007).
+
+Structure from Northeast Coastal and Barrier Network
+\url{https://irma.nps.gov/DataStore/Reference/Profile/2195238}
+Justification =\textgreater{} Vital Sign =\textgreater{} Monitoring Goal
+=\textgreater{} Monitoring Questions =\textgreater{} Monitoring
+Objectives =\textgreater{} Measures (eg pg 55 \& 56)
+
+Clarify Objectives of the Decision Makers Among the decision maker
+objectives identified in 1.b.ii, clarify the Fundamental Objective(s)
+from the Means Objectives, then diagram the Objectives Hierarchy.
+Identify the Attributes that need to be monitored to assess achievement
+of each of the objectives. (`Concepts by Theory', Ford 2001) Identify
+the Measurements selected to characterize each attribute. (`Concepts by
+Data', Ford 2001) {[}WHAT{]} Identify any Threshold values associated w/
+each Measurement
+
+Q: compiling and assessing regional trends in waterbirds in SE AK? Asked
+of Heather Renner (Ak Maritime), Robin Corcoran (Kodiak NWR) Answers:
+Not really; regular discussion at PSG but no one has taken it on. Kathy
+Kuletz works on statewide trends in at sea seabird observations; Piatt
+GLBA work (\& Martin Renner); Robin C: ``There's always talk at the PSG
+meeting about the North Pacific seabird colony database, or some
+variation of that database for marine birds, but it never gets anywhere.
+Basically there is no money for a database manager. I've been submitting
+my data to Rob Kaler in Migratory Bird Management, but I think that's
+just for storage until the money for a database manager materializes.
+More recently Rob Suryan w/NOAA has been interested - for the North
+Pacific Pelagic Seabird Database. You might want to contact him, he's
+leading the Gulf Watch Alaska Long-Term Ecosystem Monitoring Program,
+and maybe interested in this work.''
+
+NPS/Audubon: Wu et al. 2018. Projected avifaunal responses to climate
+change across the U.S. NPS. PLOS ONE. Appendices include projected
+park-specific turnover, colonization, and extirpations projections -
+potential to test with this survey. Would require discussions w/ CCRP \&
+ARO - ideally as a coordinated effort with, say, AK Audubon and ACF(?)
+or LCCs as tracking metric.\\
+Appendices include ``Potential management goals and activities for
+parks, organized by trend group.''
+
+Melanie AK Audubon: IBA requires demonstrating higher than `usual'
+densities (relative to surrounding area).
+
+Nicole Michel \& Brooke Batemen Audubon National Science Team: of
+interest and possible use in national scale quantitative analyses or
+climate species distribution models. ``Scaling up and integrating
+datasets across regions, including data from different goals, is
+something that we're starting to do in other regions. ``
+
+Occurrence, Richness Phenology (migration, breeding) Abundance - Even
+without the structure needed to estimate detection probability, if the
+same protocol is used annually this data could be used to produce
+long-term trend indices for the study area. (competing staff priorities
+- peak (?) usually aligns with hooligan run. Possibly reduce summer
+frequency?)
+
+Diagram the Conceptual Model of the system E.g., create an influence
+diagram, being sure to denote the Fundamental \& Means Objective(s)
+Factors influencing their achievement (aka `system drivers') Associated
+management or policy decisions and/or potential actions. Include a
+written summary of the literature upon which the conceptual model is
+based.
+
+Summarize the management or policy decisions the monitoring is to inform
+(if any) based on 3.c.
+
+\subsection{Phase 2 - Monitoring \& Analysis
+Design}\label{phase-2---monitoring-analysis-design}
+
+HOW monitor? Clarify the various design choices.
+
+Clarify rationale for monitoring versus some other means of addressing
+the information objectives (e.g., literature review, controlled
+experiment, etc.), and type of monitoring being undertaken (status \&
+trends or surveillance, threshold, effectiveness, or adaptive
+management).
+
+Questions: Why? What are information goals \& objectives? What sort of
+observations would trigger action? What actions?
+
+\subsubsection{Survey Design}\label{survey-design}
+
+\emph{Target Frame} - space, time, scale, target populations
+\emph{Spatial} Upper Lynn Canal visible from coastline from Skagway to
+Dyea, including Skagway \& Taiya river mouths and Nahku Bay (between
+Skagway and Dyea Point)
+
+\begin{verbatim}
+#> [1] "/home/mward2/klgo_bio_monitoring"
+\end{verbatim}
+
+Species: Targets: loons, grebes, cormorants, herons, ducks, geese,
+plovers, sandpipers, gull, alcids, {[}kingfishers{]} Questions: clarify
+role of kingfishers.
+
+Incidental: 48 other spp Questions: are these all migratory? Any
+year-round residents? Any of special concern? Any especially problematic
+for detection on water or identification of spp?
+
+(Hahr et al. \protect\hyperlink{ref-Hahr2004}{2004}), pg 13: Areas of
+coastline that were visible from public access points between Skagway
+and the Taiya River delta were divided into eight census units and
+surveyed once per week in late April and May and bi-weekly during late
+summer and fall (August -- mid September) (Figure 5). Surveys were
+conducted as weather and scheduling permitted and dates/time were not
+selected at random. Standardized observation points were established for
+each census unit to ensure the most complete coverage of the study area,
+and to minimize observer bias. Observers counted and identified all
+birds visible within each unit and documented birds opportunistically
+observed while moving between units. Counts were made by scanning the
+census units with Bushnell Legend 10 x 42 binoculars and a Bausch \&
+Lomb 20-60 x 70 spotting scope until the observer was able to quantify
+all visible birds in the unit. Surveys were only conducted under optimal
+weather conditions; however, occasionally conditions deteriorated during
+the course of a survey making species identification difficult
+(especially in the case of low clouds, fog and wind). Data were recorded
+on standardized data forms developed after Collins et al. (2001)
+(Appendix B). ArcView shapefiles of the observation points and census
+units were created for use in the park's GIS. All data, original data
+forms, and field notes were archived at KLGO.
+
+\emph{Temporal} ??how define `season'??
+
+Questions: what is cue to start of survey season? \emph{Madeleine later}
+Diagnostic analysis =\textgreater{} check dates \& unit of first
+non-zero counts each year for each spp (relative to dates of initiating
+surveys)
+
+\emph{Sample Frame} Spatial: same coverage as Target Frame. Area split
+into eight survey areas (see Hahr et al.
+\protect\hyperlink{ref-Hahr2004}{2004}). Questions: Access to all units?
+Ease of observation of different units? Ease of distinguishing
+boundaries? \emph{Madeleine later} Diagnostic analysis =\textgreater{}
+value of all units - only some spp in unit X?; ``unit by species
+occurrence'' relationships?
+
+\emph{Sample Selection process} - any strata or clusters? Two-stage
+processes? Probabilistic selection? {[}get in to enumerative vs
+analytical distinction of Deming?{]} Currently survey all of frame
+(`census' of units); no spatial sampling uncertainty. All spatial
+uncertainty comes from Observation Process and detection issues.
+Temporal sampling uncertainty remains.
+
+Questions: feasible to reduce \# of units? See Qs above about `unique
+contributions' of each unit. Logistic considerations? What effort level
+is feasible? Diagnostic analysis =\textgreater{} any `representative'
+units? How would that be defined?
+
+\emph{Survey timing} Per season -
+
+Questions: how define when to begin surveys? Zeros? Triggering events?
+Potential confounding factors? (changes in phenology, ClCh); important
+objective or confounder? Design options for addressing? Diagnostic
+analysis=\textgreater{} Signs of confounding?
+
+W/in season - (e.g., LEAU St.~George); potential refinement? Temporal:
+(migration) 1 per wk, Apr 27 - May 20; (breeding) 1 per 2 wks, Jun 6 -
+Jul 18; (migration) 1 per wk, Aug 1 - Sept 28. 2016: 17 surveys total
+Questions: How define beginning \& end of breeding period? Info goals
+from migration periods? From breeding periods? Design options to reduce
+frequency? Diagnostic analysis=\textgreater{} .assessment of impact on
+priority info goals of different frequencies? .spp specific occurrency
+by survey date across years - capturing onset and end of migration?
+.other assessments of survey timing relative to phenology of spp .mine
+FB, Eagle Chat, others for date of first occurrences (see 2016 report);
+Elaine. Requires clarifying information goals of survey vrs `first
+occurrence'. E.g., not tail behavior.
+
+Per survey route sequencing and tidal influence; SOP: 1,2,3,4,5,6,8,7 or
+reverse, depending on tide timing (determines when do unit 7).
+
+Questions: design options for confounding factors? Duration across eight
+units: feasible to pull off? issue of bird movement between units?
+Anyway to bound potential bias? Design options?
+
+Monitoring Design Membership Design (panels, etc.) Single Panel
+
+Revisitation Design W/in Year; varying effort levels (strata in time
+across seasons) Between Years Always Repeat (pure panel), every year
+Questions: feasbility of not doing every year? What are information
+goals and triggers?
+
+Response Design Attributes \& Measurements Focal targets vrs all species
+Priority Spp for region? PSG? At Risk Spp (CCRP?) Audubon AK spp of
+concern? See Audubon Climate Report. Relevant spp (intersection with spp
+list)
+
+\subsubsection{Observation Process}\label{observation-process}
+
+Question: How determine boundaries? Visual markers. How handle movement
+of birds into and out of unit? Check SOPs but basically `until things
+stop'. Problem is that that is an accumulating approach that will bias
+high areas with lots of productive habitat and/or well timed relative to
+changing tidal conditions and sequencing of survey. How handle tendency
+to record everything of note: e.g., recording observations in
+neighboring units when really supposed to be focused on this unit. E.g.,
+variation in time observing and effort observing across units \&
+sampling events. This fails to track actual observation activity (time)
+devoted to each unit as well as preferential bias to overestimate use in
+areas. Think about Forsell \& Zweifelhofer? Chat w/ Emily \& Mark Otto
+\& Andy? \#\#\#\# Covariates - captured \& not captured. Value, use in
+analyses; more reliable alternative data sources; alignment of spatial
+scales of interest and time scales of interest.
+
+Lack of control over time at each site; portion spent traveling between
+observation points, variation in number of observation points for each
+site.
+
+Variation in survey effort across sites, across per unit area, across
+surveys (days), etc.
+
+Major weather conditions (Northerlies, Southerlies) - simplify
+conditions to these Unit 1 - recording and impact of presence \& \# of
+cruise ships in dock, helicopter tours, etc., etc., other human
+disturbances.
+
+Distinguish value of covariates for act of (i) presence/absence
+assessment, (ii) abundance count, (iii) composition \& breeding state.
+
+Check SOP to clarify categorization of conditions.
+
+Temp and wind greatly burden data collection process (slowing down
+greatly). Variation in observer \#, training, and skill across surveys,
+across years
+
+\emph{Madeleine early} Diagnostic analyses =\textgreater{} .distribution
+of time duration at each site by date and year .correlation across
+units? .average surface area per unit .something about sequencing of
+observation sites (e.g., confounding with tidal state)? .distribution of
+observers by survey date by year .distribution of observer experience(?)
+by survey date by year?
+
+\paragraph{Detection issues associated with survey
+conditions}\label{detection-issues-associated-with-survey-conditions}
+
+.species specific counts w/in season by weather conditions and wave
+conditions .species occurrence by wave conditions \& weather conditions
+.species age and composition by wave conditions \& weather conditions
+.total \# species by weather conditions, wave conditions; internally
+consistent contrasts to demonstrate value, or lack thereof, of current
+covariates. .richness by major weather conditions (Northerlies,
+Southerlies, etc.) and for each spp .distribution of weather conditions
+.distribution of survey time by weather conditions .diagnostic to ID key
+survey times to ensure high quality observers? .consistency in `breeding
+periods' across years (as captured in data) .quick diagnostics to ID
+covariates seldom recorded, not consistently recorded, consistently
+valued (e.g., no basis for contrast), etc.
+
+Value of site-specific covariate recordings vs available `local' weather
+(Skagway weather observations from airport - wind direction \& speed,
+temp, etc.)
+
+Ppt Codes: 0 - none, 1 - fog, 2 - drizzle, 3 - showers, 4 - light rain,
+5 - moderate rain (steady), 6 - heavy rain, 7 - sleet, 8 - light snow, 9
+- mod snow, 10 - heavy snow Beaufort scale codes: 0 - \textless{} 1 mph
+(air calm); 1 - 1-3 mph (smoke drift show direction of wind); 2 - 4-7
+mph wind felt on face, leaves rustle; 3 - 8-12 mph leaves \& small twigs
+in constant motion; 4 - 13-18 raises dust, loose paper, moves small
+branches; 5 - 19-24 small trees in leaf sway, crested wavelets form on
+inland waters; Wave height: 0 - calm; 1 - scaly ripples, no foam crests;
+2 - small wavelets, crests glassy, no breaking; 3 - large wavelets,
+crests begin to break, scattered whitecaps; 4 - small waves, becoming
+longer, numerous whitecaps; 5 - moderate waves, many whitecaps, some
+spray SPP \# Age (Adult, imm, juv, mixed, unknown) Composition - M, F,
+Fe/juve, Mixed, Unknown) Breeding Status - pairs, etcc; 24 potential
+codings see SOP \#3.
+
+Recommendations =\textgreater{} Clearly record standardized observation
+locations on map and include in SOP to ensure consistency across
+observers and personnel. Issue of veg growth reducing visible portion of
+unit from each viewpoint - long-term confounding factor, etc. Value of
+covariates, recommendations on what to drop, what to include Observation
+quality notes to support assessment of extreme observations, etc.
+
+Detection issues (seeing and recording available birds) Design options
+for improving detection \& measurement Hmm? Lit? Emily, Aaron C., Kathi,
+Mark Otto, Andy Royle? Feasible to do some sort of double observer
+process - coordinate immediately after survey? Only conduct
+intermittently per season rather than every time? E.g., like
+sightability functions? Major drivers of sightability? Capturing
+uncertainty on spp id Capturing uncertainty on spp count UAVs? Observer
+training \& behavior classification Training materials from Kodiak or
+Homer or Cordova or Haines or Juneau or Yakutat or\ldots{}?
+
+\paragraph{Species identification
+issues}\label{species-identification-issues}
+
+Priority ID concerns: Commonly encountered species that can be difficult
+Work with Elaine \& Heather \& Laura to develop list of commonly
+confused species based on those commonly encountered (database or
+Skagway Bird Club sightings) E.g., scoters, scaup, murrelets, etc.)
+Target Spp of interest Training materials or other improvements Db error
+checking? Other? Other expected sources of bias Species ID Behavior
+classification Changes in equipment Summary Metrics Confounding factors
+\& Covariates
+
+\subsubsection{Analysis Design}\label{analysis-design}
+
+Priority Summaries of interest (tie to Conceptual Model and Information
+Objectives) Associated analyses:
+
+Number of species sighted per year: 2003-2016 (source 2 found 2003-2009)
+.Waterbird and non-waterbird species .Positive association between
+species richness and year of survey, when excluding year 2014, which
+started later than usual. R-squared = .54. .Species richness within
+year: 2016 .Individual and max. numbers of observed counts for each
+species for year 2016, with first and last sightings noted. .Peak
+abundance/species richness identified with observed species counts and
+individual sightings across surveys during 2016 season .Peak abundance
+(May 4) observed to be in tandem with spring euchalon (April 21-)
+.Species richness peaked May 4-11
+
+Observer bias: variation in number of surveys and length of monitoring
+season .2010: No seasonal technician; only sporadic surveys .2014:
+Surveys begun 1 month late (May 22) .Across years: observer turnover
+rate, varying experience
+
+Number of surveys across census units per year (2003-2009) \&
+distribution of survey dates
+
+Percent of expected waterbird and breeding landbird species (174)
+confirmed (158; 91\%)
+
+Diversity .Simpson's Diversity Index (1/D) (2003-2009): heavily
+sensitive to species richness .Q statistic (2003-2009) .Simpson evenness
+measure: (1/D)/\# species, where values approaching 1 signal more equal
+distribution (not sensitive to species richness)
+
+Comparisons across census units: .Unit characteristics .Area of unit
+(square km) .Shoreline habitat (meters) .Waterbird characteristics:
+.Average number of waterbirds per survey per square km .Diversity
+measures Analysis across dates each year: .Number of species; number of
+birds .Diversity measures
+
+Reporting schedule Questions: Who does the analyses? Interest in setting
+up as Reproducible Research draft report? General delay in reporting?
+When normally completed?
+
+Secondary Summaries of interest Associated analyses Reporting schedule
+
+Survey effort levels / Change detection targets / Power to detect
+changes Reiterate targets for `local' inference vrs contribution to
+regional trends assessments
+
+1 Biotech conducts just this \& amphi monitoring.
+
+\subsubsection{Data Management \& Reporting Structures / Software /
+Workflows}\label{data-management-reporting-structures-software-workflows}
+
+Data Models Design Requirements / User reporting needs
+
+Elaine: Can put stuff in but can't get it out of existing ACCESS db.
+Problematic. Bottleneck for analyses and summaries. Ebird - boundaries
+don't include Skagway burough. Rather, formerly unincorporated area
+including Skagway, Haines, and Angoon - too broad, not useful.
+
+The current database is written in Microsoft Access version XX for
+32-bit operating systems. Software and machine operating systems have
+advanced enough for this to cause unnecessary burdens for accessing and
+importing the data for analysis and reporting in common statistical
+analysis environments (e.g., R). Recommend the Park request the ARO GIS
+shop to convert the database to an uptodate software.
+
+\emph{JOEL: Talk to Angie about what this would entail.}
+
+\emph{Recommendations} work with GIS shop to clean up db, improve
+reporting \& query support; shiny app; reproducible research scripts to
+generate automatic reports? Shiny app to interface?
+
+\section{Discussion}\label{discussion}
+
+\section{Conclusion}\label{conclusion}
+
+\section{Acknowledgements}\label{acknowledgements}
+
+\subparagraph{pagebreak}\label{pagebreak}
+
+\section{References}\label{references}
+
+\hypertarget{refs}{}
+\hypertarget{ref-Anonymous2009}{}
+Anonymous, (KLGO NHP). 2009. ``Waterbird Monitoring Protocol for
+Klondike Gold Rush National Historical Park , Skagway , Alaska Standard
+Operating Procedure ( SOP ) \# 3 Conducting the Waterbird Survey
+Transect Revision History Log :'' April 9, 2009.
+
+\hypertarget{ref-Fancy2009}{}
+Fancy, Steven G., J. E. Gross, and S. L. Carter. 2009. ``Monitoring the
+condition of natural resources in US national parks.''
+\emph{Environmental Monitoring and Assessment} 151 (1-4): 161--74.
+doi:\href{https://doi.org/10.1007/s10661-008-0257-y}{10.1007/s10661-008-0257-y}.
+
+\hypertarget{ref-Hahr2004}{}
+Hahr, Meg, Todd W Trapp, Meg Hahr, and Todd W Trapp. 2004. ``Waterbird
+and Breeding Landbird Inventories in Klondike Gold Rush National
+Historical Park Waterbird and Breeding Landbird Inventories in Klondike
+Gold Rush National Historical Park Final Report,'' no. May.
+
+\hypertarget{ref-Mitchell2018}{}
+Mitchell, Brian, Alice Chung-MacCoubrey, Jim Comiskey, Lisa Garrett,
+Maggie MacCluskie, Bill Moore, Tom Philippie, Geoff Sanders, and John
+Paul Schmit. 2018. ``Inventory and Monitoring Division Protocol Review
+Guidance.'' Fort Collins, CO.
+
+\hypertarget{ref-NABCI2000}{}
+(NABCI), North American Bird Conservation Initiative. 2000. ``North
+American Bird Conservation Initiative Bird Conservation Region Map and
+Descriptions.'' Arlington, VA.
+\url{http://nabci-us.org/resources/bird-conservation-regions/}.
+
+\hypertarget{ref-Reynolds2012}{}
+Reynolds, Joel H. 2012. ``An overview of statistical considerations in
+long-term monitoring.'' In \emph{Design and Analysis of Long-Term
+Ecological Monitoring Studies}, 23--53.
+doi:\href{https://doi.org/10.1017/CBO9781139022422.005}{10.1017/CBO9781139022422.005}.
+
+\hypertarget{ref-Reynolds2016}{}
+Reynolds, Joel H., Melinda G. Knutson, Ken B. Newman, Emily D.
+Silverman, and William L. Thompson. 2016. ``A road map for designing and
+implementing a biological monitoring program.'' \emph{Environmental
+Monitoring and Assessment} 188 (7). Environmental Monitoring;
+Assessment: 1--25.
+doi:\href{https://doi.org/10.1007/s10661-016-5397-x}{10.1007/s10661-016-5397-x}.
+
+\hypertarget{ref-St.Pierre2015}{}
+St. Pierre, Mallory (KLGO NHP). 2015. ``2014 Bird Surveys at Klondike
+Gold Rush National Historical Park.'' Fort Collins: U.S. Department of
+Interior, National Park Service, NRSS.
+
+\hypertarget{ref-Surdyk2017}{}
+Surdyk, Shelby L. (KLGO NHP). 2017. ``Bird Surveys at Klondike Gold Rush
+NHP: 2015 summary.''
+
+\hypertarget{ref-Surdyk2018}{}
+Surdyk, Shelby L. (KLGO NHP), and S. A. (KLGO NHP) Evans. 2018. ``Bird
+Surveys at Klondike Gold Rush NHP Bird Surveys at Klondike Gold Rush
+NHP: 2016 summary.'' Fort Collins: National Park Service.
+
+\hypertarget{ref-Wu2018}{}
+Wu, J X, C B Wilsey, L Taylor, and G W Schuurman. 2018. ``Projected
+avifaunal responses to climate change across the U.S. National Park
+System.'' \emph{PLoS ONE}.
+doi:\href{https://doi.org/10.1371/journal.pone.0190557}{10.1371/journal.pone.0190557}.
+
+\subparagraph{pagebreak}\label{pagebreak-1}
+
+\subsubsection{Colophon}\label{colophon}
+
+This report was generated on 2018-12-10 13:33:40 using the following
+computational environment and dependencies:
+
+\begin{verbatim}
+#>  setting  value                       
+#>  version  R version 3.5.1 (2018-07-02)
+#>  system   x86_64, linux-gnu           
+#>  ui       X11                         
+#>  language (EN)                        
+#>  collate  en_US.UTF-8                 
+#>  tz       EST5EDT                     
+#>  date     2018-12-10                  
+#> 
+#>  package    * version date       source        
+#>  assertthat   0.2.0   2017-04-11 CRAN (R 3.3.1)
+#>  backports    1.1.2   2017-12-13 CRAN (R 3.5.0)
+#>  base       * 3.5.1   2018-09-10 local         
+#>  bindr        0.1.1   2018-03-13 CRAN (R 3.5.0)
+#>  bindrcpp   * 0.2.2   2018-03-29 CRAN (R 3.5.0)
+#>  colorspace   1.3-2   2016-12-14 CRAN (R 3.5.0)
+#>  compiler     3.5.1   2018-09-10 local         
+#>  crayon       1.3.4   2017-09-16 CRAN (R 3.3.1)
+#>  datasets   * 3.5.1   2018-09-10 local         
+#>  DBI          1.0.0   2018-05-02 CRAN (R 3.5.0)
+#>  dbplyr     * 1.2.2   2018-07-25 CRAN (R 3.5.0)
+#>  devtools     1.13.6  2018-06-27 CRAN (R 3.5.0)
+#>  digest       0.6.17  2018-09-12 CRAN (R 3.5.0)
+#>  dplyr      * 0.7.6   2018-06-29 CRAN (R 3.5.0)
+#>  evaluate     0.11    2018-07-17 CRAN (R 3.5.0)
+#>  farver       1.1.0   2018-11-20 CRAN (R 3.5.1)
+#>  ggforce    * 0.1.3   2018-07-07 CRAN (R 3.5.1)
+#>  ggplot2    * 3.0.0   2018-07-03 CRAN (R 3.5.0)
+#>  ggthemes   * 4.0.1   2018-08-24 CRAN (R 3.5.1)
+#>  glue         1.3.0   2018-07-17 CRAN (R 3.5.0)
+#>  graphics   * 3.5.1   2018-09-10 local         
+#>  grDevices  * 3.5.1   2018-09-10 local         
+#>  grid         3.5.1   2018-09-10 local         
+#>  gtable       0.2.0   2016-02-26 CRAN (R 3.5.0)
+#>  hms          0.4.2   2018-03-10 CRAN (R 3.5.0)
+#>  htmltools    0.3.6   2017-04-28 CRAN (R 3.5.0)
+#>  knitr        1.20    2018-02-20 CRAN (R 3.5.0)
+#>  lazyeval     0.2.1   2017-10-29 CRAN (R 3.5.0)
+#>  lubridate  * 1.7.4   2018-04-11 CRAN (R 3.5.0)
+#>  magrittr     1.5     2014-11-22 CRAN (R 3.1.2)
+#>  MASS         7.3-50  2018-04-30 CRAN (R 3.5.1)
+#>  memoise      1.1.0   2017-04-21 CRAN (R 3.4.3)
+#>  methods    * 3.5.1   2018-09-10 local         
+#>  munsell      0.5.0   2018-06-12 CRAN (R 3.5.0)
+#>  pillar       1.3.0   2018-07-14 CRAN (R 3.5.0)
+#>  pkgconfig    2.0.2   2018-08-16 CRAN (R 3.5.0)
+#>  plyr         1.8.4   2016-06-08 CRAN (R 3.5.0)
+#>  purrr        0.2.5   2018-05-29 CRAN (R 3.5.0)
+#>  R6           2.2.2   2017-06-17 CRAN (R 3.3.1)
+#>  Rcpp         0.12.18 2018-07-23 CRAN (R 3.5.0)
+#>  readr      * 1.1.1   2017-05-16 CRAN (R 3.5.0)
+#>  rlang        0.2.2   2018-08-16 CRAN (R 3.5.0)
+#>  rmarkdown    1.10    2018-06-11 CRAN (R 3.5.0)
+#>  rprojroot    1.3-2   2018-01-03 CRAN (R 3.5.0)
+#>  scales       1.0.0   2018-08-09 CRAN (R 3.5.0)
+#>  stats      * 3.5.1   2018-09-10 local         
+#>  stringi      1.2.4   2018-07-20 CRAN (R 3.5.0)
+#>  stringr    * 1.3.1   2018-05-10 CRAN (R 3.5.0)
+#>  tibble       1.4.2   2018-01-22 CRAN (R 3.5.0)
+#>  tidyr      * 0.8.1   2018-05-18 CRAN (R 3.5.0)
+#>  tidyselect   0.2.4   2018-02-26 CRAN (R 3.5.0)
+#>  tools        3.5.1   2018-09-10 local         
+#>  tweenr       1.0.0   2018-09-27 CRAN (R 3.5.1)
+#>  units        0.6-0   2018-06-09 CRAN (R 3.5.0)
+#>  utils      * 3.5.1   2018-09-10 local         
+#>  withr        2.1.2   2018-03-15 CRAN (R 3.5.0)
+#>  yaml         2.2.0   2018-07-25 CRAN (R 3.5.0)
+\end{verbatim}
+
+The current Git commit details are:
+
+
+\end{document}
