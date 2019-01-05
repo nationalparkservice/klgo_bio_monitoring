@@ -55,7 +55,7 @@ species_data_2007 <- left_join(tbl_Field_Data, tbl_Events,
 #ifelse(species_data_2007$`Num_ Observed` < mean(species_data_2007$`Num_ Observed`), "below", "above")
 
 #faceted by species?
-ggplot(species_data_2007,
+plot1 <- ggplot(species_data_2007 %>% ungroup() %>% filter(Species < "AMPI"),
        aes(as.factor(Days_since_first),
            `Num_ Observed`)) +
   geom_bar(stat='identity', aes(fill = as.factor(Year))) +
@@ -63,13 +63,15 @@ ggplot(species_data_2007,
   #paginate
   facet_wrap_paginate(~Species, ncol = 1)
 
+print(plot1)
+
 #another way to paginate
 #for (i in seq(1, length(unique(species_data_2007$Species)), 6)) {
  # print(plot)
 #}
 
 #first count every year?
-ggplot(species_data_2007 %>%
+plot2 <- ggplot(species_data_2007 %>%
          ungroup() %>%
          group_by(Species, Year) %>%
          arrange(Days_since_first) %>%
@@ -79,13 +81,15 @@ ggplot(species_data_2007 %>%
   #using facet_wrap_paginate() from ggforce
   #to distribute over pages
   facet_wrap_paginate(~Species, ncol = 1)
+print(plot2)
 
 #time series?
 #dot plot
-ggplot(species_data_2007, aes(as.factor(Year), `Num_ Observed`)) +
+plot3 <- ggplot(species_data_2007, aes(as.factor(Year), `Num_ Observed`)) +
   geom_boxplot() +
   geom_dotplot(#binaxis='y',
                #stackdir='center',
                #dotsize = .5,
                #fill="red"
     )
+print(plot3)

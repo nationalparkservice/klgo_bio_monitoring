@@ -31,23 +31,25 @@ species_units <-
   #spread(GIS_Location_ID, total_Observed)
 
 #to do: make plot
-ggplot(species_units, aes(as.numeric(Days_since_first),
+plot4 <- ggplot(species_units, aes(as.numeric(Days_since_first),
                           total_Observed,
                           color = as.factor(Year))) +
   geom_jitter(height = .3, aes(fill = GIS_Location_ID)) +
   #in ggforce package to supposedly distribute facets over pages
   facet_wrap_paginate(~Species, ncol = 1, scales = "free") +
   ylim(c(0, 2000))
+print(plot4)
 
 #how to
   #1. order bars with a y aesthetic,
   #2. have species not take up so much space
   #3. get rid of 0/NA values to take up less space?? ("free_x" not working)
-ggplot(species_units, aes(Species, total_Observed, fill = as.factor(Year))) +
+plot5 <- ggplot(species_units, aes(Species, total_Observed, fill = as.factor(Year))) +
   geom_bar(stat = "identity") +
   coord_flip() +
   #in ggforce package to supposedly distribute facets over pages
   facet_wrap_paginate(~GIS_Location_ID, ncol = 2, scales = "free")
+print(plot5)
 #bar chart:
   #faceted by unit (8) and by non-zero species?
   #x = all species(?), could be separated by year
