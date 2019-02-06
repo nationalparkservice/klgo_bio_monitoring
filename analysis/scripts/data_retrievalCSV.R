@@ -6,7 +6,11 @@
 # Last Edit: 2018 Oct 17
 ########
 
-path = "./analysis/data/raw_data/CSVs/"
+print(getwd()) # JR added 2019 Feb 5 to help traceback
+
+#path = "./analysis/data/raw_data/CSVs/"
+path = "../data/raw_data/CSVs/"  #JR corrected 2019 Feb 5
+
 
 #retrieve file names with full path included
 file_names <- dir(path, full.names = TRUE)
