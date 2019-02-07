@@ -39,7 +39,7 @@ species_data <- left_join(tbl_Field_Data, tbl_Events,
   ungroup() #%>%
 #arrange()
 
-ggplot(species_data, aes(Common_Name, Month_Day)) +
+p1 <- ggplot(species_data, aes(Common_Name, Month_Day)) + #store ggplot as plot object
   geom_point(col="tomato2", size=3) +   # Draw points
   geom_segment(aes(x=Common_Name,
                    y=min(Month_Day),
@@ -49,6 +49,8 @@ ggplot(species_data, aes(Common_Name, Month_Day)) +
   labs(title="Dot Plot",
        subtitle="Common Name vs. Sighting") +
   coord_flip()
+
+
 
 species_data_2007 <- left_join(tbl_Field_Data, tbl_Events,
                                by = "Event_ID") %>%

@@ -217,7 +217,8 @@ What sort of observations would trigger action? What actions?
 # else source("./scripts/data_retrievalNPS.R")
 
 #NOTE: working directory when knitting markup is /analysis/paper. So relative pathway needs to be ../scripts etc.
-source("../scripts/data_retrievalCSV.R")
+source("../scripts/data_retrievalCSV.R") 
+
 
 ```
 
@@ -257,7 +258,10 @@ Questions: what is cue to start of survey season?
 *Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
 
 ```{r, eval=TRUE}
-source("../scripts/data_exploration.R") 
+source("../scripts/data_exploration.R") # JR 2019 Feb 5 corrected relative pathname
+
+#source("../scripts/units_species.R")
+
 ```
 
 *Sample Frame* 
