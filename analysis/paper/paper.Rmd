@@ -6,9 +6,12 @@ author:
 - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  pdf_document:
-    toc: yes
   word_document:
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
     toc: yes
 keywords: keyword 1; keyword 2; keyword 3
 link-citations: yes
@@ -21,30 +24,41 @@ abstract: The Coastal Waterbird Survey has been conducted, with varying levels o
   time, and budgets, it is imperative that surveys be conducted efficiently in terms
   of both choice of sampling design and choice of sampling effort. Now that KLGO has
   multiple years of experience implementing the protocol, it is timely to step back
-  and assess how things are going. We review the current survey programâ€™s objectives,  design,
-  identify statistical issues, and recommend potential solutions. Major topics include
-  â€¦. The study concludes with a series of recommended tasks that the park should
-  undertake to improve the coastal waterbird surveyâ€™s efficiency and effectiveness.
+  and assess how things are going. We review the current program's objectives and survey design,
+  identify statistical issues, and recommend potential solutions. Major topics include... blah blah. The study concludes with a series of recommended tasks that the park should
+  undertake to improve the coastal waterbird survey's efficiency and effectiveness.
 ---
 
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
 
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, cache = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  warning = FALSE,
-  message = FALSE,
+  warning = TRUE, # set to FALSE when done
+  message = TRUE, # set to FALSE when doen
   echo = FALSE,
   comment = "#>",
-  fig.path = "../figures/"
+  dev = c('png','pdf'),
+  pdf.options(encoding = "ISOLatin9.enc"),
+  fig.path = "../figures/",
+  error = FALSE
 )
 
-library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);library(tidyr);library(lubridate);library(ggthemes);library(ggforce)
+library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);library(tidyr);library(lubridate);library(lattice);library(ggthemes);library(ggforce)
+
 
 ```
-# Things To Discuss
+# Things To Discuss with Madeleine
 - add all libraries used in scripts to 'setup' code chunk (just above) rather than just loading in script so that it is easy to see what needs to be loaded before you can successfully knit.
+- documentation in scripts
+
+# Issues to Resolve
+- why isn't code chunk option warning= FALSE suppressing warnings() in Data_Retrieval? (from read_csv)
+- How do we use latex figure environment in rmarkdown (for inclusion of ggplot graphics; captioning figures and labelling for cross-references, etc)?
+- conversion from paper.md to paper.pdf (pandoc issue?) (i) update MikTex package, set dev=c('pdf') in setup
+- github permissions for Madeleine on local machine
+- What is up with 2008 surveys? why such distinct timing?
 
 # Introduction
 Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer 2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
@@ -211,7 +225,7 @@ What sort of observations would trigger action? What actions?
 *Target Frame* - space, time, scale, target populations
 *Spatial* Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
 
-```{r DataInput, eval=TRUE, echo=FALSE, cache=TRUE}
+```{r Data_Retrieval, eval=TRUE, echo=FALSE, warning = FALSE}
 # if (system("git config user.email")=="mward2@swarthmore.edu") 
 #      source("./scripts/data_retrievalSwarthmore.R")
 # else source("./scripts/data_retrievalNPS.R")
@@ -251,16 +265,22 @@ forms developed after Collins et al. (2001) (Appendix B). ArcView shapefiles of
 the observation points and census units were created for use in the park’s GIS.
 All data, original data forms, and field notes were archived at KLGO.
 
+```{r Data_Wrangling, eval=TRUE, echo=FALSE, warning = TRUE}
+# reconstructs species_data tibble from tables read in by DataInput
+#
+source("../scripts/data_wrangling.R") 
+
+```
+
 
 *Temporal* ??how define ‘season’??
 
 Questions: what is cue to start of survey season?
 *Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
 
-```{r, eval=TRUE}
-source("../scripts/data_exploration.R") # JR 2019 Feb 5 corrected relative pathname
-
-#source("../scripts/units_species.R")
+```{r EDA_SurveyTiming, eval=TRUE, cache = FALSE, fig.show= 'asis'}
+ source("../scripts/survey_timing_EDA.R", echo=FALSE) 
+print(Plot1)
 
 ```
 
