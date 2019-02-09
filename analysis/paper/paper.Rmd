@@ -54,10 +54,11 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 - documentation in scripts
 
 # Issues to Resolve
-- why isn't code chunk option warning= FALSE suppressing warnings() in Data_Retrieval? (from read_csv)
 - How do we use latex figure environment in rmarkdown (for inclusion of ggplot graphics; captioning figures and labelling for cross-references, etc)?
-- conversion from paper.md to paper.pdf (pandoc issue?) (i) update MikTex package, set dev=c('pdf') in setup
+- conversion from paper.md to paper.pdf (pandoc issue?) 
+  (i) update MikTex package, set dev=c('pdf') in setup
 - github permissions for Madeleine on local machine
+- adding files to .gitignore
 - What is up with 2008 surveys? why such distinct timing?
 
 # Introduction
