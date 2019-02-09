@@ -1,12 +1,12 @@
 # Retrieve CSV Data when working on swarthmore R server
 ############
-# This script uses library("readr") to access the comma-separated files associated with species data.
+# Read in the comma-separated files associated with species data.
+########
+# Libraries used: readr
 ########
 # Madeleine Ward
 # Last Edit: 2018 Oct 17
 ########
-
-print(getwd()) # JR added 2019 Feb 5 to help traceback
 
 #path = "./analysis/data/raw_data/CSVs/"
 path = "../data/raw_data/CSVs/"  #JR corrected 2019 Feb 5

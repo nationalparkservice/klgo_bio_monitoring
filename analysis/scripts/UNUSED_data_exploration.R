@@ -40,17 +40,14 @@ species_data <- left_join(tbl_Field_Data, tbl_Events,
 #arrange()
 
 plot1<- ggplot(species_data, aes(Common_Name, Month_Day)) + #store ggplot as plot object
-  geom_point(col="tomato2", size=3) +   # Draw points
-  geom_segment(aes(x=Common_Name,
+  geom_point(col="tomato2", size=2) +   # Draw points
+  geom_segment(aes(x=Common_Name, xend=Common_Name,  #2019 Feb 7 JR added xend
                    y=min(Month_Day),
                    yend=max(Month_Day)),
                linetype="dashed",
                size=0.1) +   # Draw dashed lines
-  labs(title="Dot Plot",
-       subtitle="Common Name vs. Sighting") +
+  labs(title="Sightings by Species") +
   coord_flip()
-
-print(plot1) # JR explicitly render
 
 
 species_data_2007 <- left_join(tbl_Field_Data, tbl_Events,
