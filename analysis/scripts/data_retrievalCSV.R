@@ -22,5 +22,5 @@ for(i in 1:length(file_names)){
   title <- gsub(".csv", "", title)
 
   #assign tibble names to data frames
-  assign(title, read_csv(file_names[i]))
+  assign(title, suppressMessages(read_csv(file_names[i])))
 }
