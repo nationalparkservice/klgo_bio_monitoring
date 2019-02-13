@@ -6,13 +6,17 @@ author:
 - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  word_document:
-    toc: yes
   html_document:
     df_print: paged
     toc: yes
+    fig_caption: true
+  word_document:
+    toc: yes
+    fig_caption: true
+    reference_docx: NRR_Author_Template_V4.2.docx
   pdf_document:
     toc: yes
+    fig_caption: true
 keywords: keyword 1; keyword 2; keyword 3
 link-citations: yes
 bibliography: KLGOCWS_References.bib
@@ -62,7 +66,7 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 - What is up with 2008 surveys? why such distinct timing?
 
 # Introduction
-Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer 2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
+Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmayer2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
 
 Assessing a monitoring program focuses on four broad topics following the major Phases of a monitoring program (ibid):  
 1. _why_ - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?  
@@ -278,13 +282,18 @@ source("../scripts/data_wrangling.R")
 
 Questions: what is cue to start of survey season?
 *Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
+The annual dates of the first and last survey each year has varied by over a month (Figure \ref{fig:Figure_SurveyTiming}).
 
-```{r EDA_SurveyTiming, eval=TRUE, cache = FALSE, fig.show= 'asis'}
- source("../scripts/survey_timing_EDA.R", echo=FALSE) 
-print(Plot1)
+```{r EDA_SurveyTiming, eval=TRUE, cache = TRUE, include = FALSE}
+# dotplot of survey times by year
+source("../scripts/survey_timing_EDA.R", echo=FALSE)
 
 ```
 
+```{r Figure_SurveyTiming, echo=FALSE, eval=TRUE, cache=TRUE, dependson= c("EDA_SurveyTiming"), fig.show= 'asis', fig.cap="\\label{fig:Figure_SurveyTiming}The annual dates of the first and last survey have both varied by over a month across the years."}
+
+print(Plot1)
+```
 *Sample Frame* 
 Spatial: same coverage as Target Frame. Area split into eight survey areas [see @Hahr2004].
 Questions: Access to all units? Ease of observation of different units? Ease of distinguishing boundaries?
