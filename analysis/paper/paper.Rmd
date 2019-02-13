@@ -6,13 +6,14 @@ author:
 - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  word_document:
-    toc: yes
   html_document:
     df_print: paged
     toc: yes
   pdf_document:
     toc: yes
+  word_document:
+    toc: yes
+    # reference_docx: NRSS_template_2018July.docx get NRSS report template from Paul Burger
 keywords: keyword 1; keyword 2; keyword 3
 link-citations: yes
 bibliography: KLGOCWS_References.bib
@@ -27,6 +28,8 @@ abstract: The Coastal Waterbird Survey has been conducted, with varying levels o
   and assess how things are going. We review the current program's objectives and survey design,
   identify statistical issues, and recommend potential solutions. Major topics include... blah blah. The study concludes with a series of recommended tasks that the park should
   undertake to improve the coastal waterbird survey's efficiency and effectiveness.
+editor_options: 
+  chunk_output_type: inline
 ---
 
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
@@ -56,13 +59,11 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 # Issues to Resolve
 - How do we use latex figure environment in rmarkdown (for inclusion of ggplot graphics; captioning figures and labelling for cross-references, etc)?
 - conversion from paper.md to paper.pdf (pandoc issue?) 
-  (i) update MikTex package, set dev=c('pdf') in setup
-- github permissions for Madeleine on local machine
 - adding files to .gitignore
 - What is up with 2008 surveys? why such distinct timing?
 
 # Introduction
-Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer 2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
+Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmeyer2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
 
 Assessing a monitoring program focuses on four broad topics following the major Phases of a monitoring program (ibid):  
 1. _why_ - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?  
