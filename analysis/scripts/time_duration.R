@@ -1,6 +1,6 @@
 # title
 ############
-# This script examines the time duration at each site by day and year
+# This script examines the time duration at each site by day and year.
 ########
 # Madeleine Ward
 # Last Edit: 2018 Oct 30
