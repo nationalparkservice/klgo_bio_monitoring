@@ -292,14 +292,14 @@ Questions: what is cue to start of survey season?
 The annual dates of the first and last survey each year has varied by over a month (Figure \@ref(fig:Fig-SurveyTiming)).
 
 
-```{r EDA_SurveyTiming, eval=TRUE, cache = TRUE, include = FALSE}
+```{r EDA_SurveyTiming, eval=TRUE, cache = FALSE, include = FALSE}
 # dotplot of survey times by year
 source("../scripts/survey_timing_EDA.R", echo=FALSE)
 
 ```
 
 
-```{r Fig-SurveyTiming, echo=FALSE, eval=TRUE, cache=TRUE, dependson= c("EDA_SurveyTiming"), fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
+```{r Fig-SurveyTiming, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
 
 print(Plot1)
 ```
