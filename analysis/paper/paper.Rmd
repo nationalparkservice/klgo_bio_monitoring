@@ -14,9 +14,14 @@ output:
     fig_caption: yes
     number_sections: yes
     toc: yes
+  word_document:
+    toc: yes
+    fig_caption: true
+    reference_docx: NRR_Author_Template_V4.2.docx
   pdf_document:
     fig_caption: yes
     toc: yes
+    fig_caption: true
 keywords: keyword 1; keyword 2; keyword 3
 link-citations: yes
 bibliography: KLGOCWS_References.bib
@@ -289,6 +294,7 @@ Questions: what is cue to start of survey season?
 
 The annual dates of the first and last survey each year has varied by over a month (Figure \@ref(fig:Fig-SurveyTiming)).
 
+
 ```{r EDA_SurveyTiming, eval=TRUE, cache = TRUE, include = FALSE}
 # dotplot of survey times by year
 source("../scripts/survey_timing_EDA.R", echo=FALSE)
@@ -296,12 +302,10 @@ source("../scripts/survey_timing_EDA.R", echo=FALSE)
 ```
 
 
-
 ```{r Fig-SurveyTiming, echo=FALSE, eval=TRUE, cache=TRUE, dependson= c("EDA_SurveyTiming"), fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
 
 print(Plot1)
 ```
-
 
 *Sample Frame* 
 Spatial: same coverage as Target Frame. Area split into eight survey areas [see @Hahr2004].
