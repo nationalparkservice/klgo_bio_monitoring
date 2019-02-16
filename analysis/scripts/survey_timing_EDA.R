@@ -14,8 +14,7 @@ Plot1<- species_data %>%
   geom_point(col="blue", size=2) +   # Draw points
   geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
              linetype=2, colour="grey") +
-  labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)",
-       caption="The annual dates of the first and last survey have both varied by over a month across the years.")
+  labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)")
 
 ####### Ideas to pursue later
 #######
@@ -28,8 +27,7 @@ if (0) {
     geom_dotplot(col="blue") +   # Draw points
     geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
                linetype=2, colour="grey") +
-    labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)",
-         caption="The annual dates of the first and last survey have both varied by over a month across the years.")
+    labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)")
 
 }
 
@@ -42,6 +40,5 @@ if (0) {
     geom_point(col="blue", size=2) +   # Draw points
     geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
                linetype=2, colour="grey") +
-    labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)",
-         caption="The annual dates of the first and last survey have both varied by over a month across the years.")
+    labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)")
 }
