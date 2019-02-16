@@ -2,5 +2,13 @@
 .Rhistory
 .RData
 .Ruserdata
+# ignore products from pandoc to final output
 analysis/paper/paper.log
+analysis/paper/paper.html
+analysis/paper/paper.docx
+analysis/paper/paper.pdf
+# ignore intermediate cache objects as don't need to track them.
+analysis/paper/paper_cache/
+# ignore output (figures)
+analysis/figures/
 
