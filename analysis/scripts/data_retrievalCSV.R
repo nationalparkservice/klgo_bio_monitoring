@@ -11,7 +11,6 @@
 #path = "./analysis/data/raw_data/CSVs/"
 path = "../data/raw_data/CSVs/"  #JR corrected 2019 Feb 5
 
-
 #retrieve file names with full path included
 file_names <- dir(path, full.names = TRUE)
 

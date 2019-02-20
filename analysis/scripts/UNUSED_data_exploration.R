@@ -15,63 +15,35 @@ species_data <- left_join(tbl_Field_Data, tbl_Events,
          Month_Day = format(Date, "%m-%d")) %>%
   filter(`Num_ Observed` > 0, Year >= 2003) %>%
   group_by(Species, Year, Month_Day) %>%
-  mutate(total_obs = sum(`Num_ Observed`)) #%>%
-  #ungroup() %>%
-  #group_by(Species, Year) %>%
-  #filter(row_number()==1) %>%
-  #ungroup() #%>%
-  #arrange()
-
-species_data$species_num= as.integer(as.factor(species_data$Species))
-species_data <- left_join(tbl_Field_Data, tbl_Events,
-                          by = "Event_ID") %>%
-  left_join(tlu_species_codes,
-            by = c("Species" = "Code")) %>%
-  mutate(Date = substr(Start_Date, 1, 8),
-         Date = mdy(Date),
-         Month_Day = format(Date, "%m-%d")) %>%
-  filter(`Num_ Observed` > 0, Year >= 2003) %>%
-  group_by(Species, Year, Month_Day) %>%
   mutate(total_obs = sum(`Num_ Observed`)) %>%
-  ungroup() %>%
-  group_by(Species, Year) %>%
-  filter(row_number()==1) %>%
   ungroup() #%>%
+#ungroup() %>%
+#group_by(Species, Year) %>%
+#filter(row_number()==1) %>%
+#ungroup() #%>%
 #arrange()
 
-plot1<- ggplot(species_data, aes(Common_Name, Month_Day)) + #store ggplot as plot object
-  geom_point(col="tomato2", size=2) +   # Draw points
-  geom_segment(aes(x=Common_Name, xend=Common_Name,  #2019 Feb 7 JR added xend
-                   y=min(Month_Day),
-                   yend=max(Month_Day)),
-               linetype="dashed",
-               size=0.1) +   # Draw dashed lines
-  labs(title="Sightings by Species") +
-  coord_flip()
-
-
-species_data_2007 <- left_join(tbl_Field_Data, tbl_Events,
-                               by = "Event_ID") %>%
-  left_join(tlu_species_codes,
-            by = c("Species" = "Code")) %>%
-  separate(Start_Date, c("Date", "Time_0"), sep = " ") %>%
-  separate(Start_Time, c("Date_01", "Time_Start"), sep = " ") %>%
-  #how to fit all these into one argument??
-  separate(End_Time, c("Date_02", "Time_End"), sep = " ") %>%
-  mutate(Date = mdy(Date),
-         Day_Month = format(Date, "%m-%d")) %>%
-  filter(`Num_ Observed` != 0, Year >= 2003) %>%
-  group_by(Year) %>%
-  arrange(Date) %>%
-  mutate(Days_since_first = Date - Date[row_number()==1]) %>%
-  ungroup() %>%
-
+species_top <- species_data %>%
   group_by(Species) %>%
-  arrange(Year) #%>%
+  summarize(total = sum(total_obs)) %>%
+  arrange(desc(total)) %>%
+  top_n(n = 20, wt = total)
 
-  #take first observation from each year
-  #filter(row_number()==1)
+species_graph <- species_top %>%
+  left_join(species_data,
+            by = "Species")
 
-#species_data_2007$type <-
-#ifelse(species_data_2007$`Num_ Observed` <
-#mean(species_data_2007$`Num_ Observed`), "below", "above")
+ggplot(species_graph, aes(Common_Name, Month_Day)) +
+  geom_point() +
+  labs(title = "Bird Species Obs. by Date, 2003-2009",
+       x = "Species",
+       y = "Date") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  scale_x_discrete() +
+  coord_flip() +
+  theme_classic()
+
+#what is the NA value on the graph?
+#to do: arrange by first sighting,
+#get breaks in x axis label
+
