@@ -233,7 +233,10 @@ What sort of observations would trigger action? What actions?
 ### Survey Design 
 
 *Target Frame* - space, time, scale, target populations
+
 *Spatial* Upper Lynn Canal visible from coastline from Skagway to Dyea, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point)
+
+> INSERT FIGURE FROM NRSS report
 
 ```{r Data-Retrieval, eval=TRUE, echo=FALSE, warning = FALSE}
 # if (system("git config user.email")=="mward2@swarthmore.edu") 
@@ -251,6 +254,25 @@ Targets: loons, grebes, cormorants, herons, ducks, geese, plovers, sandpipers, g
 Questions: clarify role of kingfishers.
 
 Incidental: 48 other spp
+
+> Consider graphic of spp frequency of occurrence (maybe some panel-rich figure, one panel per spp, showing annual average percentage of daily observations in which spp was sighted - as line-connected points?- ordered from most frequently observed spp to least frequently. Think about appropriate estimator so annual value accounts for variation in survey effort across years.) likely needs to be a full page figure (e.g., we'll need to set  fig.width and fig.height)
+
+
+```{r EDA_AllSpp_Frequency, eval=TRUE, cache = FALSE, include = FALSE}
+# lets discuss what I'm thinking of. It is of secondary importance, so don't want this 
+# to consume tons of your time.
+
+#source("../scripts/survey_timing_EDA.R", echo=FALSE)
+
+```
+
+
+```{r Fig-AllSppFreq, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="blah blah about consistency in target species occurrence. Maybe something about new spp showing up?"}
+
+#print(Plot1)
+```
+
+
 Questions: are these all migratory? Any year-round residents? Any of special concern? 
 Any especially problematic for detection on water or identification of spp?
 
@@ -263,6 +285,7 @@ as weather and scheduling permitted and dates/time were not selected at
 random. Standardized observation points were established for each census unit
 to ensure the most complete coverage of the study area, and to minimize
 observer bias.
+
 Observers counted and identified all birds visible within each unit and
 documented birds opportunistically observed while moving between units.
 Counts were made by scanning the census units with Bushnell Legend 10 x 42
@@ -283,11 +306,8 @@ source("../scripts/data_wrangling.R")
 ```
 
 
+
 *Temporal* ??how define ‘season’??
-
-Questions: what is cue to start of survey season?
-*Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
-
 
 The annual dates of the first and last survey each year has varied by over a month (Figure \@ref(fig:Fig-SurveyTiming)).
 
@@ -303,6 +323,36 @@ source("../scripts/survey_timing_EDA.R", echo=FALSE)
 
 print(Plot1)
 ```
+
+Questions: what is cue to start of survey season?
+*Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
+
+Narrative on how well the current surveys are capturing the Spring arrival and Fall departure of each of the targeted species (\@ref(fig:Fig-SpeciesTiming)). Implications for informing Audubon Climate Change Watch or national phenology network, yadda yadd.
+
+```{r SpeciesTiming, eval=TRUE, cache = FALSE, include = FALSE}
+# Madeleine: write a script to extract, for just the target species listed at line 250, 
+# just the dates each year that each of the target species was observed (somewhere in the survey areas - don't care which, at the moment)
+# then add a layer to the ggplot 'Plot1' (horrid name, by the way) to visually distinguish those dates for that species.
+# will have to play around to see if it is feasible to do this by faceting on the species or just make a separate 
+# timing graph for each species - your call. It will be unreadable if try and put all of the target species on 
+# a single plot
+
+# tweak this call to source that new script, then un-comment, etc.
+# source("../scripts/species_timing_EDA.R", echo=FALSE) 
+
+```
+
+
+```{r Fig-SpeciesTiming, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="For each of the target species, the dates on which they were observed in any of the sample areas."}
+
+#edit to use the name of the new plot
+print(Plot1)
+```
+
+
+
+
+
 
 *Sample Frame* 
 Spatial: same coverage as Target Frame. Area split into eight survey areas [see @Hahr2004].
