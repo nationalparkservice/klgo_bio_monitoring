@@ -255,10 +255,10 @@ Questions: clarify role of kingfishers.
 
 Incidental: 48 other spp
 
-> Consider graphic of spp frequency of occurrence (maybe some panel-rich figure, one panel per spp, showing annual average percentage of daily observations in which spp was sighted - as line-connected points?- ordered from most frequently observed spp to least frequently. Think about appropriate estimator so annual value accounts for variation in survey effort across years.) likely needs to be a full page figure (e.g., we'll need to set  fig.width and fig.height)
+> MADELEINE: add a graphic of spp frequency of occurrence (maybe some panel-rich figure, one panel per spp, showing annual average percentage of daily observations in which spp was sighted - as line-connected points?- ordered from most frequently observed spp to least frequently. (e.g., use facets). LET"S DISCUSS - Think about appropriate estimator so annual value accounts for variation in survey effort across years.) likely needs to be a full page figure (e.g., we'll need to set  fig.width and fig.height)
 
 
-```{r EDA_AllSpp_Frequency, eval=TRUE, cache = FALSE, include = FALSE}
+```{r EDA_AllSpp_Frequency, eval=TRUE, cache = FALSE, include = FALSE, fig.height=8, fig.width=6}
 # lets discuss what I'm thinking of. It is of secondary importance, so don't want this 
 # to consume tons of your time.
 
@@ -305,8 +305,6 @@ source("../scripts/data_wrangling.R")
 
 ```
 
-
-
 *Temporal* ??how define ‘season’??
 
 The annual dates of the first and last survey each year has varied by over a month (Figure \@ref(fig:Fig-SurveyTiming)).
@@ -330,7 +328,7 @@ Questions: what is cue to start of survey season?
 Narrative on how well the current surveys are capturing the Spring arrival and Fall departure of each of the targeted species (\@ref(fig:Fig-SpeciesTiming)). Implications for informing Audubon Climate Change Watch or national phenology network, yadda yadd.
 
 ```{r SpeciesTiming, eval=TRUE, cache = FALSE, include = FALSE}
-# Madeleine: write a script to extract, for just the target species listed at line 250, 
+# MADELEINE: write a script to extract, for just the target species listed at line 250, 
 # just the dates each year that each of the target species was observed (somewhere in the survey areas - don't care which, at the moment)
 # then add a layer to the ggplot 'Plot1' (horrid name, by the way) to visually distinguish those dates for that species.
 # will have to play around to see if it is feasible to do this by faceting on the species or just make a separate 
