@@ -305,6 +305,12 @@ source("../scripts/data_wrangling.R")
 
 ```
 
+```{r Target_Species, eval=TRUE, echo=FALSE, warning = TRUE}
+# selects only target species listed above
+#
+source("../scripts/target_data.R")
+```
+
 *Temporal* ??how define ‘season’??
 
 The annual dates of the first and last survey each year has varied by over a month (Figure \@ref(fig:Fig-SurveyTiming)).
