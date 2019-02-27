@@ -325,11 +325,11 @@ source("../scripts/data_wrangling.R")
 
 ```
 
-> MADELEINE: need to 'stage' the new script file when you do a 'commit' so that it gets incorporated into the commit. There isn't a copy of target_data.R in the repository yet... I set 'eval = FALSE' to skip the source call for now.
-```{r Target_Species, eval=FALSE, echo=FALSE, warning = TRUE}
+
+```{r Target_Species, eval=TRUE, echo=FALSE, warning = TRUE}
 # selects only target species listed above
 #
-source("../scripts/target_data.R")
+source("../scripts/target_species.R")
 ```
 
 *Temporal* ??how define ‘season’??
