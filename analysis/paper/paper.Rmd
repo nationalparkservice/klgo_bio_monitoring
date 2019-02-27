@@ -69,6 +69,10 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 
 # Issues to Resolve with content (narrative, figures, analyses)
 - What is up with 2008 surveys? why such distinct timing?
+- Think about Covariate EDA, if any...change in observers?
+- Begin thinking about (Freq of Occurrence, Phenology, Abundance | target species) and then Richness - both Phenology (Day of Season) and across years.
+- clean up structure of survey design section - consistent pattern in {Element Definition, Settings, Assessment}; as cleanly as possible separate space and time aspects of survey design (& effort) from spp-specific responses.
+
 
 # Introduction
 Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmayer2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
@@ -248,6 +252,22 @@ source("../scripts/data_retrievalCSV.R")
 
 
 ```
+*Site Accessibility*
+How consistently are they able to conduct surveys at each site? E.g., how often is Site 1 dropped due to cruise ships?
+
+> MADELEINE: With all these initial round of figures, don't get too caught up in refining fine details as we'll likely iterate a couple times and very well may end up deciding a totally different figure is more effective.  For example, this initial round of requests is a lot of dotplots, more or less, but we may end up realizing it is better to look at a summary of '% success per week' or something else that is a more continuous outcome variable. Hopefully some of that makes sense.
+
+> MADELEINE: add two graphs (they will end up rather similar to ones for looking at timing of survey effort) to visualize how consistently they are able to complete planned surveys at each of the survey 'sites'. Probably okay to do both at dotplots or variants thereof. 
+
+> FIRST graph: x axis is Day of Season (Julian Date; be nice to ultimately include vertical reference lines to denote beginnings of months), y axis is year; open dots (circles/points) for the days of planned surveys - e.g., every day there was any observation effort at any site; closed dots (filled in circles, pch=19?) for days where the survey was successfully completed, facet by site. So we are seeing whethere there are consistently problematic sites (like site 1, half of which consists of cruise ship docking areas). 
+
+> SECOND graph: [THIS IS SECONDARY PRIORITY] x axis is Time of Day, perhaps broken in to 1 or 2 hour blocks , y axis is ....this is a tough one so totally open to your ideas. How about y axis is % [0, 1.0] and for each year there is a different curve showing the % of planned surveys (as defined above) that were successfully completed that season within that time block; facet by site. So we are seeing whethere there are consistently problematic times of day at each site. 
+
+*Survey Effort*
+Would like to get a sense of the consistency of (alternatively, variation in) survey effort (e.g., duration at each site) across Days of season and years.Like many of these figure requests, we are basically looking to check that there isn't anything glaring going on underneath so we are comfortable later summarizing across this particular variable, or making sure we account for it via some sort of weighting of observations (perhaps by focusing on a variant of something known in fisheries as Catch Per Unit Effort).
+
+> MADELEINE: (that really isn't meant to come across as yelling, just trying to consistently label these so you can easily search for them) This is a very rough thought - feel free to suggest something else. We want to look at variation in 'duration' at each site across days of season and years. Maybe facet by season week, y axis is year, x axis is duration, horizontal boxplot of duration. This lumps all sites - maybe redo that graph again, once for each site?
+
 
 Species: 
 Targets: loons, grebes, cormorants, herons, ducks, geese, plovers, sandpipers, gull, alcids, [kingfishers]
@@ -255,7 +275,7 @@ Questions: clarify role of kingfishers.
 
 Incidental: 48 other spp
 
-> MADELEINE: add a graphic of spp frequency of occurrence (maybe some panel-rich figure, one panel per spp, showing annual average percentage of daily observations in which spp was sighted - as line-connected points?- ordered from most frequently observed spp to least frequently. (e.g., use facets). LET"S DISCUSS - Think about appropriate estimator so annual value accounts for variation in survey effort across years.) likely needs to be a full page figure (e.g., we'll need to set  fig.width and fig.height)
+> MADELEINE: add a graphic of spp frequency of occurrence (maybe some panel-rich figure, one panel per spp, showing annual average percentage of daily observations in which spp was sighted - as line-connected points?- ordered from most frequently observed spp to least frequently. (e.g., use facets). x axis is Day of Season, y axis is % as decimal [0, 1.0], curves for each year; facet by species. LET"S DISCUSS - Think about appropriate estimator so annual value accounts for variation in survey effort across years.) likely needs to be a full page figure (e.g., we'll need to set  fig.width and fig.height). TAKE A STAB AT THIS BUT DON'T get lost trying to complete all the refinements. Really we should build up to this.
 
 
 ```{r EDA_AllSpp_Frequency, eval=TRUE, cache = FALSE, include = FALSE, fig.height=8, fig.width=6}
@@ -329,7 +349,16 @@ print(Plot1)
 ```
 
 Questions: what is cue to start of survey season?
-*Madeleine later* Diagnostic analysis => check dates & unit of first non-zero counts each year for each spp (relative to dates of initiating surveys)
+
+*Survey Timing and Changes in Phenology*
+Want to see if the survey design's start and end dates each season need to be modified to account for any observed changes in phenology (due to climate change, really). Ultimately need to review Audubon's Climate Change Watch List and see if any of their target species are observed in this effort.
+
+> MADELEINE: FIRST graph - x axis is year, y axis is Day of Season, curve for each of the target species defined in next sentence; possibly consider facet by site if anything of interest is revealed when doing so. Curve should be made of points of the first day the species was observed each year; maybe do one with just raw points connected by line segments and one with some sort of smooth - use default until we get a chance to look at these and talk about smoothers. Different color for each of the target species. Might be too many curves (species), in which case define some grouping on species or facet by species (more important than site).
+
+> SECOND graph - similar but showing last day of the season the species was observed each year.
+
+> THIRD graph - x axis is time of day, y axis is week of season, open circles for days with completed surveys, filled circles for surveys (times of day) when target species was observed in any year; facet on target spp. Or consider using the 'time of day' binning discussed in the Site Accessibility graphs (above). THIS IS SECONDARY PRIORITY - don't really like lumping all years together but no other ideas at the moment.
+
 
 Narrative on how well the current surveys are capturing the Spring arrival and Fall departure of each of the targeted species (\@ref(fig:Fig-SpeciesTiming)). Implications for informing Audubon Climate Change Watch or national phenology network, yadda yadd.
 
