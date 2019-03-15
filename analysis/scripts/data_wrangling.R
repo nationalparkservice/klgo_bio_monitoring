@@ -14,7 +14,7 @@
 # 1st left_join - attaches relevant Event data to each event in tbl_Field_Data (using Event_ID)
 species_data <- left_join(tbl_Field_Data, tbl_Events,
                           by = "Event_ID") %>%
-  # 2nd lef_join - attaches relevant Species names (Common, Latin, etc.) (using Species Code)
+  # 2nd left_join - attaches relevant Species names (Common, Latin, etc.) (using Species Code)
   left_join(tlu_species_codes,
             by = c("Species" = "Code")) %>%
   #subset out just columns we care about, re-order by interest, rename where necessary
