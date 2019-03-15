@@ -69,4 +69,3 @@ plot_units_1 <- unit_data_1 %>%
   scale_shape_manual(values = c(21, 16), breaks = c("Yes", "No")) +
   #facet by unit location
   facet_wrap(~GIS_Location_ID)
-plot_units_1

@@ -257,10 +257,6 @@ How consistently are they able to conduct surveys at each site? E.g., how often 
 
 > MADELEINE: With all these initial round of figures, don't get too caught up in refining fine details as we'll likely iterate a couple times and very well may end up deciding a totally different figure is more effective.  For example, this initial round of requests is a lot of dotplots, more or less, but we may end up realizing it is better to look at a summary of '% success per week' or something else that is a more continuous outcome variable. Hopefully some of that makes sense.
 
-> MADELEINE: add two graphs (they will end up rather similar to ones for looking at timing of survey effort) to visualize how consistently they are able to complete planned surveys at each of the survey 'sites'. Probably okay to do both at dotplots or variants thereof. 
-
-> FIRST graph: x axis is Day of Season (Julian Date; be nice to ultimately include vertical reference lines to denote beginnings of months), y axis is year; open dots (circles/points) for the days of planned surveys - e.g., every day there was any observation effort at any site; closed dots (filled in circles, pch=19?) for days where the survey was successfully completed, facet by site. So we are seeing whethere there are consistently problematic sites (like site 1, half of which consists of cruise ship docking areas). 
-
 > SECOND graph: [THIS IS SECONDARY PRIORITY] x axis is Time of Day, perhaps broken in to 1 or 2 hour blocks , y axis is ....this is a tough one so totally open to your ideas. How about y axis is % [0, 1.0] and for each year there is a different curve showing the % of planned surveys (as defined above) that were successfully completed that season within that time block; facet by site. So we are seeing whethere there are consistently problematic times of day at each site. 
 
 *Survey Effort*
@@ -330,6 +326,21 @@ source("../scripts/data_wrangling.R")
 # selects only target species listed above
 #
 source("../scripts/target_species.R")
+```
+
+> MADELEINE: add two graphs (they will end up rather similar to ones for looking at timing of survey effort) to visualize how consistently they are able to complete planned surveys at each of the survey 'sites'. Probably okay to do both at dotplots or variants thereof. 
+
+> FIRST graph: x axis is Day of Season (Julian Date; be nice to ultimately include vertical reference lines to denote beginnings of months), y axis is year; open dots (circles/points) for the days of planned surveys - e.g., every day there was any observation effort at any site; closed dots (filled in circles, pch=19?) for days where the survey was successfully completed, facet by site. So we are seeing whethere there are consistently problematic sites (like site 1, half of which consists of cruise ship docking areas). 
+
+```{r SurveySites, eval=TRUE, cache = FALSE, include = FALSE}
+# dotplot of survey occurrences by unit and whether there were observations
+source("../scripts/survey_sites.R", echo=FALSE)
+```
+
+
+```{r Fig-SurveySites, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
+
+print(plot_units_1)
 ```
 
 *Temporal* ??how define ‘season’??
