@@ -27,7 +27,7 @@ unit_data_1 <-
          YearDay = yday(Date)) %>%
   filter(Year > 2002) %>%
   #select and order relevant variables
-  select(GIS_Location_ID, Date, YearDay, Day, Month, Year, Total_Obs, 
+  select(GIS_Location_ID, Year, Date, YearDay, Day, Month, Year, Total_Obs, 
          Duration, Start_Time, End_Time, Event_Notes, 
          Location_ID, Event_ID) %>%
   #chose arbitrary value for considering a success based on observations above 0

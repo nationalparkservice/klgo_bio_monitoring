@@ -264,6 +264,13 @@ Would like to get a sense of the consistency of (alternatively, variation in) su
 
 > MADELEINE: (that really isn't meant to come across as yelling, just trying to consistently label these so you can easily search for them) This is a very rough thought - feel free to suggest something else. We want to look at variation in 'duration' at each site across days of season and years. Maybe facet by season week, y axis is year, x axis is duration, horizontal boxplot of duration. This lumps all sites - maybe redo that graph again, once for each site?
 
+```{r SurveyEffort, eval=TRUE, cache = FALSE, include = FALSE}
+#source("../scripts/survey_duration.R", echo=FALSE)
+```
+
+```{r Fig-SurveyEffort, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap=""}
+#print(plot_duration)
+```
 
 Species: 
 Targets: loons, grebes, cormorants, herons, ducks, geese, plovers, sandpipers, gull, alcids, [kingfishers]
@@ -350,14 +357,14 @@ The annual dates of the first and last survey each year has varied by over a mon
 
 ```{r EDA_SurveyTiming, eval=TRUE, cache = FALSE, include = FALSE}
 # dotplot of survey times by year
-source("../scripts/survey_timing_EDA.R", echo=FALSE)
+#source("../scripts/survey_timing_EDA.R", echo=FALSE)
 
 ```
 
 
 ```{r Fig-SurveyTiming, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
 
-print(Plot1)
+#print(Plot1)
 ```
 
 Questions: what is cue to start of survey season?
@@ -367,7 +374,20 @@ Want to see if the survey design's start and end dates each season need to be mo
 
 > MADELEINE: FIRST graph - x axis is year, y axis is Day of Season, curve for each of the target species defined in next sentence; possibly consider facet by site if anything of interest is revealed when doing so. Curve should be made of points of the first day the species was observed each year; maybe do one with just raw points connected by line segments and one with some sort of smooth - use default until we get a chance to look at these and talk about smoothers. Different color for each of the target species. Might be too many curves (species), in which case define some grouping on species or facet by species (more important than site).
 
+```{r SurveyDates, eval=TRUE, cache = FALSE, include = FALSE}
+# scatterplot of species' first and last sightings
+source("../scripts/survey_dates.R", echo=FALSE)
+```
+
+```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The first sighting of each species each year."}
+print(plot_timing_1)
+```
+
 > SECOND graph - similar but showing last day of the season the species was observed each year.
+
+```{r Fig-SurveyDates2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The last sighting of each species each year."}
+print(plot_timing_2)
+```
 
 > THIRD graph - x axis is time of day, y axis is week of season, open circles for days with completed surveys, filled circles for surveys (times of day) when target species was observed in any year; facet on target spp. Or consider using the 'time of day' binning discussed in the Site Accessibility graphs (above). THIS IS SECONDARY PRIORITY - don't really like lumping all years together but no other ideas at the moment.
 
