@@ -68,6 +68,9 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 - adding files to .gitignore
 
 # Issues to Resolve with content (narrative, figures, analyses)
+- **Joel** needs to add commands to target_species.R to define spp & Common Name as **ordinal** variables following AOU sequencing (e.g., so all ducks show up together, all gulls show up together, etc.).
+- **Joel & Madeleine** will discuss survey_dates.R commands and how to modify them so that we get a sense of when surveys were & when target species was first (or last) seen each year. E.g., separate out any filtering process stemming from survey effort levels and timing. (thinking some thing like showing open circles for survey events PRIOR to first sighting...)
+- Need to think about way to winnow out target species that do not occurr w/ adequate frequency to report on. E.g., those only seen <3 or 5 years??? Look at phenology graphs and determine threshold to apply. Consider some species N-ward and S-ward migration routes may differ.
 - What is up with 2008 surveys? why such distinct timing?
 - Think about Covariate EDA, if any...change in observers?
 - Begin thinking about (Freq of Occurrence, Phenology, Abundance | target species) and then Richness - both Phenology (Day of Season) and across years.
@@ -330,30 +333,27 @@ source("../scripts/data_wrangling.R")
 
 
 ```{r Target_Species, eval=TRUE, echo=FALSE, warning = TRUE}
-# selects only target species listed above
+# selects out only target species listed above
 #
 source("../scripts/target_species.R")
 ```
 
-> MADELEINE: add two graphs (they will end up rather similar to ones for looking at timing of survey effort) to visualize how consistently they are able to complete planned surveys at each of the survey 'sites'. Probably okay to do both at dotplots or variants thereof. 
+*Survey Completion*
 
-> FIRST graph: x axis is Day of Season (Julian Date; be nice to ultimately include vertical reference lines to denote beginnings of months), y axis is year; open dots (circles/points) for the days of planned surveys - e.g., every day there was any observation effort at any site; closed dots (filled in circles, pch=19?) for days where the survey was successfully completed, facet by site. So we are seeing whethere there are consistently problematic sites (like site 1, half of which consists of cruise ship docking areas). 
-
-```{r SurveySites, eval=TRUE, cache = FALSE, include = FALSE}
+```{r SiteSurveyCompletion, eval=TRUE, cache = FALSE, include = FALSE}
 # dotplot of survey occurrences by unit and whether there were observations
 source("../scripts/survey_sites.R", echo=FALSE)
 ```
 
+Add sentence or two about success in completing surveys. Doesn't appear to be any consistently problematic sites, not even site 1 (Figure \@ref(fig:Fig-SiteSurveyCompletion)).  **MADELEINE: Dig in to Site 1 to make sure there aren't messages hidden in 'notes' since that is the location that consists of cruise ship docking areas for a good chunk of the space.**
+```{r Fig-SiteSurveyCompletion, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="Need to add caption.",warning=FALSE}
 
-```{r Fig-SurveySites, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
-
-print(plot_units_1)
+print(plot_unitSuccess)
 ```
 
 *Temporal* ??how define ‘season’??
 
 The annual dates of the first and last survey each year has varied by over a month (Figure \@ref(fig:Fig-SurveyTiming)).
-
 
 ```{r EDA_SurveyTiming, eval=TRUE, cache = FALSE, include = FALSE}
 # dotplot of survey times by year
@@ -379,7 +379,7 @@ Want to see if the survey design's start and end dates each season need to be mo
 source("../scripts/survey_dates.R", echo=FALSE)
 ```
 
-```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The first sighting of each species each year."}
+```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The first sighting of each species each year.", warning=FALSE}
 print(plot_timing_1)
 ```
 

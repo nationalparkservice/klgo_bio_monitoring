@@ -3,10 +3,20 @@
 ########
 # Libraries used: dplyr, lubridate, ggplot2
 ########
-# Madeleine Ward
-# Last Edit: 2019 Mar 15
+# Madeleine Ward, Joel Reynolds
+# Last Edit: 2019 Mar 24
 ########
 
+# Note to Madeleine, 2019 March 24
+# It is better to just select out, and reformat where necessary, the subsets you want from the 
+# data object created in data_wrangling.R. Then you wouldn't have to re-filter by year, mutate date, etc.
+###
+# E.g., a good programming goal is minimize the number of new objects and ensure always pulling from 
+# the single source object so that anytime there is new data we only have to recreate that main source object
+# and we know all the other scripts will be updated appropriately.
+# That will also help so that when the Database is fixed (which I think may actually have happened), we
+# only need to update that one script for data ingesting & the rest doesn't need changed.
+####################
 #create data frame with all survey dates at each unit, along with 
 #number of observations and duration at each
 unit_data_1 <-
@@ -55,17 +65,17 @@ unit_data_2 <-
          Duration, Start_Time, End_Time, Event_Notes, 
          Location_ID, Event_ID)
 
-#based on non-target species; to-do: use target data
-plot_units_1 <- unit_data_1 %>%
+#based on non-target species; 
+# TO DO: use target data
+plot_unitSuccess <- unit_data_1 %>%
   ggplot(aes(YearDay,Year)) +
   #filled vs. unfilled shape shows viable survey
   geom_point(col="black", size=1.5, 
              aes(shape = as.factor(is_success))) +
   geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
              linetype=2, colour="grey") +
-  labs(x="Julian Date \n (vertical lines 
-       denote 1st of April, May, ... and Oct in non-leap years)") +
+  labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)") +
   #manually define shape values
-  scale_shape_manual(values = c(21, 16), breaks = c("Yes", "No")) +
+  scale_shape_manual(values = c(21, 16), breaks = c("Yes", "No"), name="Survey Completed Survey?") +
   #facet by unit location
   facet_wrap(~GIS_Location_ID)

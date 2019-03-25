@@ -1,6 +1,7 @@
 ############
 # Graphs to see if the survey design's start and end dates each season 
 # need to be modified to account for any observed changes in phenology
+# of the target species.
 ########
 # Libraries used: dplyr, lubridate, tidyr
 ########
@@ -30,6 +31,11 @@ target_end <- target_start_end %>%
   filter(Start_End == "End")
 
 # this plot shows start dates connected with piecewise lines
+# MADELEINE: let's discuss how this could be modified to include a sense
+# of WHEN, each year, the surveys actually started. E.g., so the viewer can
+# separate out any changes in species phenology from changes in survey timing and effort levels.
+# ALSO may need to think about either dropping some spp (e.g., Am Black Duck) or otherwise
+# constraining the range of the y axis so really focus on early (or late) period.
 plot_timing_1 <- 
   ggplot(target_start, aes(x= Year, y= YearDay)) +
   #ggplot(target_start_end, aes(x= Year, y= YearDay)) +
@@ -42,8 +48,11 @@ plot_timing_1 <-
   facet_wrap(~Common_Name
              #, scales = "free_y"
   ) +
+  # add horizontal reference lines to denote start of months...
   labs(title = "Date of First Observation by Year", y = "Julian Date \n 
-       (vertical lines denote 1st of April, May, ... and Oct in non-leap years)") 
+       (horizontal lines denote 1st of April, May, ... and Oct in non-leap years)") +
+  geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
+             linetype=2, colour="grey")
 
 # same graph but for end dates
 plot_timing_2 <- 
