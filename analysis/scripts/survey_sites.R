@@ -61,7 +61,7 @@ unit_data_2 <-
   mutate(Date = floor_date(mdy_hm(Start_Date), unit = "day"),
          YearDay = yday(Date)) %>%
   #select and order relevant variables
-  select(GIS_Location_ID, Date, YearDay, Total_Obs, 
+  select(GIS_Location_ID, Year, Date, YearDay, Total_Obs, 
          Duration, Start_Time, End_Time, Event_Notes, 
          Location_ID, Event_ID)
 

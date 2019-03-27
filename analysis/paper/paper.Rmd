@@ -255,6 +255,22 @@ source("../scripts/data_retrievalCSV.R")
 
 
 ```
+
+```{r Data_Wrangling, eval=TRUE, echo=FALSE, warning = TRUE}
+# reconstructs species_data tibble from tables read in by DataInput
+#
+source("../scripts/data_wrangling.R") 
+
+```
+
+
+```{r Target_Species, eval=TRUE, echo=FALSE, warning = TRUE}
+# selects out only target species listed above
+#
+source("../scripts/target_species.R")
+```
+
+
 *Site Accessibility*
 How consistently are they able to conduct surveys at each site? E.g., how often is Site 1 dropped due to cruise ships?
 
@@ -268,11 +284,11 @@ Would like to get a sense of the consistency of (alternatively, variation in) su
 > MADELEINE: (that really isn't meant to come across as yelling, just trying to consistently label these so you can easily search for them) This is a very rough thought - feel free to suggest something else. We want to look at variation in 'duration' at each site across days of season and years. Maybe facet by season week, y axis is year, x axis is duration, horizontal boxplot of duration. This lumps all sites - maybe redo that graph again, once for each site?
 
 ```{r SurveyEffort, eval=TRUE, cache = FALSE, include = FALSE}
-#source("../scripts/survey_duration.R", echo=FALSE)
+source("../scripts/survey_duration.R", echo=FALSE)
 ```
 
 ```{r Fig-SurveyEffort, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap=""}
-#print(plot_duration)
+print(plot_duration)
 ```
 
 Species: 
@@ -323,20 +339,6 @@ the case of low clouds, fog and wind). Data were recorded on standardized data
 forms developed after Collins et al. (2001) (Appendix B). ArcView shapefiles of
 the observation points and census units were created for use in the park’s GIS.
 All data, original data forms, and field notes were archived at KLGO.
-
-```{r Data_Wrangling, eval=TRUE, echo=FALSE, warning = TRUE}
-# reconstructs species_data tibble from tables read in by DataInput
-#
-source("../scripts/data_wrangling.R") 
-
-```
-
-
-```{r Target_Species, eval=TRUE, echo=FALSE, warning = TRUE}
-# selects out only target species listed above
-#
-source("../scripts/target_species.R")
-```
 
 *Survey Completion*
 
