@@ -413,7 +413,7 @@ Narrative on how well the current surveys are capturing the Spring arrival and F
 ```{r Fig-SpeciesTiming, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="For each of the target species, the dates on which they were observed in any of the sample areas."}
 
 #edit to use the name of the new plot
-print(Plot1)
+#print(Plot1)
 ```
 
 
