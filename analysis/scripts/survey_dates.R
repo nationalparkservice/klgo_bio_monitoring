@@ -11,7 +11,6 @@
 
 #dataset with both start and end dates for each target species
 target_start_end <- target_data %>%
-  left_join(tbl_Locations, by = "Location_ID") %>%
   # group by year
   group_by(Common_Name, Year
            #         , Location_ID
@@ -23,21 +22,15 @@ target_start_end <- target_data %>%
   mutate(Start_End = ifelse(row_number()==1, "Start", "End")) %>%
   ungroup() 
 
-# separate sets for both start and end dates
-target_start <- target_start_end %>%
-  filter(Start_End == "Start")
-
-target_end <- target_start_end %>%
-  filter(Start_End == "End")
-
 # this plot shows start dates connected with piecewise lines
 # MADELEINE: let's discuss how this could be modified to include a sense
 # of WHEN, each year, the surveys actually started. E.g., so the viewer can
 # separate out any changes in species phenology from changes in survey timing and effort levels.
 # ALSO may need to think about either dropping some spp (e.g., Am Black Duck) or otherwise
 # constraining the range of the y axis so really focus on early (or late) period.
-plot_timing_1 <- 
-  ggplot(target_start, aes(x= Year, y= YearDay)) +
+plot_timing_1 <- target_start_end %>%
+  filter(Start_End == "Start") %>%
+  ggplot(aes(x= Year, y= YearDay)) +
   #ggplot(target_start_end, aes(x= Year, y= YearDay)) +
   geom_point(
     # to put both start/end on the same plot:
@@ -55,8 +48,9 @@ plot_timing_1 <-
              linetype=2, colour="grey")
 
 # same graph but for end dates
-plot_timing_2 <- 
-  ggplot(target_end, aes(x= Year, y= YearDay)) +
+plot_timing_2 <- target_start_end %>%
+  filter(Start_End == "End") %>%
+  ggplot(aes(x= Year, y= YearDay)) +
   geom_point() +
   geom_line()  +
   #geom_smooth() +

@@ -17,57 +17,45 @@
 # That will also help so that when the Database is fixed (which I think may actually have happened), we
 # only need to update that one script for data ingesting & the rest doesn't need changed.
 ####################
+
 #create data frame with all survey dates at each unit, along with 
 #number of observations and duration at each
-unit_data_1 <-
-  #combine field data (observation), location data, and events (key)
-  left_join(tbl_Field_Data, tbl_Events,
-            by = "Event_ID") %>%
-  left_join(tbl_Locations,
-            by = "Location_ID") %>%
+#unit_data_1 <-
+ # #combine field data (observation), location data, and events (key)
+#  left_join(tbl_Field_Data, tbl_Events,
+ #           by = "Event_ID") %>%
+#  left_join(tbl_Locations,
+ #           by = "Location_ID") %>%
   #find sum of all observations for all species, incl. non-targets, at each date
-  group_by(GIS_Location_ID, Event_ID) %>%
-  summarize(Total_Obs = sum(`Num_ Observed`)) %>%
+  #group_by(GIS_Location_ID, Event_ID) %>%
+  #summarize(Total_Obs = sum(`Num_ Observed`)) %>%
   
   #re-join with events data to get date
-  left_join(tbl_Events,
-            by = "Event_ID") %>%
+  #left_join(tbl_Events,
+   #         by = "Event_ID") %>%
   #Julian dates (reused from data_wrangling.R)
-  mutate(Date = floor_date(mdy_hm(Start_Date), unit = "day"),
-         YearDay = yday(Date)) %>%
-  filter(Year > 2002) %>%
+  #mutate(Date = floor_date(mdy_hm(Start_Date), unit = "day"),
+   #      YearDay = yday(Date)) %>%
+  #filter(Year > 2002) %>%
   #select and order relevant variables
-  select(GIS_Location_ID, Year, Date, YearDay, Day, Month, Year, Total_Obs, 
-         Duration, Start_Time, End_Time, Event_Notes, 
-         Location_ID, Event_ID) %>%
+  #select(GIS_Location_ID, Year, Date, YearDay, Day, Month, Year, Total_Obs, 
+   #      Duration, Start_Time, End_Time, Event_Notes, 
+  #       Location_ID, Event_ID) %>%
   #chose arbitrary value for considering a success based on observations above 0
-  mutate(is_success = ifelse(Total_Obs == 0, "No", "Yes")) %>%
-  filter(!is.na(GIS_Location_ID))
+  #mutate(is_success = ifelse(Total_Obs == 0, "No", "Yes")) %>%
+  #filter(!is.na(GIS_Location_ID))
 
-#same data frame but with only target species
-#to-do: recreate without using species_data set;
-#needs to include 0 values for observation number
-unit_data_2 <-
-  #combine field data (observation), location data, and events (key)
-  left_join(target_data, tbl_Locations,
-            by = "Location_ID") %>%
-  #find sum of all observations for only target species at each date
-  group_by(GIS_Location_ID, Event_ID) %>%
-  summarize(Total_Obs = sum(Num_Obs)) %>%
-  #re-join with events data to get date
-  left_join(tbl_Events,
-            by = "Event_ID") %>%
-  #Julian dates (reused from data_wrangling.R)
-  mutate(Date = floor_date(mdy_hm(Start_Date), unit = "day"),
-         YearDay = yday(Date)) %>%
-  #select and order relevant variables
-  select(GIS_Location_ID, Year, Date, YearDay, Total_Obs, 
-         Duration, Start_Time, End_Time, Event_Notes, 
-         Location_ID, Event_ID)
+#create data frame with all survey dates at each unit, along with 
+#number of observations and duration at each
+survey_units <- survey_duration %>%
+  
+  #chose arbitrary value for considering a success based on observations above 0
+  mutate(is_success = ifelse(total_obs_site == 0, "No", "Yes")) %>%
+  filter(!is.na(GIS_Location_ID))
 
 #based on non-target species; 
 # TO DO: use target data
-plot_unitSuccess <- unit_data_1 %>%
+plot_unitSuccess <- survey_units %>%
   ggplot(aes(YearDay,Year)) +
   #filled vs. unfilled shape shows viable survey
   geom_point(col="black", size=1.5, 
@@ -76,6 +64,6 @@ plot_unitSuccess <- unit_data_1 %>%
              linetype=2, colour="grey") +
   labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)") +
   #manually define shape values
-  scale_shape_manual(values = c(21, 16), breaks = c("Yes", "No"), name="Survey Completed Survey?") +
+  scale_shape_manual(values = c(21, 16), breaks = c("Yes", "No"), name="Completed Survey?") +
   #facet by unit location
   facet_wrap(~GIS_Location_ID)
