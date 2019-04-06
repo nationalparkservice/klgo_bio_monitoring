@@ -9,8 +9,16 @@
 # Last Edit: 2019 Mar 17
 ########
 
+
 #dataset with both start and end dates for each target species
 target_start_end <- target_data %>%
+  #one way to address when the surveys started is to use a 
+  #survey variable that grabs the # of days since the first survey date
+  group_by(Year) %>%
+  arrange(YearDay) %>%
+  mutate(Days_since_first = YearDay - YearDay[row_number()==1]) %>%
+  ungroup() %>%
+# now this will find first/last days
   # group by year
   group_by(Common_Name, Year
            #         , Location_ID
@@ -30,13 +38,15 @@ target_start_end <- target_data %>%
 # constraining the range of the y axis so really focus on early (or late) period.
 plot_timing_1 <- target_start_end %>%
   filter(Start_End == "Start") %>%
-  ggplot(aes(x= Year, y= YearDay)) +
+  ggplot(aes(x= Year)) +
   #ggplot(target_start_end, aes(x= Year, y= YearDay)) +
-  geom_point(
+  geom_point(aes(y=YearDay)
     # to put both start/end on the same plot:
     #aes(color = as.factor(Start_End))
   ) +
-  geom_line()  +
+  geom_line(aes(y=YearDay))  +
+  #using Days_since_first
+  geom_line(aes(y = Days_since_first), color = "blue") +
   #geom_smooth() +
   facet_wrap(~Common_Name
              #, scales = "free_y"
@@ -48,6 +58,7 @@ plot_timing_1 <- target_start_end %>%
              linetype=2, colour="grey")
 
 # same graph but for end dates
+# without days_since_first
 plot_timing_2 <- target_start_end %>%
   filter(Start_End == "End") %>%
   ggplot(aes(x= Year, y= YearDay)) +
