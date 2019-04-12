@@ -1,4 +1,4 @@
-# Select data from target species from field dataset
+# Subset out data on target species from field dataset
 ########
 # Libraries used: dplyr
 ########
@@ -16,3 +16,10 @@ target_data <- species_data %>%
 
 # Need to define the species list as an ordered factor following the AOU sequence.
 # Joel will do this.
+
+# 4/11/19 - JR - Question:
+# is subsetting on Common_Name getting everything we want?
+#
+# Target Species AOU order: (using AOS 2018 data)
+# FINISH EDITING - or put in Data_wrangling?
+
