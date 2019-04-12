@@ -8,17 +8,17 @@
 ########
 
 # Note to Madeleine, 2019 March 24
-# It is better to just select out, and reformat where necessary, the subsets you want from the 
+# It is better to just select out, and reformat where necessary, the subsets you want from the
 # data object created in data_wrangling.R. Then you wouldn't have to re-filter by year, mutate date, etc.
 ###
-# E.g., a good programming goal is minimize the number of new objects and ensure always pulling from 
+# E.g., a good programming goal is minimize the number of new objects and ensure always pulling from
 # the single source object so that anytime there is new data we only have to recreate that main source object
 # and we know all the other scripts will be updated appropriately.
 # That will also help so that when the Database is fixed (which I think may actually have happened), we
 # only need to update that one script for data ingesting & the rest doesn't need changed.
 ####################
 
-#create data frame with all survey dates at each unit, along with 
+#create data frame with all survey dates at each unit, along with
 #number of observations and duration at each
 #unit_data_1 <-
  # #combine field data (observation), location data, and events (key)
@@ -29,7 +29,7 @@
   #find sum of all observations for all species, incl. non-targets, at each date
   #group_by(GIS_Location_ID, Event_ID) %>%
   #summarize(Total_Obs = sum(`Num_ Observed`)) %>%
-  
+
   #re-join with events data to get date
   #left_join(tbl_Events,
    #         by = "Event_ID") %>%
@@ -38,27 +38,28 @@
    #      YearDay = yday(Date)) %>%
   #filter(Year > 2002) %>%
   #select and order relevant variables
-  #select(GIS_Location_ID, Year, Date, YearDay, Day, Month, Year, Total_Obs, 
-   #      Duration, Start_Time, End_Time, Event_Notes, 
+  #select(GIS_Location_ID, Year, Date, YearDay, Day, Month, Year, Total_Obs,
+   #      Duration, Start_Time, End_Time, Event_Notes,
   #       Location_ID, Event_ID) %>%
   #chose arbitrary value for considering a success based on observations above 0
   #mutate(is_success = ifelse(Total_Obs == 0, "No", "Yes")) %>%
   #filter(!is.na(GIS_Location_ID))
 
-#create data frame with all survey dates at each unit, along with 
+#create data frame with all survey dates at each unit, along with
 #number of observations and duration at each
+# NOTE: based on all species;
+#TO DO: filter to just target species data
 survey_units <- survey_duration %>%
-  
-  #chose arbitrary value for considering a success based on observations above 0
+  #chose arbitrary value for considering a success based on seeing any birds (observations above 0)
   mutate(is_success = ifelse(total_obs_site == 0, "No", "Yes")) %>%
-  filter(!is.na(GIS_Location_ID))
+  filter(!is.na(GIS_Location_ID)) # ignore observations not associated with a survey site
 
-#based on non-target species; 
-# TO DO: use target data
+# based on all species;
+#TO DO: filter to just target species data
 plot_unitSuccess <- survey_units %>%
   ggplot(aes(YearDay,Year)) +
   #filled vs. unfilled shape shows viable survey
-  geom_point(col="black", size=1.5, 
+  geom_point(col="black", size=1,
              aes(shape = as.factor(is_success))) +
   geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
              linetype=2, colour="grey") +

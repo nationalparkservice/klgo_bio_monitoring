@@ -59,8 +59,8 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 
 
 ```
-# Things To Discuss with Madeleine
-- add all libraries used in scripts to 'setup' code chunk (just above) rather than just loading in script so that it is easy to see what needs to be loaded before you can successfully knit.
+# NOTES To Madeleine
+- see edits in survey_duration.R to aid interpretation by the viewer (e.g., changes in x axis tick locations, etc.)
 - documentation in scripts
 
 # Issues to Resolve with Rmarkdown, Knitr, Github, etc.
@@ -68,7 +68,6 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 - adding files to .gitignore
 
 # Issues to Resolve with content (narrative, figures, analyses)
-- **Joel** needs to add commands to target_species.R to define spp & Common Name as **ordinal** variables following AOU sequencing (e.g., so all ducks show up together, all gulls show up together, etc.).
 - **Joel & Madeleine** will discuss survey_dates.R commands and how to modify them so that we get a sense of when surveys were & when target species was first (or last) seen each year. E.g., separate out any filtering process stemming from survey effort levels and timing. (thinking some thing like showing open circles for survey events PRIOR to first sighting...)
 - Need to think about way to winnow out target species that do not occurr w/ adequate frequency to report on. E.g., those only seen <3 or 5 years??? Look at phenology graphs and determine threshold to apply. Consider some species N-ward and S-ward migration routes may differ.
 - What is up with 2008 surveys? why such distinct timing?
@@ -81,10 +80,10 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmayer2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
 
 Assessing a monitoring program focuses on four broad topics following the major Phases of a monitoring program (ibid):  
-1. _why_ - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?  
-2. _how_ - [Data Collection Design] Does the monitoring data collection design effectively addresses the information objectives? Given interim learning regarding system characteristics and improvements in measurement technologies, are the information goals (including accuracy and precision goals), actually feasible? If so, can the data collection be made more efficient, reducing the observation burden on staff resources?  
-3. _how_ - [Data Analysis Design] Do the data analysis methods effectively address the information objectives? Do the data analysis methods properly account for impactful features of the data collection design? Are more informative analyses available given interim improvements in methods?  
-4. _how_ - [Workflows & Reporting] Are workflows and related software systems in place to allow timely, and efficient, data management, analysis updating, reporting, and distribution of findings to target audiences of information users?  
+1. _Why_ - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?  
+2. _How_ - [Data Collection Design] Does the monitoring data collection design effectively addresses the information objectives? Given interim learning regarding system characteristics and improvements in measurement technologies, are the information goals (including accuracy and precision goals), actually feasible? If so, can the data collection be made more efficient, reducing the observation burden on staff resources?  
+3. _How_ - [Data Analysis Design] Do the data analysis methods effectively address the information objectives? Do the data analysis methods properly account for impactful features of the data collection design? Are more informative analyses available given interim improvements in methods?  
+4. _How_ - [Workflows & Reporting] Are workflows and related software systems in place to allow timely, and efficient, data management, analysis updating, reporting, and distribution of findings to target audiences of information users?  
 
 This assessment addressed all four topics, but focused predominantly on topics (i) Problem Framing & Information Objectives, (ii) Data Collection Design, and (iii) Data Analysis Design.  Since 'Problem Framing & Information Objectives' determine the relevancy of many of the potential assessment actions related to the other topics,  the assessment was drafted as a first stage of an iterative effort, providing high level feedback, including listings of potential detailed syntheses and workflow enhancement activities (such as improved database interface, automation of annual analyses and updating of syntheses, etc.).  With this foundation, further dialogue with KLGO staff regarding relevant 'Problem Framing & Information Objectives' and other priorities will determine which follow-on activities to pursue. 
 
@@ -263,6 +262,7 @@ source("../scripts/data_wrangling.R")
 
 ```
 
+> **Joel** needs to add commands to target_species.R to define spp & Common Name as **ordinal** variables following AOU sequencing (e.g., so all ducks show up together, all gulls show up together, etc.).
 
 ```{r Target_Species, eval=TRUE, echo=FALSE, warning = TRUE}
 # selects out only target species listed above
@@ -274,20 +274,24 @@ source("../scripts/target_species.R")
 *Site Accessibility*
 How consistently are they able to conduct surveys at each site? E.g., how often is Site 1 dropped due to cruise ships?
 
-> MADELEINE: With all these initial round of figures, don't get too caught up in refining fine details as we'll likely iterate a couple times and very well may end up deciding a totally different figure is more effective.  For example, this initial round of requests is a lot of dotplots, more or less, but we may end up realizing it is better to look at a summary of '% success per week' or something else that is a more continuous outcome variable. Hopefully some of that makes sense.
-
 > SECOND graph: [THIS IS SECONDARY PRIORITY] x axis is Time of Day, perhaps broken in to 1 or 2 hour blocks , y axis is ....this is a tough one so totally open to your ideas. How about y axis is % [0, 1.0] and for each year there is a different curve showing the % of planned surveys (as defined above) that were successfully completed that season within that time block; facet by site. So we are seeing whethere there are consistently problematic times of day at each site. 
+```{r SiteAccess, eval=TRUE, cache = FALSE, include = FALSE}
+# STILL NEED TO CREATE
+# source("../scripts/survey_access.R", echo=FALSE)
+```
+
+```{r Fig-SiteAccess, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="",warning= FALSE}
+# print(plot_access)
+```
 
 *Survey Effort*
-Would like to get a sense of the consistency of (alternatively, variation in) survey effort (e.g., duration at each site) across Days of season and years.Like many of these figure requests, we are basically looking to check that there isn't anything glaring going on underneath so we are comfortable later summarizing across this particular variable, or making sure we account for it via some sort of weighting of observations (perhaps by focusing on a variant of something known in fisheries as Catch Per Unit Effort).
-
-> MADELEINE: (that really isn't meant to come across as yelling, just trying to consistently label these so you can easily search for them) This is a very rough thought - feel free to suggest something else. We want to look at variation in 'duration' at each site across days of season and years. Maybe facet by season week, y axis is year, x axis is duration, horizontal boxplot of duration. This lumps all sites - maybe redo that graph again, once for each site?
+The time spent at each site during a survey has varied widely across the years, especially at Sites 1, 7, and 8 (Figure \@ref(fig:Fig-SurveyEffort)).  This variation in survey effort may be due to changes in numbers of birds occurring (and hence needing to be ID'd and recorded), variation among observers in identification skills, changes in visibility and area available for consistent viewing at each site, as well as potential changes in protocol across the years.  This variation in survey effort should be considered in any analysis of changes across years in occurrence or frequency of a species, or richness.  Depending on the analysis, this might best be done by adjusting the response variable from 'counts' to 'counts per unit effort', weighting observations by survey effort, or considering how survey duration might be accounted for as a covariate.
 
 ```{r SurveyEffort, eval=TRUE, cache = FALSE, include = FALSE}
 source("../scripts/survey_duration.R", echo=FALSE)
 ```
 
-```{r Fig-SurveyEffort, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap=""}
+```{r Fig-SurveyEffort, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="",warning= FALSE}
 print(plot_duration)
 ```
 
@@ -341,13 +345,17 @@ the observation points and census units were created for use in the park’s GIS
 All data, original data forms, and field notes were archived at KLGO.
 
 *Survey Completion*
+> Ultimately, re-order these sections to flow better. Completion then Duration, etc., etc.
 
 ```{r SiteSurveyCompletion, eval=TRUE, cache = FALSE, include = FALSE}
 # dotplot of survey occurrences by unit and whether there were observations
 source("../scripts/survey_sites.R", echo=FALSE)
 ```
 
-Add sentence or two about success in completing surveys. Doesn't appear to be any consistently problematic sites, not even site 1 (Figure \@ref(fig:Fig-SiteSurveyCompletion)).  **MADELEINE: Dig in to Site 1 to make sure there aren't messages hidden in 'notes' since that is the location that consists of cruise ship docking areas for a good chunk of the space.**
+Add sentence or two about success in completing surveys. Doesn't appear to be any consistently problematic sites, not even site 1 (Figure \@ref(fig:Fig-SiteSurveyCompletion)).  
+
+**MADELEINE: Dig in to Site 1 to make sure there aren't messages hidden in 'notes' since that is the location that consists of cruise ship docking areas for a good chunk of the space.**
+
 ```{r Fig-SiteSurveyCompletion, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="Need to add caption.",warning=FALSE}
 
 print(plot_unitSuccess)
