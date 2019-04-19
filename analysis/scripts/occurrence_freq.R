@@ -7,18 +7,6 @@
 # Last Edit: 2019 Apr 16
 ########
 
-#MADELEINE: add a graphic of spp frequency of occurrence 
-#(maybe some panel-rich figure, one panel per spp, 
-#showing annual average percentage of daily observations 
-#in which spp was sighted - as line-connected points?- 
-#ordered from most frequently observed spp to least frequently. 
-#(e.g., use facets). x axis is Day of Season, 
-#y axis is % as decimal [0, 1.0], curves for each year; 
-#facet by species. LET'S DISCUSS - 
-#Think about appropriate estimator so annual value accounts 
-#for variation in survey effort across years.) 
-#likely needs to be a full page figure (e.g., 
-#we’ll need to set fig.width and fig.height).
 
 occurrence_data <- target_data %>%
   group_by(Year) #%>%

@@ -3,22 +3,21 @@
 # need to be modified to account for any observed changes in phenology
 # of the target species.
 ########
-# Libraries used: dplyr, lubridate, tidyr
+# Libraries used: dplyr, ggplot2
 ########
 # Madeleine Ward
 # Last Edit: 2019 Mar 17
 ########
 
+first_surveys <- species_data %>%
+  group_by(Year) %>%
+  arrange(YearDay) %>%
+  slice(1) 
 
 #dataset with both start and end dates for each target species
 target_start_end <- target_data %>%
-  #one way to address when the surveys started is to use a 
-  #survey variable that grabs the # of days since the first survey date
-  group_by(Year) %>%
-  arrange(YearDay) %>%
-  mutate(Days_since_first = YearDay - YearDay[row_number()==1]) %>%
-  ungroup() %>%
-# now this will find first/last days
+  mutate(is_first = ifelse(Event_ID %in% first_surveys$Event_ID, 1, 0)) %>%
+  # now this will find first/last days
   # group by year
   group_by(Common_Name, Year
            #         , Location_ID
@@ -30,43 +29,44 @@ target_start_end <- target_data %>%
   mutate(Start_End = ifelse(row_number()==1, "Start", "End")) %>%
   ungroup() 
 
-# this plot shows start dates connected with piecewise lines
-# MADELEINE: let's discuss how this could be modified to include a sense
-# of WHEN, each year, the surveys actually started. E.g., so the viewer can
-# separate out any changes in species phenology from changes in survey timing and effort levels.
-# ALSO may need to think about either dropping some spp (e.g., Am Black Duck) or otherwise
-# constraining the range of the y axis so really focus on early (or late) period.
-plot_timing_1 <- target_start_end %>%
-  filter(Start_End == "Start") %>%
-  ggplot(aes(x= Year)) +
-  #ggplot(target_start_end, aes(x= Year, y= YearDay)) +
-  geom_point(aes(y=YearDay)
-    # to put both start/end on the same plot:
-    #aes(color = as.factor(Start_End))
-  ) +
-  geom_line(aes(y=YearDay))  +
-  #using Days_since_first
-  geom_line(aes(y = Days_since_first), color = "blue") +
-  #geom_smooth() +
-  facet_wrap(~Common_Name
-             #, scales = "free_y"
-  ) +
-  # add horizontal reference lines to denote start of months...
-  labs(title = "Date of First Observation by Year", y = "Julian Date \n 
-       (horizontal lines denote 1st of April, May, ... and Oct in non-leap years)") +
-  geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
-             linetype=2, colour="grey")
+# this plot shows start dates of each survey, as well as
+# first sighting of each target species
 
-# same graph but for end dates
-# without days_since_first
-plot_timing_2 <- target_start_end %>%
-  filter(Start_End == "End") %>%
-  ggplot(aes(x= Year, y= YearDay)) +
-  geom_point() +
-  geom_line()  +
-  #geom_smooth() +
-  facet_wrap(~Common_Name
+# used species HERG as placeholder until I can get facet to work
+plot_timing_1 <- ggplot() +
+  geom_line(data =target_start_end %>%
+              filter(is_first == 1
+                     ), 
+            aes(x=Year, y=YearDay, color="blue")) +
+  geom_line(data =target_start_end %>%
+              filter(Start_End == "Start"
+                     , Species == "HERG"
+                     ), 
+            aes(x=Year, y=YearDay, color="red")) +
+labs(title = "Date of First Observation by Year", y = "Julian Date \n 
+       (vertical lines denote 1st of April, May, ... 
+     and Oct in non-leap years)")  +
+scale_color_discrete(name = "", labels = c("First Day of Survey Season",
+                                           "First Day of Species Sighting")) + 
+  geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
+             linetype=2, colour="grey") + 
+  theme(legend.position="bottom") 
+#+
+#  facet_wrap(~target_start_end$Common_Name
              #, scales = "free_y"
-  ) +
-  labs(title = "Date of First Observation by Year", y = "Julian Date \n 
-       (vertical lines denote 1st of April, May, ... and Oct in non-leap years)") 
+#  )
+
+
+#explore more succinct way with dplyr
+#df1 <- data.frame(dates = x,Variable = rnorm(mean = 0.75,nmonths))
+#df2 <- data.frame(dates = x,Variable = rnorm(mean = -0.75,nmonths))
+
+#df3 <- df1 %>%  mutate(Type = 'Amocycillin') %>%
+#  bind_rows(df2 %>%
+#              mutate(Type = 'Penicillin'))
+
+
+#ggplot(df3,aes(y = Variable,x = dates,color = Type)) + 
+#  geom_line() +
+#  ggtitle("Merged datasets")
+
