@@ -386,7 +386,7 @@ Want to see if the survey design's start and end dates each season need to be mo
 > MADELEINE: FIRST graph - x axis is year, y axis is Day of Season, curve for each of the target species defined in next sentence; possibly consider facet by site if anything of interest is revealed when doing so. Curve should be made of points of the first day the species was observed each year; maybe do one with just raw points connected by line segments and one with some sort of smooth - use default until we get a chance to look at these and talk about smoothers. Different color for each of the target species. Might be too many curves (species), in which case define some grouping on species or facet by species (more important than site).
 
 ```{r SurveyDates, eval=TRUE, cache = FALSE, include = FALSE}
-# scatterplot of species' first and last sightings
+# scatterplot of species' first and sightings compared to survey season start
 source("../scripts/survey_dates.R", echo=FALSE)
 ```
 
@@ -396,9 +396,7 @@ print(plot_timing_1)
 
 > SECOND graph - similar but showing last day of the season the species was observed each year.
 
-```{r Fig-SurveyDates2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The last sighting of each species each year."}
-print(plot_timing_2)
-```
+#to do
 
 > THIRD graph - x axis is time of day, y axis is week of season, open circles for days with completed surveys, filled circles for surveys (times of day) when target species was observed in any year; facet on target spp. Or consider using the 'time of day' binning discussed in the Site Accessibility graphs (above). THIS IS SECONDARY PRIORITY - don't really like lumping all years together but no other ideas at the moment.
 

@@ -16,8 +16,8 @@
 # re-build the necessary data frame from the various CSV files
 # (basically reconstructing the query as if the database was functioning).
 
-# 1st left_join - attaches relevant Event data to each event in tbl_Field_Data (using Event_ID)
-species_data <- left_join(tbl_Field_Data, tbl_Events,
+# 1st join - attaches relevant Event data to each event in tbl_Field_Data (using Event_ID)
+species_data <- full_join(tbl_Field_Data, tbl_Events,
                           by = "Event_ID") %>%
   # 2nd left_join - attaches relevant Species names (Common, Latin, etc.) (using Species Code)
   left_join(tlu_species_codes,
@@ -43,7 +43,7 @@ species_data <- left_join(tbl_Field_Data, tbl_Events,
   #define grouping by Species
   group_by(Species, Year, YearDay) %>%
   #add total observations column (by species by observation date)
-  mutate(total_obs_all = sum(Num_Obs)) %>%
+  mutate(obs_date = sum(Num_Obs)) %>%
   ungroup()
 
 
