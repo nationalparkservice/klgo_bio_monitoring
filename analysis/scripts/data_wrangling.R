@@ -43,7 +43,7 @@ species_data <- left_join(tbl_Field_Data, tbl_Events,
   #define grouping by Species
   group_by(Species, Year, YearDay) %>%
   #add total observations column (by species by observation date)
-  mutate(total_obs_all = sum(Num_Obs)) %>%
+  mutate(obs_date = sum(Num_Obs)) %>%
   ungroup()
 
 
