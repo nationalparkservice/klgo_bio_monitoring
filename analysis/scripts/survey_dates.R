@@ -62,7 +62,8 @@ labs(title = "Date of First Observation by Year", y = "Julian Date \n
   theme(legend.position="bottom") +
   facet_wrap(~Common_Name)
              #, scales = "free_y"
-plot_timing_1
+
+#plot_timing_1
 
 #explore more succinct way with dplyr
 
