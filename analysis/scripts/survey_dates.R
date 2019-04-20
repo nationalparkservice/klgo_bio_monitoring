@@ -36,31 +36,36 @@ target_start_end <- target_data %>%
 
 # used species HERG as placeholder until I can get facet to work
 plot_timing_1 <- ggplot() +
-  geom_line(data =first_surveys 
+  geom_point(data =target_start_end %>%
+               filter(Start_End == "Start"
+                      #, Species == "HERG"
+               ), 
+             aes(x=Year, y=YearDay), color="red") +
+  geom_line(data =first_surveys
+            #%>%
+            #            filter(is_first == 1
+            #                   )
+            , 
+            aes(x=Year, y=YearDay), color="black") +
+  #geom_line(data =first_surveys 
             #%>%
   #            filter(is_first == 1
   #                   )
-  , 
-            aes(x=Year, y=YearDay, color="blue")) +
-  geom_line(data =target_start_end %>%
-              filter(Start_End == "Start"
-                     #, Species == "HERG"
-                     ), 
-            aes(x=Year, y=YearDay, color="red")) +
+  #, 
+   #         aes(x=Year, y=YearDay, color="blue")) +
 labs(title = "Date of First Observation by Year", y = "Julian Date \n 
        (vertical lines denote 1st of April, May, ... 
      and Oct in non-leap years)")  +
-scale_color_discrete(name = "", labels = c("First Day of Species Sighting",
-                                           "First Day of Survey Season")) + 
+#scale_color_discrete(values = c("First Day of Survey Season" = "black")) + 
   geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
              linetype=2, colour="grey") + 
   theme(legend.position="bottom") +
-  facet_wrap(~Common_Name
+  facet_wrap(~Common_Name)
              #, scales = "free_y"
-  )
 plot_timing_1
 
 #explore more succinct way with dplyr
+
 #df1 <- data.frame(dates = x,Variable = rnorm(mean = 0.75,nmonths))
 #df2 <- data.frame(dates = x,Variable = rnorm(mean = -0.75,nmonths))
 
