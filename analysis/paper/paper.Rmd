@@ -62,6 +62,11 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 # NOTES To Madeleine
 - see edits in survey_duration.R to aid interpretation by the viewer (e.g., changes in x axis tick locations, etc.)
 - documentation in scripts
+- **NEXT Priority Milestones**: note - all references to line numbers are prior to any other edits!
+- finish graphs of first & last observation per year for each target species (around line 386);**ultimately** add a fitted linear trend line to each of those (we need to account for frequency of surveying, so some subtle effort things here, but can resolve that later);
+- graphs of species occurrence (around line 407) for each of target species; 
+- covariate distribution graphs (lots of univariate & bivariate things; around line 534);
+- plot of total # spp sighted each season across years (around line 600)
 
 # Issues to Resolve with Rmarkdown, Knitr, Github, etc.
 - conversion from paper.md to paper.pdf (pandoc issue?) 
@@ -526,16 +531,18 @@ Variation in observer #, training, and skill across surveys, across years
 .distribution of observer experience(?)  by survey date by year?
 
 #### Detection issues associated with survey conditions
-.species specific counts w/in season by weather conditions and wave conditions
-.species occurrence by wave conditions & weather conditions
-.species age and composition by wave conditions & weather conditions 
-.total # species by weather conditions, wave conditions; internally consistent contrasts to demonstrate value, or lack thereof, of current covariates.
-.richness by major weather conditions (Northerlies, Southerlies, etc.) and for each spp
+>MADELIENE: Next couple plots are priority.
+
 .distribution of weather conditions
 .distribution of survey time by weather conditions
+.quick diagnostics to ID covariates seldom recorded, not consistently recorded, consistently valued (e.g., no basis for contrast), etc.
+.species specific counts w/in season by weather conditions and wave conditions
+.species occurrence by wave conditions & weather conditions
+.species age and composition by wave conditions & weather conditions
+.total # species by weather conditions, wave conditions; internally consistent contrasts to demonstrate value, or lack thereof, of current covariates.
+.richness by major weather conditions (Northerlies, Southerlies, etc.) and for each spp
 .diagnostic to ID key survey times to ensure high quality observers?
 .consistency in ‘breeding periods’ across years (as captured in data)
-.quick diagnostics to ID covariates seldom recorded, not consistently recorded, consistently valued (e.g., no basis for contrast), etc.
 
 
 Value of site-specific covariate recordings vs available ‘local’ weather (Skagway weather observations from airport - wind direction & speed, temp, etc.)
