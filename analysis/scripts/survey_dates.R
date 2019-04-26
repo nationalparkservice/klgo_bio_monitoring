@@ -12,11 +12,13 @@
 first_surveys <- species_data %>%
   group_by(Year) %>%
   arrange(YearDay) %>%
-  slice(1) 
+  slice(1) %>%
+  ungroup() %>%
+  select(Year, YearDay)
 
 #dataset with both start and end dates for each target species
 target_start_end <- target_data %>%
-  mutate(is_first = ifelse(Event_ID %in% first_surveys$Event_ID, 1, 0)) %>%
+  mutate(is_first = ifelse(Date %in% first_surveys$Date, 1, 0)) %>%
   # now this will find first/last days
   # group by year
   group_by(Common_Name, Year
@@ -34,30 +36,37 @@ target_start_end <- target_data %>%
 
 # used species HERG as placeholder until I can get facet to work
 plot_timing_1 <- ggplot() +
-  geom_line(data =target_start_end %>%
-              filter(is_first == 1
-                     ), 
-            aes(x=Year, y=YearDay, color="blue")) +
-  geom_line(data =target_start_end %>%
-              filter(Start_End == "Start"
-                     , Species == "HERG"
-                     ), 
-            aes(x=Year, y=YearDay, color="red")) +
+  geom_point(data =target_start_end %>%
+               filter(Start_End == "Start"
+                      #, Species == "HERG"
+               ), 
+             aes(x=Year, y=YearDay), color="red") +
+  geom_line(data =first_surveys
+            #%>%
+            #            filter(is_first == 1
+            #                   )
+            , 
+            aes(x=Year, y=YearDay), color="black") +
+  #geom_line(data =first_surveys 
+            #%>%
+  #            filter(is_first == 1
+  #                   )
+  #, 
+   #         aes(x=Year, y=YearDay, color="blue")) +
 labs(title = "Date of First Observation by Year", y = "Julian Date \n 
        (vertical lines denote 1st of April, May, ... 
      and Oct in non-leap years)")  +
-scale_color_discrete(name = "", labels = c("First Day of Survey Season",
-                                           "First Day of Species Sighting")) + 
+#scale_color_discrete(values = c("First Day of Survey Season" = "black")) + 
   geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
              linetype=2, colour="grey") + 
-  theme(legend.position="bottom") 
-#+
-#  facet_wrap(~target_start_end$Common_Name
+  theme(legend.position="bottom") +
+  facet_wrap(~Common_Name)
              #, scales = "free_y"
-#  )
 
+#plot_timing_1
 
 #explore more succinct way with dplyr
+
 #df1 <- data.frame(dates = x,Variable = rnorm(mean = 0.75,nmonths))
 #df2 <- data.frame(dates = x,Variable = rnorm(mean = -0.75,nmonths))
 
