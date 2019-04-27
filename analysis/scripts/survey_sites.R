@@ -7,44 +7,6 @@
 # Last Edit: 2019 Mar 24
 ########
 
-# Note to Madeleine, 2019 March 24
-# It is better to just select out, and reformat where necessary, the subsets you want from the
-# data object created in data_wrangling.R. Then you wouldn't have to re-filter by year, mutate date, etc.
-###
-# E.g., a good programming goal is minimize the number of new objects and ensure always pulling from
-# the single source object so that anytime there is new data we only have to recreate that main source object
-# and we know all the other scripts will be updated appropriately.
-# That will also help so that when the Database is fixed (which I think may actually have happened), we
-# only need to update that one script for data ingesting & the rest doesn't need changed.
-####################
-
-#create data frame with all survey dates at each unit, along with
-#number of observations and duration at each
-#unit_data_1 <-
- # #combine field data (observation), location data, and events (key)
-#  left_join(tbl_Field_Data, tbl_Events,
- #           by = "Event_ID") %>%
-#  left_join(tbl_Locations,
- #           by = "Location_ID") %>%
-  #find sum of all observations for all species, incl. non-targets, at each date
-  #group_by(GIS_Location_ID, Event_ID) %>%
-  #summarize(Total_Obs = sum(`Num_ Observed`)) %>%
-
-  #re-join with events data to get date
-  #left_join(tbl_Events,
-   #         by = "Event_ID") %>%
-  #Julian dates (reused from data_wrangling.R)
-  #mutate(Date = floor_date(mdy_hm(Start_Date), unit = "day"),
-   #      YearDay = yday(Date)) %>%
-  #filter(Year > 2002) %>%
-  #select and order relevant variables
-  #select(GIS_Location_ID, Year, Date, YearDay, Day, Month, Year, Total_Obs,
-   #      Duration, Start_Time, End_Time, Event_Notes,
-  #       Location_ID, Event_ID) %>%
-  #chose arbitrary value for considering a success based on observations above 0
-  #mutate(is_success = ifelse(Total_Obs == 0, "No", "Yes")) %>%
-  #filter(!is.na(GIS_Location_ID))
-
 #create data frame with all survey dates at each unit, along with
 #number of observations and duration at each
 # NOTE: based on all species;

@@ -6,10 +6,8 @@ author:
 - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  html_document:
-    df_print: paged
+  pdf_document:
     fig_caption: yes
-    number_sections: yes
     toc: yes
   bookdown::word_document2:
     fig_caption: yes
@@ -18,8 +16,10 @@ output:
     toc: yes
     fig_caption: true
     reference_docx: NRR_Author_Template_V4.2.docx
-  pdf_document:
+  html_document:
+    df_print: paged
     fig_caption: yes
+    number_sections: yes
     toc: yes
 editor_options: 
   chunk_output_type: inline
@@ -373,14 +373,20 @@ The annual dates of the first and last survey each year has varied by over a mon
 
 ```{r EDA_SurveyTiming, eval=TRUE, cache = FALSE, include = FALSE}
 # dotplot of survey times by year
-#source("../scripts/survey_timing_EDA.R", echo=FALSE)
+source("../scripts/survey_timing_EDA.R", echo=FALSE)
 
 ```
 
+```{r Fig-SurveyTiming1, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
 
-```{r Fig-SurveyTiming, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
+print(plot_alldates)
+```
 
-#print(Plot1)
+
+JOEL - this graph below looks VERY good zoomed in, but kinda crowded in HTML; still working on a better way to facet with specified rows
+```{r Fig-SurveyTiming2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap=""}
+
+print(plot_phenology)
 ```
 
 Questions: what is cue to start of survey season?

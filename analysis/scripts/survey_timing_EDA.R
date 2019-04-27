@@ -5,48 +5,40 @@
 # Libraries used: ggplot2,
 ########
 # Joel Reynolds (repurposing code by Madeleine Ward)
-# Last Edit: 2019 Mar 17
+# Last Edit: 2019 Apr 27
 ########
 
-# Display the dates surveys were conducted across each year
-plot_surveydates <- species_data %>%
+## Display the dates surveys were conducted across each year
+
+plot_alldates <- species_data %>%
   ggplot(aes(YearDay,Year)) +
   geom_point(col="black", size=1.5) +   # Draw points
   geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
              linetype=2, colour="grey") +
-  labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)") +
-  theme_bw()
+  labs(x="Julian Date \n (vertical lines denote 1st of April, May,
+       ... and Oct in non-leap years)")
 
-#UNFINISHED
-all_dates <- species_data %>%
-  select(Date) %>%
-  unique() %>%
-  mutate(all_date = 1)
+## Display sightings for each species collapsed across sites for given survey date
 
-all_targets <- target_data %>%
-  mutate(sighting_date = ifelse(Date %in% all_dates$Date, 1, 0))
-
-target_dates <- full_join(all_dates, all_targets, by = "Date")
-
-full_join(all_dates, by = "Date")
-
-#### STILL TO FINISH
-# figure out which dates observed any of the key species - maybe facet on each?
-# then plot an open circle over that survey date (so we see which surveys were bust)
-# build toward species specific phenology plots.
-
-
-Plot2<- ggplot(target_dates, aes(YearDay, Year)) +
-  geom_point(shape = 21)
-
-Plot3 <- Plot2 +
-  geom_point(aes(shape = as.factor(is_sighted))) +
-  facet_wrap(~Common_Name)
-
-geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
-           linetype=2, colour="grey") +
-  labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)")+
-  scale_shape_manual(values = c(16, 21)) +
+plot_phenology <- ggplot() +
+  #add layer for all possible survey dates
+  geom_point(data = species_data %>%
+               distinct(Date, .keep_all = TRUE) %>%
+               select(Date, Year, YearDay),
+             #plot with open circle shape & greater transparency
+             aes(x = YearDay, y = Year), shape = 1, alpha = .5) +
+  #add layer for species-specific sighting dates, closed circles
+  geom_point(data = target_data,
+             aes(x = YearDay, y = Year)) +
+  #titles and Julian date markers
+  geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
+             linetype=2, colour="darkgrey") +
+  labs(x="Julian Date \n (vertical lines denote 1st of April, May,
+       ... and Oct in non-leap years)",
+       title= "Survey Success for Target Species") +
+  #temp; make background white for clearer contrast
+  theme_bw() +
+  #facet by target species; common name used
   facet_wrap(~Common_Name)
 
 
