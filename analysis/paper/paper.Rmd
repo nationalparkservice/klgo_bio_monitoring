@@ -6,8 +6,10 @@ author:
 - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  pdf_document:
+  html_document:
+    df_print: paged
     fig_caption: yes
+    number_sections: yes
     toc: yes
   bookdown::word_document2:
     fig_caption: yes
@@ -16,10 +18,8 @@ output:
     toc: yes
     fig_caption: true
     reference_docx: NRR_Author_Template_V4.2.docx
-  html_document:
-    df_print: paged
+  pdf_document:
     fig_caption: yes
-    number_sections: yes
     toc: yes
 editor_options: 
   chunk_output_type: inline
