@@ -383,7 +383,7 @@ print(plot_alldates)
 ```
 
 
-JOEL - this graph below looks VERY good zoomed in, but kinda crowded in HTML; still working on a better way to facet with specified rows
+JOEL - I specified ncol = 3 in the facet command but my html doesn't update with it (I know the command itself works since I can see the zoom in the script)? Are you able to see it? and/or does it work in solving the space problem?
 ```{r Fig-SurveyTiming2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap=""}
 
 print(plot_phenology)

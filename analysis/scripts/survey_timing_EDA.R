@@ -39,7 +39,7 @@ plot_phenology <- ggplot() +
   #temp; make background white for clearer contrast
   theme_bw() +
   #facet by target species; common name used
-  facet_wrap(~Common_Name)
+  facet_wrap(~Common_Name, ncol = 3)
 
 
 ####### Ideas to pursue later
