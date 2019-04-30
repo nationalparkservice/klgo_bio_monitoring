@@ -47,14 +47,51 @@ plot_windsite
 ### Covariates
 
 ## Distribution of survey time by weather conditions
-# Needs survey_timing_EDA.R plots created first
-plot_timewind <- species_data %>%
-  distinct(Date, .keep_all = TRUE) %>%
-  filter(!is.na(Wind_code)) %>%
-  ggplot(aes(YearDay,Year)) +
-  geom_point(aes(fill = as.factor(Wind_code))) +   # Draw points
+plot_timeweather <- species_data %>%
+  filter(Year >= 2003) %>%
+  #distinct(Date, .keep_all = TRUE) %>%
+  #filter(!is.na(Wind_code)) %>%
+  ggplot(aes(YearDay,Year)) +   
   geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
              linetype=2, colour="grey") +
   labs(x="Julian Date \n (vertical lines denote 1st of April, May,
-       ... and Oct in non-leap years)")
+       ... and Oct in non-leap years)") +
+  facet_wrap(~GIS_Location_ID)
+
+# To do: change color scheme so no one goes blind looking at this
+
+# By wind code
+plot_timewind <- plot_timeweather +
+  geom_point(aes(color = as.factor(Wind_code)),size = 2) +
+  scale_color_discrete(labels = tlu_wind_codes$Wind_Speed,
+                       name = "Wind Speed") +
+  labs(title = "Survey Timing and Wind Conditions")
 plot_timewind
+
+# By wave height
+plot_timewave <- plot_timeweather +
+  geom_point(aes(color = as.factor(Wave_ht)),size = 2) +
+  scale_color_discrete(labels = tlu_wave_codes$Description,
+                       name = "Waves") +
+  theme(legend.position = "bottom") +
+  labs(title = "Survey Timing and Wave Height")
+plot_timewave
+
+## Total number species by weather conditions
+# By wind code
+plot_targetsweather <- target_data %>%
+  group_by(Date) %>%
+  mutate(total_obs = sum(obs_date)) 
+plot_targetswind <- plot_targetsweather %>%
+  ggplot(aes(as.factor(Wind_code), total_obs)) +
+  geom_boxplot() +
+  coord_flip() +
+  coord_cartesian(ylim = c(0, 10000)) 
+#+ facet_wrap(~Common_Name)
+plot_targetswind
+
+plot_targetswave <- plot_targetsweather %>%
+  ggplot(aes(as.factor(Wave_ht), obs_date)) +
+  geom_boxplot() +
+  coord_cartesian(ylim = c(0, 1000))
+plot_targetswave

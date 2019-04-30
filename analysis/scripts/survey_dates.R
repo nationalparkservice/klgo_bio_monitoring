@@ -9,12 +9,17 @@
 # Last Edit: 2019 Mar 17
 ########
 
-first_surveys <- species_data %>%
+firstlast_surveys <- species_data %>%
   group_by(Year) %>%
-  arrange(YearDay) %>%
+  arrange(YearDay) 
+
+first_surveys <- firstlast_surveys %>%
   slice(1) %>%
-  ungroup() %>%
   select(Year, YearDay)
+last_surveys <- firstlast_surveys %>%
+  slice(n()) %>%
+  select(Year, YearDay)
+
 
 #dataset with both start and end dates for each target species
 target_start_end <- target_data %>%
@@ -63,19 +68,24 @@ labs(title = "Date of First Observation by Year", y = "Julian Date \n
   facet_wrap(~Common_Name)
              #, scales = "free_y"
 
-#plot_timing_1
-
-#explore more succinct way with dplyr
-
-#df1 <- data.frame(dates = x,Variable = rnorm(mean = 0.75,nmonths))
-#df2 <- data.frame(dates = x,Variable = rnorm(mean = -0.75,nmonths))
-
-#df3 <- df1 %>%  mutate(Type = 'Amocycillin') %>%
-#  bind_rows(df2 %>%
-#              mutate(Type = 'Penicillin'))
-
-
-#ggplot(df3,aes(y = Variable,x = dates,color = Type)) + 
-#  geom_line() +
-#  ggtitle("Merged datasets")
+plot_timing_2 <- ggplot() +
+  geom_point(data =target_start_end %>%
+               filter(Start_End == "End"
+                      #, Species == "HERG"
+               ), 
+             aes(x=Year, y=YearDay), color="blue") +
+  geom_line(data =last_surveys
+            #%>%
+            #            filter(is_first == 1
+            #                   )
+            , 
+            aes(x=Year, y=YearDay), color="black") +
+  labs(title = "Date of Last Observation by Year", y = "Julian Date \n 
+       (vertical lines denote 1st of April, May, ... 
+       and Oct in non-leap years)")  +
+  #scale_color_discrete(values = c("First Day of Survey Season" = "black")) + 
+  geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
+             linetype=2, colour="grey") + 
+  theme(legend.position="bottom") +
+  facet_wrap(~Common_Name, ncol = 3)
 

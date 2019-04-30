@@ -407,7 +407,9 @@ print(plot_timing_1)
 
 > SECOND graph - similar but showing last day of the season the species was observed each year.
 
-#to do
+```{r Fig-SurveyDates2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The last sighting of each species each year.", warning=FALSE}
+print(plot_timing_2)
+```
 
 > THIRD graph - x axis is time of day, y axis is week of season, open circles for days with completed surveys, filled circles for surveys (times of day) when target species was observed in any year; facet on target spp. Or consider using the 'time of day' binning discussed in the Site Accessibility graphs (above). THIS IS SECONDARY PRIORITY - don't really like lumping all years together but no other ideas at the moment.
 
