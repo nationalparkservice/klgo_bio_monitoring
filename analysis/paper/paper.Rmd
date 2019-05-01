@@ -319,7 +319,7 @@ Incidental: 48 other spp
 ```
 
 
-```{r Fig-AllSppFreq, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="blah blah about consistency in target species occurrence. Maybe something about new spp showing up?"}
+```{r Fig-AllSppFreq, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap="blah blah about consistency in target species occurrence. Maybe something about new spp showing up?"}
 
 #print(Plot1)
 ```
@@ -362,7 +362,7 @@ Add sentence or two about success in completing surveys. Doesn't appear to be an
 
 **MADELEINE: Dig in to Site 1 to make sure there aren't messages hidden in 'notes' since that is the location that consists of cruise ship docking areas for a good chunk of the space.**
 
-```{r Fig-SiteSurveyCompletion, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="Need to add caption.",warning=FALSE}
+```{r Fig-SiteSurveyCompletion, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap="Need to add caption.",warning=FALSE}
 
 print(plot_unitSuccess)
 ```
@@ -377,14 +377,14 @@ source("../scripts/survey_timing_EDA.R", echo=FALSE)
 
 ```
 
-```{r Fig-SurveyTiming1, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
+```{r Fig-SurveyTiming1, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
 
 print(plot_alldates)
 ```
 
 
 JOEL - I specified ncol = 3 in the facet command but my html doesn't update with it (I know the command itself works since I can see the zoom in the script)? Are you able to see it? and/or does it work in solving the space problem?
-```{r Fig-SurveyTiming2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap=""}
+```{r Fig-SurveyTiming2, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap=""}
 
 print(plot_phenology)
 ```
@@ -401,13 +401,13 @@ Want to see if the survey design's start and end dates each season need to be mo
 source("../scripts/survey_dates.R", echo=FALSE)
 ```
 
-```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The first sighting of each species each year.", warning=FALSE}
+```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap="The first sighting of each species each year.", warning=FALSE}
 print(plot_timing_1)
 ```
 
 > SECOND graph - similar but showing last day of the season the species was observed each year.
 
-```{r Fig-SurveyDates2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="The last sighting of each species each year.", warning=FALSE}
+```{r Fig-SurveyDates2, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap="The last sighting of each species each year.", warning=FALSE}
 print(plot_timing_2)
 ```
 
