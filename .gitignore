@@ -7,6 +7,8 @@ analysis/paper/paper.log
 analysis/paper/paper.html
 analysis/paper/paper.docx
 analysis/paper/paper.pdf
+analysis/paper/PapertryingtouseTemplate.docx
+analysis/paper/NRR_Author_Template_V4.2.docx
 # ignore intermediate cache objects as don't need to track them.
 analysis/paper/paper_cache/
 # ignore output (figures)
