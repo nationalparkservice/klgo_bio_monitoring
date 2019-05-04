@@ -1,12 +1,12 @@
 ############
 # Examine various covariates and distributions.
 ########
-# Libraries used: ggplot2
+# Libraries used: ggplot2, stringr
 ########
 # Madeleine Ward
 # Last Edit: 2019 Apr 27
 ########
-
+library(stringr)
 ### Distribution of weather conditions
 
 ## Distribution of wind speed by year
@@ -19,11 +19,13 @@ plot_wind <- ggplot(tbl_Events %>%
                       name = "Wind Speed") +
   labs(title = "Distribution of Wind Conditions Across Years",
        x = "Year", y = "Count")
-plot_wind
+print(plot_wind)
 ## Wind speed by year & site
 plot_windsite <- plot_wind +
   facet_wrap(~GIS_Location_ID)
-plot_windsite
+print(plot_windsite)
+
+### Distribution of wave conditions
 
 ## Distribution of wave height by year
 plot_waves <- ggplot(tbl_Events %>%
@@ -38,11 +40,36 @@ plot_waves <- ggplot(tbl_Events %>%
        x = "Year", y = "Count") +
   coord_flip() + 
   theme(legend.position="bottom")
-plot_waves
-## Wind speed by year & site
-plot_windsite <- plot_wind +
+print(plot_waves)
+## Wave height by year & site
+plot_wavesite <- plot_waves +
   facet_wrap(~GIS_Location_ID, ncol =2)
-plot_windsite
+print(plot_wavesite)
+
+## Distribution of tide states by year
+#many problems with this graph...
+plot_tides <- ggplot(test <- tbl_Events %>%
+                       left_join(tbl_Locations, by = "Location_ID") %>%
+                                   mutate(All_tides = substr(Tide_Level, start = 1, stop = 1), locale = "en") %>%
+                       filter(Year >= 2003
+                              #,
+                              #!is.na(All_tides)
+                              , 
+                              !is.na(GIS_Location_ID)
+                              ),
+                     aes(as.factor(Year))) +
+  geom_bar(aes(fill = as.factor(Tide_Level))) +
+  scale_fill_discrete(labels = tlu_tide_level$tide_level,
+                      name = "Tide Level") +
+  labs(title = "Distribution of Tide Levels Across Years",
+       x = "Year", y = "Count") +
+  coord_flip() + 
+  theme(legend.position="bottom")
+print(plot_tides)
+
+plot_tidesite <- plot_tides +
+  facet_wrap(~GIS_Location_ID, ncol =2)
+print(plot_tidesite)
 
 ### Covariates
 
@@ -66,7 +93,7 @@ plot_timewind <- plot_timeweather +
   scale_color_discrete(labels = tlu_wind_codes$Wind_Speed,
                        name = "Wind Speed") +
   labs(title = "Survey Timing and Wind Conditions")
-plot_timewind
+print(plot_timewind)
 
 # By wave height
 plot_timewave <- plot_timeweather +
@@ -75,23 +102,26 @@ plot_timewave <- plot_timeweather +
                        name = "Waves") +
   theme(legend.position = "bottom") +
   labs(title = "Survey Timing and Wave Height")
-plot_timewave
+print(plot_timewave)
 
 ## Total number species by weather conditions
 # By wind code
 plot_targetsweather <- target_data %>%
   group_by(Date) %>%
   mutate(total_obs = sum(obs_date)) 
+
 plot_targetswind <- plot_targetsweather %>%
   ggplot(aes(as.factor(Wind_code), total_obs)) +
   geom_boxplot() +
   coord_flip() +
   coord_cartesian(ylim = c(0, 10000)) 
 #+ facet_wrap(~Common_Name)
-plot_targetswind
+print(plot_targetswind)
 
 plot_targetswave <- plot_targetsweather %>%
   ggplot(aes(as.factor(Wave_ht), obs_date)) +
   geom_boxplot() +
   coord_cartesian(ylim = c(0, 1000))
-plot_targetswave
+print(plot_targetswave)
+
+### Temperature by 

@@ -401,7 +401,7 @@ Want to see if the survey design's start and end dates each season need to be mo
 source("../scripts/survey_dates.R", echo=FALSE)
 ```
 
-```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap="The first sighting of each species each year.", warning=FALSE}
+```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.cap="The first sighting of each species each year.",fig.height=20, fig.width=12, warning=FALSE}
 print(plot_timing_1)
 ```
 
@@ -416,27 +416,11 @@ print(plot_timing_2)
 
 Narrative on how well the current surveys are capturing the Spring arrival and Fall departure of each of the targeted species (\@ref(fig:Fig-SpeciesTiming)). Implications for informing Audubon Climate Change Watch or national phenology network, yadda yadd.
 
-```{r SpeciesTiming, eval=TRUE, cache = FALSE, include = FALSE}
-# MADELEINE: write a script to extract, for just the target species listed at line 250, 
-# just the dates each year that each of the target species was observed (somewhere in the survey areas - don't care which, at the moment)
-# then add a layer to the ggplot 'Plot1' (horrid name, by the way) to visually distinguish those dates for that species.
-# will have to play around to see if it is feasible to do this by faceting on the species or just make a separate 
-# timing graph for each species - your call. It will be unreadable if try and put all of the target species on 
-# a single plot
 
-# tweak this call to source that new script, then un-comment, etc.
-# source("../scripts/species_timing_EDA.R", echo=FALSE) 
+```{r Fig-SpeciesTiming2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="For each of the target species, the dates on which they were observed in any of the sample areas."}
 
+print(plot_phenology)
 ```
-
-
-```{r Fig-SpeciesTiming, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis', fig.cap="For each of the target species, the dates on which they were observed in any of the sample areas."}
-
-#edit to use the name of the new plot
-#print(Plot1)
-```
-
-
 
 
 
@@ -552,6 +536,9 @@ Variation in observer #, training, and skill across surveys, across years
 .diagnostic to ID key survey times to ensure high quality observers?
 .consistency in ‘breeding periods’ across years (as captured in data)
 
+```{r Covariates, eval=TRUE, cache = FALSE, include = FALSE}
+source("../scripts/temp_covariates.R")
+```
 
 Value of site-specific covariate recordings vs available ‘local’ weather (Skagway weather observations from airport - wind direction & speed, temp, etc.)
 
