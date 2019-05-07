@@ -1,1 +1,0 @@
-# blah generic script file
