@@ -68,3 +68,22 @@ plot_timing_2 <- ggplot() +
   geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
              linetype=2, colour="grey") + 
   facet_wrap_paginate(~Common_Name, ncol = 3)
+
+## layering both first/last sightings
+#plot_timing_3 <- ggplot() +
+ # geom_point(data =target_start_end, 
+#             aes(x=Year, y=YearDay, color = Start_End)) +
+#  geom_line(data =firstlast_surveys %>%
+#              slice(1), 
+#            aes(x=Year, y=YearDay), color="black") +
+#  geom_line(data =firstlast_surveys %>%
+#              slice(n()), 
+#            aes(x=Year, y=YearDay), color="black") +
+  # titles and Julian date labels
+#  labs(title = "Date of First & Last Observations by Year", y = "Julian Date \n 
+#       (vertical lines denote 1st of April, May, ... 
+#       and Oct in non-leap years)")  +
+  #scale_color_discrete(values = c("First Day of Survey Season" = "black")) + 
+#  geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
+#             linetype=2, colour="grey") + 
+#  facet_wrap_paginate(~Common_Name, ncol = 3)

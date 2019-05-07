@@ -45,13 +45,3 @@ species_data <- full_join(tbl_Field_Data, tbl_Events,
   #add total observations column (by species by observation date)
   mutate(obs_date = sum(Num_Obs)) %>%
   ungroup()
-
-
-###
-###survey_timing_EDA.R
-#unfinished
-
-###
-###UNUSED
-##time_duration.R
-##units_species.R
