@@ -3,7 +3,7 @@
 # need to be modified to account for any observed changes in phenology
 # of the target species.
 ########
-# Libraries used: dplyr, ggplot2, ggforce
+# Libraries used: dplyr, ggplot2
 ########
 # Madeleine Ward
 # Last Edit: 2019 Mar 17
@@ -17,9 +17,11 @@ firstlast_surveys <- species_data %>%
 
 #dataset with both start and end dates for each target species
 target_start_end <- target_data %>%
+  
   # find first/last days, by year
   group_by(Common_Name, Year) %>%
   arrange(YearDay) %>%
+  
   # take first and last day for each group
   slice(c(1, n())) %>%
   # mark whether it is the first or last day each year
@@ -46,9 +48,7 @@ labs(title = "Date of First Observation by Year", y = "Julian Date \n
   geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
              linetype=2, colour="grey") + 
   # facet by species; try to separate into visible columns
-  facet_wrap_paginate(~Common_Name, ncol = 3
-             #, scales = "free_y")
-  )
+  facet_wrap(~Common_Name, ncol = 3)
 
 ## last sighting of each species
 plot_timing_2 <- ggplot() +
@@ -64,26 +64,6 @@ plot_timing_2 <- ggplot() +
   labs(title = "Date of Last Observation by Year", y = "Julian Date \n 
        (vertical lines denote 1st of April, May, ... 
        and Oct in non-leap years)")  +
-  #scale_color_discrete(values = c("First Day of Survey Season" = "black")) + 
   geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
              linetype=2, colour="grey") + 
-  facet_wrap_paginate(~Common_Name, ncol = 3)
-
-## layering both first/last sightings
-#plot_timing_3 <- ggplot() +
- # geom_point(data =target_start_end, 
-#             aes(x=Year, y=YearDay, color = Start_End)) +
-#  geom_line(data =firstlast_surveys %>%
-#              slice(1), 
-#            aes(x=Year, y=YearDay), color="black") +
-#  geom_line(data =firstlast_surveys %>%
-#              slice(n()), 
-#            aes(x=Year, y=YearDay), color="black") +
-  # titles and Julian date labels
-#  labs(title = "Date of First & Last Observations by Year", y = "Julian Date \n 
-#       (vertical lines denote 1st of April, May, ... 
-#       and Oct in non-leap years)")  +
-  #scale_color_discrete(values = c("First Day of Survey Season" = "black")) + 
-#  geom_hline(yintercept=c(yday(ymd(paste("2007-",c(4:6),"-1",sep="")))),
-#             linetype=2, colour="grey") + 
-#  facet_wrap_paginate(~Common_Name, ncol = 3)
+  facet_wrap(~Common_Name, ncol = 3)
