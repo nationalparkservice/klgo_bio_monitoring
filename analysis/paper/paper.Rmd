@@ -280,7 +280,7 @@ source("../scripts/target_species.R")
 How consistently are they able to conduct surveys at each site? E.g., how often is Site 1 dropped due to cruise ships?
 
 > SECOND graph: [THIS IS SECONDARY PRIORITY] x axis is Time of Day, perhaps broken in to 1 or 2 hour blocks , y axis is ....this is a tough one so totally open to your ideas. How about y axis is % [0, 1.0] and for each year there is a different curve showing the % of planned surveys (as defined above) that were successfully completed that season within that time block; facet by site. So we are seeing whether there are consistently problematic times of day at each site. 
-> JOEL: some updates on this! for now, times are in hour blocks. There can't be lines/curves for year since they are unreadable (up/down). I also tried to use color as a factor but then the graphs are crowded (so many years). So I have 2 alternatives, I don't really like either but some are more readable than others. See below.
+> JOEL: for now, times are in hour blocks 
 
 ```{r SiteAccess, eval=TRUE, cache = FALSE}
 
@@ -289,12 +289,7 @@ source("../scripts/survey_access.R", echo=FALSE)
 
 ```{r Fig-SiteAccess1, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis',fig.height=20, fig.width=12, fig.cap="",warning= FALSE}
 
-print(plot_success)
-```
-
-```{r Fig-SiteAccess2, echo=FALSE, eval=TRUE, cache=TRUE, fig.show= 'asis',fig.height=15, fig.width=12, fig.cap="",warning= FALSE}
-
-print(plot_success3)
+#print(plot_access)
 ```
 
 *Survey Effort*
@@ -316,8 +311,6 @@ Questions: clarify role of kingfishers.
 Incidental: 48 other spp
 
 > MADELEINE: add a graphic of spp frequency of occurrence (maybe some panel-rich figure, one panel per spp, showing annual average percentage of daily observations in which spp was sighted - as line-connected points?- ordered from most frequently observed spp to least frequently. (e.g., use facets). x axis is Day of Season, y axis is % as decimal [0, 1.0], curves for each year; facet by species.
-> JOEL: I did some graphs for species occurrence that fit the description but not sure if they were what you were looking for? They do show species occurrence relative to others; as annual/daily percentage of daily observations in which spp was sighted (percentage calculated by annual/daily obs per species over all total obs - is this what you meant? let me know).
-Lines didn't work though (lots of ups and downs)
 
 
 ```{r EDA_AllSpp_Frequency, eval=TRUE, cache = FALSE, include = FALSE, fig.height=8, fig.width=6}
@@ -329,12 +322,12 @@ source("../scripts/occurrence_freq.R", echo=FALSE)
 
 ```{r Fig-AllSppFreq1, echo=FALSE, eval=TRUE, warning=FALSE, cache=FALSE, fig.show= 'asis', fig.height=20, fig.width=12, fig.cap="blah blah about consistency in target species occurrence. Maybe something about new spp showing up?"}
 
-print(plot_occurrenceDay)
+print(plot_occurrenceYear)
 ```
 
 ```{r Fig-AllSppFreq2, echo=FALSE, eval=TRUE, warning=FALSE, cache=FALSE, fig.show= 'asis', fig.height=25, fig.width=10, fig.cap="blah blah about consistency in target species occurrence. Maybe something about new spp showing up?"}
 
-print(plot_occurrenceYear)
+#print(plot_occurrenceDate)
 ```
 
 
@@ -548,7 +541,7 @@ Variation in observer #, training, and skill across surveys, across years
 .consistency in ‘breeding periods’ across years (as captured in data)
 
 ```{r Covariates, eval=TRUE, cache = FALSE, include = FALSE}
-source("../scripts/temp_covariates.R")
+#source("../scripts/temp_covariates.R")
 ```
 
 Value of site-specific covariate recordings vs available ‘local’ weather (Skagway weather observations from airport - wind direction & speed, temp, etc.)

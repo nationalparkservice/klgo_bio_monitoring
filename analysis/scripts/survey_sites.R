@@ -4,20 +4,19 @@
 # Libraries used: dplyr, lubridate, ggplot2
 ########
 # Madeleine Ward, Joel Reynolds
-# Last Edit: 2019 May 8
+# Last Edit: 2019 May 23
 ########
 
 plot_unitSuccess <- ggplot() +
   
-  # add layer with open circles for all dates in each site
+  # add layer with open circles for all dates
   geom_point(data = species_data %>%
                distinct(Date, .keep_all = TRUE) %>%
-               select(Date, Year, YearDay, GIS_Location_ID) %>%
-               filter(!is.na(GIS_Location_ID)),
+               select(Date, Year, YearDay),
              #plot with open circle shape & greater transparency
              aes(x = YearDay, y = Year), shape = 1, size = 3, alpha = .8) + 
   
-  # add layer with successful surveys
+  # add layer with successful surveys in each site
   geom_point(data = survey_duration %>%
                filter(total_obs_site > 0, !is.na(GIS_Location_ID)),
              aes(YearDay, Year),

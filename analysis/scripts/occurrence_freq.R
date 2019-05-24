@@ -7,63 +7,66 @@
 # Last Edit: 2019 May 8
 ########
 
-# graph shows observations each year relative to other TARGET species
-#percent_obs will be the percent of observations each date that 
-#the spp composed
-occurrence_species <- target_data %>%
-  group_by(Year, YearDay) %>%
-  
-  #find all observations of all species on certain date
-  mutate(all_obs = sum(obs_date)) %>%
-  ungroup() %>%
-  
-  #find percent of observations accreditable to each species
-  group_by(Year, YearDay, Species) %>%
-  mutate(percent_obs = obs_date/all_obs) %>%
-  ungroup() 
+#percent of surveys, each year, in which species was sighted
 
-#attempt to reorder facets by total percent of observations
-#occurrence_species$Common_Name <- reorder(occurrence_species$Common_Name, 
-#                                          occurrence_species$percent_obs)
-## doesn't work?
+#collect total surveys each year
+all_surveys_yr <- species_data %>%
+  distinct(Event_ID, .keep_all = TRUE) %>%
+  group_by(Year) %>%
+  summarize(total_surveys = n())
 
-#plot of observation frequency
-plot_occurrenceDay <- ggplot(occurrence_species, aes(YearDay, percent_obs)) +
-  #set alpha so clustered points visible
-  geom_point(alpha = .1) +
-  #geom_line(aes(color = as.factor(Year))) +
-  labs(title = "Species Occurrence by Date",
-       x= "Julian Date \n (vertical lines denote 1st of April, May, ... 
-       and Oct in non-leap years)",
-       y = "Percent of All Observations Species Composed") + 
-  #geom_line(alpha = .08) +
-  #set background to white for clarity
+#collect total surveys each year for each species, the percent of sighted surveys
+occurrence_species_yr <- target_data %>%
+  group_by(Common_Name, Year) %>%
+  #all surveys in which Spp were sighted each year
+  summarize(species_surveys = n()) %>%
+  #join by Year to compare with total
+  left_join(all_surveys_yr, by = "Year") %>%
+  #calculate percent of yearly surveys in which Spp sighted
+  mutate(percent_surveys = species_surveys/total_surveys)
+
+#plot of species occurrence by Year
+plot_occurrenceYear <- ggplot(occurrence_species_yr,
+                          aes(Year, percent_surveys)) +
+  geom_point() +
+  #add straight lines
+  geom_line() +
   theme_bw() +
+  labs(title = "Species Occurence Frequency by Year",
+       y = "Percent of Yearly Surveys Observed") +
   facet_wrap(~Common_Name, ncol = 4)
 
-##...each year
-occurrence_species2 <- target_data %>%
-  filter(!is.na(obs_date)) %>%
-  group_by(Year) %>%
-  mutate(all_obs = sum(obs_date)) %>%
+#percent of surveys, each day, in which species was sighted, averaged by year
+
+#collect total surveys each date
+all_surveys_date <- species_data %>%
+  distinct(Event_ID, .keep_all = TRUE) %>%
+  group_by(Year, YearDay) %>%
+  summarize(total_surveys = n())
+
+#collect total surveys in which Spp was sighted each date
+occurrence_species_date <- target_data %>%
+  group_by(Year, YearDay, Common_Name) %>%
+  #eliminate duplicates
+  distinct(GIS_Location_ID, .keep_all = TRUE) %>%
+  summarize(species_surveys = n()) %>%
   ungroup() %>%
-  
-  #find percent of observations accreditable to each species
-  group_by(Year, Species) %>%
-  mutate(percent_obs = sum(obs_date)/all_obs) %>%
-  slice(1)
+  #join by Date to compare with total
+  left_join(all_surveys_date, by = c("Year" = "Year", "YearDay" = "YearDay")) %>%
+  #calculate percent of daily surveys in which Spp sighted
+  mutate(percent_surveys = species_surveys/total_surveys) %>%
+  group_by(Common_Name, Year) %>%
+  #calculate annual avg percentage of daily surveys in which Spp sighted
+  summarize(avg_percent = mean(percent_surveys))
 
-#plot of observation frequency by Year
-plot_occurrenceYear <- ggplot(occurrence_species2, aes(Year, percent_obs)) +
-  #set alpha so clustered points visible
-  geom_bar(stat = "identity") + 
-  #geom_point(alpha = .1) +
-  labs(title = "Species Occurrence by Year",
-       y = "Percent of All Observations Species Composed") + 
-  coord_flip() +
-  #geom_line(alpha = .08) +
-  #set background to white for clarity
+#plot of avg species occurrence by day and year?
+plot_occurrenceDate <- ggplot(occurrence_species_date,
+                              aes(Year, avg_percent)) +
+  geom_point() +
+  geom_line() +
   theme_bw() +
-  facet_wrap(~Common_Name, ncol = 3)
+  labs(title = "Species Occurence Frequency by Date",
+       y = "Average Annual Percent of Surveys Observed") +
+  facet_wrap(~Common_Name, ncol = 4)
 
-## TO DO: how to order facets by freq and/or delete Spp that aren't useful?
+# TO DO: order facets by usefulness
