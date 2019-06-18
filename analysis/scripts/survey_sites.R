@@ -4,67 +4,31 @@
 # Libraries used: dplyr, lubridate, ggplot2
 ########
 # Madeleine Ward, Joel Reynolds
-# Last Edit: 2019 Mar 24
+# Last Edit: 2019 May 23
 ########
 
-# Note to Madeleine, 2019 March 24
-# It is better to just select out, and reformat where necessary, the subsets you want from the
-# data object created in data_wrangling.R. Then you wouldn't have to re-filter by year, mutate date, etc.
-###
-# E.g., a good programming goal is minimize the number of new objects and ensure always pulling from
-# the single source object so that anytime there is new data we only have to recreate that main source object
-# and we know all the other scripts will be updated appropriately.
-# That will also help so that when the Database is fixed (which I think may actually have happened), we
-# only need to update that one script for data ingesting & the rest doesn't need changed.
-####################
-
-#create data frame with all survey dates at each unit, along with
-#number of observations and duration at each
-#unit_data_1 <-
- # #combine field data (observation), location data, and events (key)
-#  left_join(tbl_Field_Data, tbl_Events,
- #           by = "Event_ID") %>%
-#  left_join(tbl_Locations,
- #           by = "Location_ID") %>%
-  #find sum of all observations for all species, incl. non-targets, at each date
-  #group_by(GIS_Location_ID, Event_ID) %>%
-  #summarize(Total_Obs = sum(`Num_ Observed`)) %>%
-
-  #re-join with events data to get date
-  #left_join(tbl_Events,
-   #         by = "Event_ID") %>%
-  #Julian dates (reused from data_wrangling.R)
-  #mutate(Date = floor_date(mdy_hm(Start_Date), unit = "day"),
-   #      YearDay = yday(Date)) %>%
-  #filter(Year > 2002) %>%
-  #select and order relevant variables
-  #select(GIS_Location_ID, Year, Date, YearDay, Day, Month, Year, Total_Obs,
-   #      Duration, Start_Time, End_Time, Event_Notes,
-  #       Location_ID, Event_ID) %>%
-  #chose arbitrary value for considering a success based on observations above 0
-  #mutate(is_success = ifelse(Total_Obs == 0, "No", "Yes")) %>%
-  #filter(!is.na(GIS_Location_ID))
-
-#create data frame with all survey dates at each unit, along with
-#number of observations and duration at each
-# NOTE: based on all species;
-#TO DO: filter to just target species data
-survey_units <- survey_duration %>%
-  #chose arbitrary value for considering a success based on seeing any birds (observations above 0)
-  mutate(is_success = ifelse(total_obs_site == 0, "No", "Yes")) %>%
-  filter(!is.na(GIS_Location_ID)) # ignore observations not associated with a survey site
-
-# based on all species;
-#TO DO: filter to just target species data
-plot_unitSuccess <- survey_units %>%
-  ggplot(aes(YearDay,Year)) +
-  #filled vs. unfilled shape shows viable survey
-  geom_point(col="black", size=1,
-             aes(shape = as.factor(is_success))) +
+plot_unitSuccess <- ggplot() +
+  
+  # add layer with open circles for all dates
+  geom_point(data = species_data %>%
+               distinct(Date, .keep_all = TRUE) %>%
+               select(Date, Year, YearDay),
+             #plot with open circle shape & greater transparency
+             aes(x = YearDay, y = Year), shape = 1, size = 3, alpha = .8) + 
+  
+  # add layer with successful surveys in each site
+  geom_point(data = survey_duration %>%
+               filter(total_obs_site > 0, !is.na(GIS_Location_ID)),
+             aes(YearDay, Year),
+             col="black", size=3) +
   geom_vline(xintercept=c(yday(ymd(paste("2007-",c(4:10),"-1",sep="")))),
              linetype=2, colour="grey") +
-  labs(x="Julian Date \n (vertical lines denote 1st of April, May, ... and Oct in non-leap years)") +
-  #manually define shape values
-  scale_shape_manual(values = c(21, 16), breaks = c("Yes", "No"), name="Completed Survey?") +
-  #facet by unit location
+  labs(x = "Julian Date \n (vertical lines denote 1st of 
+       #April, May, ... and Oct in non-leap years)",
+       title = "Survey Success Across Sites (Measured by Non-Zero Obs)") +
+  #make background white
+  theme_bw() +
+  
+  # facet by unit
   facet_wrap(~GIS_Location_ID)
+
