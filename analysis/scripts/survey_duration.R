@@ -4,14 +4,14 @@
 # Libraries used: ggplot2, dplyr
 ########
 # Madeleine Ward (2019 Mar 17); Joel Reynolds (2019 Apr 11)
-# Last Edit: 2019 Mar 17
+# Last Edit: 2019 Mar 17; 2019 Aug 12 moved creation of survey_duration to target_species.R
 ########
 
-survey_duration <- target_data %>%
-  #find sum of all observations for all target species, on each date
-  group_by(GIS_Location_ID, Date) %>%
-  mutate (total_obs_site = sum(Num_Obs)) %>%
-  ungroup()
+# survey_duration <- target_data %>%
+#   #find sum of all observations for all target species, on each date
+#   group_by(GIS_Location_ID, Date) %>%
+#   mutate (total_obs_site = sum(Num_Obs)) %>%
+#   ungroup()
 
 # group by year to get separate boxplot for each year
 plot_duration <-
