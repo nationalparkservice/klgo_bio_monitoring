@@ -1,26 +1,26 @@
 ---
-title: "Assessment of the KLGO Coastal Waterbird Survey Monitoring Program"
+title: "Status Update regarding \n Assessment of the KLGO coastal waterbird survey monitoring program"
 author:
 - name: Joel H. Reynolds^[U.S. National Park Service, Alaska Region, Natural Resources
     Science Team]
 - name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: no
+  pdf_document:
+    fig_caption: yes
+    toc: no
+  word_document:
+    toc: no
+    fig_caption: true
+    reference_docx: NRR_Author_Template_V4.2.docx
   html_document:
     df_print: paged
     fig_caption: yes
     number_sections: yes
-    toc: yes
-  bookdown::word_document2:
-    fig_caption: yes
-    toc: yes
-  word_document:
-    toc: yes
-    fig_caption: true
-    reference_docx: NRR_Author_Template_V4.2.docx
-  pdf_document:
-    fig_caption: yes
-    toc: yes
+    toc: no
 editor_options: 
   chunk_output_type: inline
 keywords: keyword 1; keyword 2; keyword 3
@@ -35,11 +35,9 @@ abstract: The Coastal Waterbird Survey has been conducted, with varying levels o
   of both choice of sampling design and choice of sampling effort. Now that KLGO has
   multiple years of experience implementing the protocol, it is timely to step back
   and assess how things are going. We review the current program's objectives and survey design,
-  identify statistical issues, and recommend potential solutions. Major topics include... blah blah. The study concludes with a series of recommended tasks that the park should
+  identify statistical issues, and recommend potential solutions. Major topics include... etc. The study concludes with a series of recommended tasks that the park should
   undertake to improve the coastal waterbird survey's efficiency and effectiveness.
 ---
-
-<!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
 
 
 ```{r setup, include=FALSE, cache = FALSE}
@@ -58,28 +56,6 @@ knitr::opts_chunk$set(
 library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);library(tidyr);library(lubridate);library(lattice);library(ggthemes);library(ggforce)
 
 ```
-# NOTES To Madeleine
-- see edits in survey_duration.R to aid interpretation by the viewer (e.g., changes in x axis tick locations, etc.) $\checkmark$
-- documentation in scripts $\checkmark$
-- **NEXT Priority Milestones**: note - all references to line numbers are prior to any other edits!
-- finish graphs of first & last observation per year for each target species (around line 386);**ultimately** add a fitted linear trend line to each of those (we need to account for frequency of surveying, so some subtle effort things here, but can resolve that later); $\checkmark$
-- graphs of species occurrence (around line 407) for each of target species; $\checkmark$
-- covariate distribution graphs (lots of univariate & bivariate things; around line 534);
-- plot of total # spp sighted each season across years (around line 600)
-
-# Issues to Resolve with Rmarkdown, Knitr, Github, etc.
-- conversion from paper.md to paper.pdf (pandoc issue?) 
-- adding files to .gitignore
-
-# Issues to Resolve with content (narrative, figures, analyses)
-- **Joel & Madeleine** will discuss survey_dates.R commands and how to modify them so that we get a sense of when surveys were & when target species was first (or last) seen each year. E.g., separate out any filtering process stemming from survey effort levels and timing. (thinking some thing like showing open circles for survey events PRIOR to first sighting...)
-- Need to think about way to winnow out target species that do not occurr w/ adequate frequency to report on. E.g., those only seen <3 or 5 years??? Look at phenology graphs and determine threshold to apply. Consider some species N-ward and S-ward migration routes may differ.
-- Joel will finish script uploading AOU data csv object & using to order Target Species
-- What is up with 2008 surveys? why such distinct timing?
-- Think about Covariate EDA, if any...change in observers?
-- Begin thinking about (Freq of Occurrence, Phenology, Abundance | target species) and then Richness - both Phenology (Day of Season) and across years.
-- clean up structure of survey design section - consistent pattern in {Element Definition, Settings, Assessment}; as cleanly as possible separate space and time aspects of survey design (& effort) from spp-specific responses.
-
 
 # Introduction
 Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmayer2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a, @Mitchell2018].  
@@ -686,7 +662,22 @@ my_data <- readr::read_csv("../data/raw_data/my_csv_file.csv")
 <!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
 <div id="refs"></div>
 
-##### pagebreak
+***
+# To Do
+## Issues to Resolve with content (narrative, figures, analyses)
+- Winnow out target species that do not occurr w/ adequate frequency to report on. E.g., those only seen <3 or 5 years??? Look at phenology graphs and determine threshold to apply. Consider some species N-ward and S-ward migration routes may differ.
+- finish script uploading AOU data csv object & using to order Target Species
+- What is up with 2008 surveys? why such distinct timing?
+- Think about Covariate EDA, if any...change in observers?
+- Begin thinking about (Freq of Occurrence, Phenology, Abundance | target species) and then Richness - both Phenology (Day of Season) and across years.
+- clean up structure of survey design section - consistent pattern in {Element Definition, Settings, Assessment}; as cleanly as possible separate space and time aspects of survey design (& effort) from spp-specific responses.
+- covariate distribution graphs (lots of univariate & bivariate things; around line 534);
+- plot of total # spp sighted each season across years (around line 600)
+
+# Issues to Resolve with Rmarkdown, Knitr, Github, etc.
+- conversion from paper.md to paper.pdf (pandoc issue?) 
+- adding files to .gitignore
+
 
 ### Colophon
 
