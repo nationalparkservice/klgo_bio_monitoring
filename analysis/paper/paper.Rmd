@@ -57,6 +57,7 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
 
 ```
 
+
 # Overview of Progress on this TAR
 * Brief overview of activities
   + 2018 Summer - site visit KLGO; discussions w/ Jamie, Elaine Furbish; gather protocol and past report materials, database, etc. Develop assessment strategy and report outline; initial review of past reports and related materials. Recruit 10 hr / wk volunteer undergraduate student intern (Madeleine Ward).
@@ -65,6 +66,23 @@ library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);
   + 2019 Summer (minimal time) - prep for discussion w/ KLGO Resources staff.
   
 The following excerpt from the planned report lists 4 major topics or phases that should be addressed in a full assessment of a monitoring program.  The most important is the first topic - the *Why* motivating the program; e.g., the program's Problem Framing and Information Objectives. I've provided draft feedback on this and a number of key questions that require resolution by KLGO staff prior to diving into any detailed analyses *so as to ensure futher detailed review of data collection & analyses target KLGO's desired Information Objectives*. I've also included some of the basic survey effort data visualizations that we've already developed but haven't spent time on the associated narrative.
+
+# NOTES To Madeleine
+- covariate distribution graphs (lots of univariate & bivariate things; around line 534);
+- plot of total # spp sighted each season across years (around line 600)
+
+# Issues to Resolve with Rmarkdown, Knitr, Github, etc.
+- conversion from paper.md to paper.pdf (pandoc issue?) 
+- adding files to .gitignore
+
+# Issues to Resolve with content (narrative, figures, analyses)
+- **Joel & Madeleine** will discuss survey_dates.R commands and how to modify them so that we get a sense of when surveys were & when target species was first (or last) seen each year. E.g., separate out any filtering process stemming from survey effort levels and timing. (thinking some thing like showing open circles for survey events PRIOR to first sighting...)
+- Need to think about way to winnow out target species that do not occurr w/ adequate frequency to report on. E.g., those only seen <3 or 5 years??? Look at phenology graphs and determine threshold to apply. Consider some species N-ward and S-ward migration routes may differ.
+- Joel will finish script uploading AOU data csv object & using to order Target Species
+- What is up with 2008 surveys? why such distinct timing?
+- Think about Covariate EDA, if any...change in observers?
+- Begin thinking about (Freq of Occurrence, Phenology, Abundance | target species) and then Richness - both Phenology (Day of Season) and across years.
+- clean up structure of survey design section - consistent pattern in {Element Definition, Settings, Assessment}; as cleanly as possible separate space and time aspects of survey design (& effort) from spp-specific responses.
 
 ***
 # Introduction
@@ -569,6 +587,7 @@ my_data <- readr::read_csv("../data/raw_data/my_csv_file.csv")
 <!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
 <div id="refs"></div>
 
+
 ***
 #### Misc draft text currently removed
 _Decision Makers_
@@ -673,6 +692,8 @@ Identify any Threshold values associated w/ each Measurement
 # Issues to Resolve with Rmarkdown, Knitr, Github, etc.
 - conversion from paper.md to paper.pdf (pandoc issue?) 
 - adding files to .gitignore
+
+##### pagebreak
 
 
 ### Colophon
