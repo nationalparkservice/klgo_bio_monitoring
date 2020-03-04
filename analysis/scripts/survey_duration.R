@@ -4,9 +4,13 @@
 # Libraries used: ggplot2, dplyr
 ########
 # Madeleine Ward (2019 Mar 17); Joel Reynolds (2019 Apr 11)
-# Last Edit: 2019 Mar 17; 2019 Aug 12 moved creation of survey_duration to target_species.R
+# Last Edit: 2020 Mar 3 moved creation of survey_duration to data_wrangling.R
+#            2019 Mar 17; 2019 Aug 12 moved creation of survey_duration to target_species.R
 ########
 
+
+
+###################
 # survey_duration <- target_data %>%
 #   #find sum of all observations for all target species, on each date
 #   group_by(GIS_Location_ID, Date) %>%
