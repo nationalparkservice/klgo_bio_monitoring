@@ -14,19 +14,23 @@ blah<- species_data %>%
   group_by(Year) %>% count(Week)
 
 plot_WeeklyFrequency <- ggplot() +
+  # add vertical lines for April,May, June, July, Aug, Sept
+  # actual dates used: Monday 2 April, 2007, May (30 April), June (black line at 28 May),
+  # July (2 July), and Aug (black line at 30 July), and September (3 Sept)
+  geom_vline(xintercept=c(14,18,22,27,31,36),colour="grey") +
+  geom_vline(xintercept=c(22,31), colour="black") +
   # add layer with circles for all weeks & scale & transparency a function of
   # number of surveys w/in that week
   geom_point(data = blah,
              #plot with open circle shape & set size = freq of surveys per week
              aes(x = Week, y = Year, size=n, alpha=1/n), col="black", shape = 16)+
-  # add vertical lines for April,May, June, July, Aug, Sept
-  geom_vline(xintercept=c(14,18,22,27,31,36),colour="grey") +
   labs(x = "Julian Date",# \n(vertical lines: Monday April 2, April 30, May 28, July 2, July 30, and Sept 3, 2007)",
        title="") +
   #make background white
   theme_bw() +
   theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
   guides(alpha=FALSE)
+
 
 # week 14 = April 2, 2007
 # Week 18 April 30
