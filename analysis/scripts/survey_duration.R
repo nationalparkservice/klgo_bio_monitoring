@@ -18,17 +18,17 @@
 #   ungroup()
 
 # group by year to get separate boxplot for each year
-plot_duration <-
-  ggplot(survey_duration %>%
-           # filter for negative (error) durations, NA Site IDs
-           filter(Duration >= 0, !is.na(GIS_Location_ID)),
-         aes(Year, Duration, group = Year)) +
+blah<-survey_duration %>%
+  # filter for negative (error) durations, NA Site IDs
+  filter(Duration > 0, !is.na(GIS_Location_ID))
+
+plot_duration <-ggplot(blah,aes(Year, Duration, group = Year)) +
   geom_boxplot() +
   # will result in vertical plots; flip
   coord_flip() +
   # JR: keeping x scale fixed to support easier comparison
   # across panels (sites).
-  facet_wrap(~GIS_Location_ID, scales = "fixed") +
+  facet_wrap(~GIS_Location_ID, scales = "fixed", ncol = 2) +
   # Resolve extreme observations by fixing scale limits at 180 min (3 hrs)
   # with vertical reference grid at 30 min intervals (rather than default 50)
   scale_y_continuous(limits=c(0,185),
