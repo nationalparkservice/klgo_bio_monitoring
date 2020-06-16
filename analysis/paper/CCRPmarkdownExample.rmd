@@ -1,0 +1,791 @@
+---
+title: "Status Update regarding \n Assessment of the KLGO coastal waterbird survey monitoring program"
+author:
+- name: Joel H. Reynolds^[U.S. National Park Service, Alaska Region, Natural Resources
+    Science Team]
+- name: Madeleine Ward^[Swarthmore College, Dept. of Mathematics and Statistics]
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    df_print: paged
+    fig_caption: yes
+    number_sections: yes
+    toc: no
+  pdf_document:
+    fig_caption: yes
+    toc: no
+  word_document:
+    toc: no
+    fig_caption: true
+    reference_docx: NRR_Author_Template_V4.2.docx
+  bookdown::word_document2:
+    fig_caption: yes
+    toc: no
+editor_options: 
+  chunk_output_type: inline
+keywords: keyword 1; keyword 2; keyword 3
+link-citations: yes
+bibliography: KLGOCWS_References.bib
+abstract: DRAFT ABSTRACT The Coastal Waterbird Survey has been conducted, with varying levels of
+  effort and in-season frequency, since 2003 [@Surdyk2018]. The area of interest has
+  been divided into eight contiguous survey units; on each survey, at each unit the
+  number, age, composition (sex), breeding status, and noteworthy behavioral observations
+  are recorded for each species [@Anonymous2009]. Given the constraints on personnel,
+  time, and budgets, it is imperative that surveys be conducted efficiently in terms
+  of both choice of sampling design and choice of sampling effort. Now that KLGO has
+  multiple years of experience implementing the protocol, it is timely to step back
+  and assess how things are going. We review the current program's objectives and survey design,
+  identify statistical issues, and recommend potential solutions. Major topics include... etc. The study concludes with a series of recommended tasks that the park should
+  undertake to improve the coastal waterbird survey's efficiency and effectiveness.
+---
+
+
+```{r setup, include=FALSE, cache = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = TRUE, # set to FALSE when done
+  message = TRUE, # set to FALSE when done
+  echo = FALSE,
+  comment = "#>",
+  dev = c('png','pdf'),
+  pdf.options(encoding = "ISOLatin9.enc"),
+  fig.path = "../figures/",
+  fig.width = 6,
+#  out.width = "75%", crashes when try to add any of these as defaults & knitr to Word docx
+#  fig.align = "center",
+#  fig.asp = 0.618,
+  error = FALSE
+)
+
+library(dplyr);library(ggplot2);library(dbplyr);library(readr);library(stringr);library(tidyr);library(lubridate);library(lattice);library(ggthemes);library(ggforce)
+
+```
+
+
+# Overview of Progress on this TAR
+* Brief overview of activities
+  + 2018 Summer - site visit KLGO; discussions w/ Jamie, Elaine Furbish; gather protocol and past report materials, database, etc. Develop assessment strategy and report outline; initial review of past reports and related materials. Recruit 10 hr / wk volunteer undergraduate student intern (Madeleine Ward).
+  + 2018 Fall-Winter - bulk of effort ended up focused on working with Madeleine and NPS WASO IT staff to set up computing systems for functional collaborative workflow (e.g., establich NPS github repository and train intern in use of 'version control systems' to automate synchronizing of our files for collaboration, resolving various IT issues, setting up project folder and file structures for long-term use and archiving); initial assessment of program goals and objectives; resolve data access issues; 
+  + 2019 Spring - initiate basic summary graphics for clarifying timing and frequency of survey events, variation in duration of survey events (e.g., variation in survey effort at a site); timing and frequency of spp-specific sightings; intial development of phenology graphics. INTERNSHIP ENDED
+  + 2019 Summer (minimal time) - prep for August discussion w/ KLGO Resources staff (Jason Taylor, Anne Matsov, Mary Hake); discussed major concern over lack of explicit, specific motivating Objectives (see **Introduction** and **Assessment Results: Phase 1 - Problem Framing and Information Objectives**).
+  + 2019 Fall (no progress) - all efforts on hold during Regional Biometrician's detail as NRST Lead
+  + 2020 Winter (high level summary of initial concerns added) - in light of the forthcoming transition of the Regional Biometrician to another NPS program, there was a follow up discussion (late Feb) with KLGO Resource Staff (Anne Matsov, Mary Hake) touching on a variety of initial concerns (see **Summary of (Potential) Concerns** below) identified but not yet detailed or assessed quantitatively and thus not yet detailed in the incomplete draft report; conversation ultimately focused on implications of those concerns regarding decisions of (a) potentially reducing or (b) potentially skipping the FY20 field season. Regional Biometrician pointed out that reducing the data collection effort requires further thought and familiarity with existing program's limitations and KLGO's 'hierarchy of objectives' for undertaking this monitoring effort and that, from a statistical perspective, skipping one year in an 15+ year monitoring effort was not problematic in terms of summary analyses of trends and changes.
+
+# Summary of (Potential) Concerns
+The report was planned to focus on each of 4 major assessment areas (see **Introduction** below). The current draft is near complete only with regard to the first, focused on problem Framing. The other points immediately below are other priority concerns raised in developing this project and of importance for the Park and the next Regional Biometrician to be aware of but that have not yet been captured in the draft text or figures.  They should be considered by the Park in deciding on Next Steps. 
+
+## Unclear Problem Framing and Motivating Objectives
+Of the 4 major topics or phases that should be addressed in a full assessment of a monitoring program, the most important is the first topic - the *Why* motivating the program; e.g., the program's Problem Framing and Information Objectives. I've provided draft feedback on this and a number of key questions that require resolution by KLGO staff prior to diving into any detailed analyses so as to ensure futher detailed review of data collection & analyses target KLGO's desired Information Objectives. 
+
+## Imporant aspects of the Survey Design 
+**Timing**: the start and end dates of the survey vary across years by over a month (see draft Figure 2 below). The timing should be clarified and consistently implemented, as much as possible, to reduce this source of uncertainty and problems in analyzing changes in phenology and other outcomes of interest.  The clarification should target the priority information goals the Park has identified in the Problem Framing.
+
+**Timing re: Target Species Phenology**: if migration phenology is a priority outcome of interest, the simple analyses related to the draft Figures 3 and 5 should be pursued to ID those target species whose northward and/or southward passages are regularly 'captured'. Note that if species is already observed on the first (last) survey of the season, then the survey is **not** capturing the timing of their northward (southward) migration. To capture that event requires at least one survey suggesting the species is not yet arrived in the area *prior* to the first observation (same thing for southward: at least one survey w/o observation *after* the last observation of the species). This hasn't been thoroughly investigated, but glancing at draft Figure 3 (or 5) suggests that the current survey design, as implemented, is capturing the northward (southward) migration of very few species; e.g., most of the species are seen on the first (last) survey of the season. If Phenology is an important outcome of interest, these simple assessments should be pursued to clarify which, if any, regularly seen species this survey may be providing consistent information on.
+
+**Frequency**: the stated intention is for survey frequency to vary in 'early & mid' versus 'late' season. Quick superficial review suggests the target intensity changes have not been achieved consistently and that, in many years, surveys have been conducted much more frequently than targeted (see draft Figure 2 below). While 'greater frequency' doesn't really create problems for the analysis, it may be something the NR program lead wants to explore further to be aware of a need to constrain effort in order to have more capacity to attend to other projects.  The variation in frequency across years needs to be considered and potentially accounted for in analyses of outcomes of interest.
+The motivation for the variation in frequency needs to be clarified and then (relatively simple) assessments completed to identify *those species* for which the motivating information objectives are being achieved. E.g., is the breeding status of the target species being reqularly measured with adequate frequency?
+
+**Duration**: the time spent at each site varies widely across visits (see draft Figure 4). This needs to be accounted for in any analysis of 'frequency of occurrence' or 'apparent abundance' following an approach akin to 'catch per unit effort' in fisheries. E.g., duration becomes a covariate in all models. Consider implications for clarifying SOP. Consider implications for different priority outcomes of interest - e.g., does it need to be variable and up to the observer or are there other rule sets that lead to more consistent implementation?
+
+
+## Measurement Process Concerns
+**Detection**: the current survey design does not account for the need to account for (by estimating) the impact of changing rates of detection. Detection rates will differ among species, among observers, and among observation conditions. It might be possible to implicitly account for detection in a Bayesian analysis framework that  accounted for a parsimonious set of covariates related to survey condition, date or season of survey, and/or survey duration; **this would not be an insubstantial undertaking**, so whether it was worth doing would depend on the information objectives and goals. Ultimately, detection must be addressed in any future survey SOP, but the importance and approach will depend on the Park clarifying the priority outcomes of interest (e.g., information needs). Detection is less of an issue for occurrence (and, perhaps, breeding state) than for phenology than  for questions related to abundance (for which it is can be of central importance).
+
+**Phenology**: if phenology is a priority outcome of interest, consider analyses treating the response as interval censored data.
+
+**Covariates**: the draft assessment didn't get to the point of exploring the potential value of the many covariates collected. In general, their value will differ with different outcomes of interest. On first blush, many of the most intensively measured covariates may not be of great value - e.g., a 'snapshot in time' covariate measured with the goal of accounting for variation in detection may not be a very useful characterization of conditions that change over the course of a site observation period whose duration was 30 or more minutes. 
+
+The choice of covariates should be determined based on the priority outcomes of interest and the planned analyses to address the Park's priority information needs. E.g., all of those components should be figured out, then consideration given to important and **feasible-to-collect** covariates, then revisit the planned analyses, etc... My gut take is that much energy is being devoted to collecting data that, ultimately, won't be useful. See also, related comments from Elaine Furbish (summer 2019, relayed by Mary Hake).
+
+* **Taxa for which it is feasible to learn something**:  An important next step is to review the frequency of detection of each taxa, both in terms of the various phases of the season, and across years, to figure out:
+  + which are detected with adequate frequency to say anything reliably about their occurrence
+  + are potential candidates for being monitoring for northward migratory phenology; ...for southward migratory phenology;
+  + are potential candidates for being monitored for seasonal local abundance and/or breeding
+  + and other possible categories based on whatever outcomes of interest the Park identifies.
+
+Note that synthesizing that information is a valuable outcome from the monitoring program and is a prime example of 'Step 10' of the 'Road Map for Monitoring': *Learning how to Learn* and an essential step before figuring out the survey effort levels required to meet the Parks information objectives (e.g., by conducting power analyses, etc.)
+
+## Reducing Data Collection vs skipping a field season
+An important immediate Park concern regards the tradeoffs between reducing current survey effort vs skipping a field season. This was discussed on the conference call in Mar 2020. In general, rather than arbitrarily modify the existing survey, it seems fine (from a statistical perspective) to skip a field season if limited staff capacity has to be redirected elsewhere. In the interim, the Park should clarify their motivating information needs and, ideally, this assessment advanced either by the incoming Regional Biometrician, via contract with an experienced applied statistician familiar with issues in natural resource monitoring, or perhaps by a student under the mentorship of such a statistician. Relatedly, the Park should be aware that many natural resource monitoring programs have shifted to regularly scheduled but intermittent monitoring - e.g., every other year or every third year or (there are many possible combinations) 2 years of monitoring followed by 2 years of no monitoring, etc. The analyses are not substantially more complicated and the cost and capacity savings can be quite impactful. However, all such decisions, again, really depend on the Park's motivating information objectives.
+
+  
+  
+I've also included some of the basic survey effort data visualizations that we've already developed but haven't spent time on the associated narrative.
+
+
+* Issues to Resolve with content (narrative, figures, analyses)
+  + Use the TargetList index vectors in the 'data_wrangling.R' script to redo all the figures with species-specific panels so that they are sets of four figures, each of which should fit on a single page. This should order the panels by AOU species number and thus improve interpretation and use by avian biologists.
+  + decide on a 'frequency of occurrence' rule to winnow out the many species that don't appear with enough consistency to warrant wasting plotting space on their inclusion. In developing the rule, consider the implications of Audobon's Climate Watch List predictions for shifting species ranges and shifts in phenology.
+  + Modify survey_dates.R script to get a sense of when surveys were & when target species was first (or last) seen each year. E.g., separate out any filtering process stemming from survey effort levels and timing. (thinking some thing like showing open circles for survey events PRIOR to first sighting...)
+  + Consider some species N-ward and S-ward migration routes may differ.
+  + clean up structure of survey design section - consistent pattern in {Element Definition, Settings, Assessment}; as cleanly as possible separate space and time aspects of survey design (& effort) from spp-specific responses.
+  + What is up with 2008 surveys? why such distinct timing?
+  + Begin thinking about (Freq of Occurrence, Phenology, Abundance | target species) and then Richness - both Phenology (Day of Season) and across years.
+  + covariate distribution graphs (lots of univariate & bivariate things; around line 534);
+  + plot of total # spp sighted each season across years (around line 600)
+
+
+***
+# Introduction
+Since 2003, staff at Klondike Gold Rush National Historical Park (KLGO) have surveyed coastal waterbird species distribution and abundance multiple times each year from late April through late September (Coastal Waterbird Survey or ‘CWS’; [@Surdyk2018]).  This is sufficient history to warrant stepping back and assessing the monitoring program.  Such assessments are key to an adaptive monitoring program [@Lindenmayer2009], are an important and distinct phase to promote program, and institutional, learning and evolution [@Reynolds2016], and align with guidance from NPS' Inventory and Monitoring Division [@Gallo2018a], [@Mitchell2018].  
+
+Assessing a monitoring program focuses on four broad topics, each associated with a major development phase of the monitoring program (ibid):
+
+1. _Why_ - [Problem Framing & Information Objectives] Are the management objective(s) motivating the monitoring well articulated? Do they remain relevant and important?  
+
+2. _How_ - [Data Collection Design] Does the monitoring data collection design effectively addresses the information objectives? Given interim learning regarding system characteristics and improvements in measurement technologies, are the information goals (including accuracy and precision goals), actually feasible? If so, can the data collection be made more efficient, reducing the observation burden on staff resources?  
+
+3. _How_ - [Data Analysis Design] Do the data analysis methods effectively address the information objectives? Do the data analysis methods properly account for impactful features of the data collection design? Are more informative analyses available given interim improvements in methods?  
+
+4. _How_ - [Workflows & Reporting] Are workflows and related software systems in place to allow timely, and efficient, data management, analysis updating, reporting, and distribution of findings to target audiences of information users?  
+
+This assessment aims to address all four topics, but will focus predominantly on topics (i) Problem Framing & Information Objectives, (ii) Data Collection Design, and (iii) Data Analysis Design.  Since 'Problem Framing & Information Objectives' determine the relevancy of many of the potential assessment actions related to the other topics,  the assessment was drafted as a first stage of an iterative effort, providing high level feedback, including listings of potential detailed syntheses and workflow enhancement activities (such as improved database interface, automation of annual analyses and updating of syntheses, etc.).  With this foundation, further dialogue with KLGO staff regarding relevant 'Problem Framing & Information Objectives' and other priorities will determine which follow-on activities to pursue. 
+<!-- Key Findings / Next Steps -->
+
+(add overview of key findings?)
+
+# Assessment Methods
+The CWS monitoring program was compared against a recommended checklist of monitoring program components developed from published literature (Appendix 1). It identifies multiple component decisions associated with each of the major Phases of a monitoring program (briefly overviewed above).  For each component, the relevant aspects of the current CWS were reviewed, potential issues identified, potentially informative diagnostic analyses suggested, and recommendations provided.  The characterization of the CWS was based on KLGO protocols and reports (Table 1), a site visit (6/4-6/2018) and personal communications with the KLGO Natural Resources Program Manager (Jami Belt, winter and spring 2018), KLGO Resources Manager (Anne Matsov, summer 2018) and long-standing survey participants (Elaine Furbish, Skagway Bird Club, spring and summer 2018).
+
+# Assessment Results
+## Phase 1 - Problem Framing and Information Objectives
+*WHY* monitor? What potential decisions and issues should the observations inform?
+
+Ideally, the survey’s data collection and analysis designs are founded on clearly articulated *Information Needs* stemming from a clearly articulated management problem or question or goal  [@Fancy2009].  Such a problem or question or goal answers “Why is this information important?”. 
+
+A robust problem definition should include, among other aspects, the temporal and geographic scope of the problem; who has the authority to make decisions that could resolve or address the problem; what information about the resource is needed to improve the decision making (the information needs); and who are the stakeholders that are impacted by the decision and/or interested in the monitoring information. Stakeholder identification should include interested parties and their information needs in both near-term - for example, park interpretation and visitor education activities, as well as long-term - for example, regional-scale changes in migration patterns or assessment and improvement of projected climate change impacts on avifauna [e.g., @Wu2018]. A good understanding of multiple information needs and pathways to influence decision making will guide the required data analyses and reporting and outreach. 
+
+The information needs are what the monitoring effort aims to address [@Reynolds2012]. Even when the focus is simply the status and trend of a resource, there is an unstated expectation that someone will endeavor to achieve or maintain a desirable state or reverse an undesirable trend [@Reynolds2016]. Whomever has that responsibility and authority (person, office, or organization) is a priority stakeholder. They should not only receive the reports but also allowed an opportunity to clarify their information needs, including the desired precision and quality of information, the timing and format of reporting, and better understand what information is feasible to obtain (Averill et al. 2010).
+
+### Assessment findings:
+#### Motivating Management Problem, Question or Goal
+The 2003 coastal waterbird inventory and survey design was developed to address "a top priority bird inventory (need)" of the Southeast Alaska Inventory and Monitoring Network (Sharman et al. 2000) - namely, an inventory of waterfowl/shorebirds at KLGO [@Hahr2004].  This was deemed a priority due to the area’s expected avifaunal richness [@NABCI2000] and the limited availability of reliable observation records - mainly consisting of systematic surveys conducted by NPS staff in the early 1980s [@Hahr2004].
+
+The inventory's stated goal was to document the occurrence of 90% of the species of waterbirds likely to occur in KLGO "... [to] ...provide park managers with timely information that facilitates land management planning, helps track wildlife population and ecosystem change over time, and keeps resource managers apprised of changes that may require action before a crisis occurs" (ibid). 
+
+=> Thus the program appears to be intended to serve management information needs associated with land use planning, provide 'surveillance monitoring' of population changes and trends through time, and provide red-flags for potential developing crises.
+
+**Recommendations**
+
+=> **Park Resource staff should clarified and further refined the motivating needs in order to allow assessment of the adequacy of the current survey design and effort levels.** 
+
+What actual land management questions might such information inform? Have any occurred in the last 20 years? If that remains a valid goal, can the types of questions and decisions be refined and clarified? What sort of crises? How quickly do they need to be 'flagged'? What sort of ability to detect trend? Only local trend or regional or...? Trend in phenology or occurrence frequency or abundance or some other population feature? Clarifying these goals matters, for example, since monitoring phenology requires much less intensive survey effort than effectively monitoring abundance.
+
+#### Motivating Management Information Objectives
+The principal objectives were identified as (numbering added) “(i) to develop scientifically valid sampling designs for inventorying waterbirds and breeding landbirds in KLGO, and to collect baseline information on bird species (ii) occurrence, (iii) distribution, (iv) abundance, and (v) habitat associations in the park ” (ibid).
+
+While no Threatened or Endangered bird species were known to occur in KLGO, as of 2004, nine species on the Alaska Watchlist had been documented in the park (ibid), thus suggesting potential priority information needs associated with monitoring for changes in those species occurrence and abundance.  
+
+Potential secondary objectives mentioned include "investigations into the breeding ecology, phenology, reproductive success and population age structure of KLGO breeding birds" (ibid). Later reports mention additional objectives of estimating changes in species occurrence and composition [@St.Pierre2015], characterizing timing of peak spring waterbird migration and its relation to spring eulachon runs [@Surdyk2017]. 
+
+=> depending on how you classify things, this is up to 12 distinct information objectives.  Distinct information objectives may well require very different surveys methods, if not at least different levels of survey effort, and analyses.
+
+**Recommendations**
+
+=> **Park Resource staff should revisit and evaluate the relevance and importance or each of these distinct information objectives**, ideally ranking them at least into 'essential' versus 'nice if feasible' categories. This will provide the targets for actually assessing adequacy of the current survey design and analysis methods.
+
+#### Key Stakeholders
+Stakeholders mentioned or, more usually, implied in park reports include park superintendent and related managers, those charged with monitoring regional and internationally important bird habitats, the Skagway Bird Club (author of 'significant bird observations in SE AK' and contributor to AK summaries for 'North American Birds'), the Alaska Landbird Monitoring Survey and the Boreal Partners in Flight.  For example, Hahr and Trapp (2004) mention the intention to develop inventories and revise the bird checklist and atlas database for the Taiya and Skagway River watersheds in collaboration with the Skagway Bird Club.   
+
+**Recommendations**
+
+=> **KLGO Natural Resources staff should explicitly clarify intended stakeholders and 'information users', clarify their exact information needs in order to assure they will be met (or cannot be met), and develop list of contacts for distributing results and updates (perhaps includes as Appendix in SOP if not already).**
+
+=> Additional potential stakeholders include Audubon North America as part of their national Climate Watch program, which develops species distribution models under projected future climates. This group is especially interested in data from areas with repeat observations at sites and that include recording of effort data (date, time of day, duration, distance/area covered, etc.).  An example of their products is the recent watchlist of projected changes [@Wu2018]. 
+(Nicole Michel, Brooke Batemen; see email from Nicole to Joel 6/7/2018)
+
+
+```{r Data-Retrieval, eval=TRUE, echo=FALSE, warning = FALSE}
+# if (system("git config user.email")=="mward2@swarthmore.edu") 
+#      source("./scripts/data_retrievalSwarthmore.R")
+# else source("./scripts/data_retrievalNPS.R")
+
+#NOTE: working directory when knitting markup is /analysis/paper. So relative pathway needs to be ../scripts etc.
+
+source("../scripts/data_retrievalCSV.R") 
+
+```
+
+
+```{r Data_Wrangling, eval=TRUE, echo=FALSE, warning = TRUE}
+# reconstructs species_data tibble from tables read in by DataInput
+#
+source("../scripts/data_wrangling.R") 
+
+```
+
+
+## Phase 2 - Monitoring & Analysis Design
+**NOTE TO READER**: The rest of this is work in progress and consists of a mix of outline and notes, with some initial data visualizations. This is far from a draft narrative. **Proceed with Caution.**
+
+### Survey Design 
+
+*Spatial Component*
+
+IDEAL: The Upper Lynn Canal, including Skagway & Taiya river mouths and Nahku Bay (between Skagway and Dyea Point).
+
+REALIZED: The portions of Upper Lynn Canal visible in the eight census units defined based on standardized observation points established at public access points between Skagway and Dyea, including Skagway & Taiya river mouths and Nahku Bay [@Hahr2004]. The standardized observation points were established for each census unit to ensure the most complete coverage of the study area, and to promote consistency of area surveyed across personnel changes (ibid).
+
+> INSERT FIGURE FROM NRSS report, include survey points and denote visible portions of the area actually visible from each survey point.
+
+
+```{r SiteSurveyCompletion, eval=TRUE, cache = FALSE, include = FALSE}
+# dotplot of survey occurrences by unit and whether there were observations
+
+source("../scripts/survey_sites.R", echo=FALSE)
+```
+
+
+```{r Fig-SiteSurveyCompletion, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.asp=1.3, fig.cap="Each survey in a given year (row) is shown as a circle on the Julian date of the survey. Filled circles denote surveys where at least one of the target species of waterbirds was observed (e.g., one of the 82 species denoted as 'Waterbird' in the data field 'Category').",warning=FALSE, out.height="60%"}
+
+print(plot_unitSuccess)
+```
+
+
+* **Considerations**:
+  + At this broad level, there don't appear to be any sites at which surveys are consistently unable to be completed (using the flag of detecting any of the target species as a signal of successful survey), not even site 1 (Figure \@ref(fig:Fig-SiteSurveyCompletion)).  A more restricted list of target species might change this conclusion.
+  + Over the course of decades the regions visible from the standardized observation points may change due to vegetation growth, new structures on private lands, etc. Similarly, seasonal patterns of vegetation growth may constrain the visible region as the season progresses at some standardized observation points. This is a minor point but should be considered in analyses focusing on those time scales. If it isn't part of the SOP already, provide a map clearly depicting the intended survey area as a guide for field staff to promote consistency of area observed across changes in personnel.
+  + (Design point to ponder further) Potential confounding of sites or route sequencing and tidal influence? The SOP says to survey units in the sequence 1, 2, 3, 4, 5, 6, 8, 7, or the reverse, depending on the timing of tide (due to impact on census unit 7).
+  + Other?
+
+*Temporal Component: Season initiation and end*
+
+IDEAL: (season initiation & duration) Apparently (this should be confirmed) from the initiation of northward migration by the earliest of the target species that pass through the study area to the conclusion of southward migration by the latest of the target species that pass through the study area. 
+
+REALIZED: [@Hahr2004]: "Census units were [scheduled to be] surveyed once per week in late April and May and bi-weekly during late summer and fall (August – mid September). Surveys were conducted as weather and scheduling permitted... Surveys were only conducted under optimal weather conditions; however, occasionally conditions deteriorated during the course of a survey making species identification difficult (especially in the case of low clouds, fog and wind)."
+
+
+* **Considerations**:
+  + The annual dates of the first and last survey each year has varied by over a month (Figure \@ref(fig:Fig-SiteSurveyCompletion)), even ignoring late 2007 and early 2008.
+  + Ideally, there should be clear description of the cue used to prompt the start of a survey season and, importantly, the information goal that underlies that decision. This is increasingly important as the potential impact of climate change on migration phenology increases.
+  + The period for 'once per week' surveys is intended to capture migration (based on reports). If the goal is to assess potential changes in migration timing, should assess whether it is feasible to survey with an adequate frequency *prior* to onset of migration for the target species so as to be sure to capture both the beginning and the end of the northward / southward migration periods.  This may require a greater frequency of surveying than is feasible to maintain. Even if capturing phenology changes is of secondary importance, those changes will impact when surveys should be conducted (and the intensity at which they are conducted) even if the information goal is to assess frequency of occurrence or the even more challenging goal of abundance. 
+  + the information goal isn't to assess potential changes in phenology for target species period of 'Ideally, the reasoning for the different survey frequencies ('once per week' and 'bi-weekly' periods) should be directly tied to explicit information goals of the survey and the historic data used to assess the feasibility of actually meeting those goals.  It may be found that less frequent surveys will meet the same information goals w/ acceptable levels of precision.
+  + consider graphical summary assessing consistency in attaining weekly targets defined above.
+
+
+
+```{r SurveyWeeklyFrequency, eval=TRUE, cache = FALSE, include = FALSE}
+# dotplot of survey frequency each week
+
+source("../scripts/survey_sitesWeekly.R", echo=FALSE)
+```
+
+
+```{r Fig-SurveyWeeklyFrequency, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.asp=1.2, fig.cap="Each week with any surveys in a given year (row) is shown as a circle on the week of the survey. The size and fill intensity of the circles denote the number of surveys that week (bigger circle and lighter fill denote more surveys). Vertical lines denote, approximately, the beginning of April, May, June (black line), July, August (black line), and September. In many years the survey intensity has been much more than the stated targeted frequency of 1/wk in the early season and 1/every other week in late season.",warning=FALSE, out.height="60%"}
+
+print(plot_WeeklyFrequency)
+```
+
+
+*Survey Timing and Changes in Phenology*
+Want to see if the survey design's start and end dates each season need to be modified to account for any observed changes in phenology (due to climate change, really). Ultimately need to review Audubon's Climate Change Watch List and see if any of their target species are observed in this effort.
+
+
+```{r SurveyDates, eval=TRUE, cache = FALSE, include = FALSE}
+
+# scatterplot of species' first and last sightings compared to survey season start
+source("../scripts/survey_dates.R", echo=FALSE)
+```
+
+
+
+```{r Fig-SurveyDates1, echo=FALSE, eval=TRUE, cache=FALSE, fig.height=20,fig.width=12, fig.show= 'asis', fig.cap="The date of the first sighting of each species each year. The solid line connects the dates of the first survey each year. Note that many of the species are detected on the very first survey, thus eliminating any insight into shifts to earlier migratrations. THIS FIGURE NEEDS TO BE CUT INTO MULTIPLE SEPARATE FIGURES BASED ON FAMILIES.", warning=FALSE}
+# fig.asp=1.4, major candidate for cutting into multiple plots
+print(plot_timing_1)
+```
+
+
+
+(migration) 1 per wk, Apr 27 - May 20; (breeding) 1 per 2 wks, Jun 6 - Jul 18; (migration) 1 per wk, Aug 1 - Sept 28.
+2016: 17 surveys total
+ Questions: How define beginning & end of breeding period?
+Info goals from migration periods? From breeding periods? 
+Design options to reduce frequency?
+
+Diagnostic analysis=> 
+.assessment of impact on priority info goals of different frequencies?
+.spp specific occurrency by survey date across years - capturing onset and end of migration?
+.other assessments of survey timing relative to phenology of spp
+.mine FB, Eagle Chat, others for date of first occurrences (see 2016 report); Elaine. Requires clarifying information goals of survey vrs ‘first occurrence’. E.g., not tail behavior.
+
+
+*Diurnal Temporal Component*
+(diurnal timing) Determined by tidal cycle at census unit 7 in relationship to daylight period.
+
+
+REALIZED: ([@Hahr2004], pg 13): "Surveys were conducted as weather and scheduling permitted and dates/time were not selected at random."
+
+*Observation Process*
+[@Hahr2004], pg 13: Observers counted and identified all birds visible within each unit and
+documented birds opportunistically observed while moving between units.
+Counts were made by scanning the census units with Bushnell Legend 10 x 42
+binoculars and a Bausch & Lomb 20-60 x 70 spotting scope until the observer
+was able to quantify all visible birds in the unit. 
+
+Data were recorded on standardized data
+forms developed after Collins et al. (2001) (Appendix B). ArcView shapefiles of
+the observation points and census units were created for use in the park’s GIS.
+All data, original data forms, and field notes were archived at KLGO.
+
+**Comments**
+
+*  Detection issues
+*  Covariates impacting detection; spp-specific rates, implicit estimation via BHM?
+
+
+```{r EDA_SurveyTiming, eval=FALSE, cache = FALSE, include = FALSE}
+# dotplot of survey times by year
+
+source("../scripts/survey_timing_EDA.R", echo=FALSE)
+```
+
+
+
+```{r Fig-SurveyTiming1, echo=FALSE, eval=FALSE, cache=FALSE, fig.show= 'asis',fig.asp=1.4, fig.cap="The annual dates of the first and last survey have both varied by over a month across the years."}
+
+print(plot_alldates)
+```
+
+
+
+
+
+
+```{r SurveyEffort, eval=TRUE, cache = FALSE, include = FALSE}
+source("../scripts/survey_duration.R", echo=FALSE)
+```
+
+
+
+
+```{r Fig-SurveyEffort, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.asp=1.4, fig.cap="The amount of time spent at each site each survey varied widely across each season, each year, and across sites.",warning= FALSE}
+# fig.asp=0.618,
+print(plot_duration)
+```
+
+
+
+*Survey Effort*
+
+The time spent at each site during a survey has varied widely across the years, especially at Sites 1, 7, and 8 (Figure \@ref(fig:Fig-SurveyEffort)).  This variation in survey effort may be due to changes in numbers of birds occurring (and hence needing to be ID'd and recorded), variation among observers in identification skills, changes in visibility and area available for consistent viewing at each site, as well as potential changes in protocol across the years.  This variation in survey effort should be considered in any analysis of changes across years in occurrence or frequency of a species, or richness.  Depending on the analysis, this might best be done by adjusting the response variable from 'counts' to 'counts per unit effort', weighting observations by survey effort, or considering how survey duration might be accounted for as a covariate.
+
+Species: 
+Targets: loons, grebes, cormorants, herons, ducks, geese, plovers, sandpipers, gull, alcids, [kingfishers]
+Questions: clarify role of kingfishers.
+
+Incidental: 48 other spp
+
+
+
+> MADELEINE: add a graphic of spp frequency of occurrence (maybe some panel-rich figure, one panel per spp, showing annual average percentage of daily observations in which spp was sighted - as line-connected points?- ordered from most frequently observed spp to least frequently. (e.g., use facets). x axis is Day of Season, y axis is % as decimal [0, 1.0], curves for each year; facet by species.
+
+
+```{r EDA_AllSpp_Frequency, eval=TRUE, cache = FALSE, include = FALSE, warning=FALSE, echo=FALSE}
+
+source("../scripts/occurrence_freq.R", echo=FALSE)
+
+```
+
+
+```{r Fig-AllSppFreq1, echo=FALSE, eval=TRUE, warning=FALSE, cache=FALSE, fig.show= 'asis', fig.height=20, fig.width=12, fig.cap="The percentage of surveys each year during which a species was detected at any site. Lower percentages likely reflect migratory or rare species, higher frequencies (seasonal?) residents. [Ultimately review this for what it tells about which target species occur with adequate regularity to actually support monitoring change in the outcomes of interest. Maybe something about new spp showing up?]"}
+
+print(plot_occurrenceYear)
+```
+
+```{r Fig-AllSppFreq2, echo=FALSE, eval=TRUE, warning=FALSE, cache=FALSE, fig.show= 'asis', fig.height=25, fig.width=10, fig.cap="blah blah about consistency in target species occurrence. Maybe something about new spp showing up?"}
+
+#print(plot_occurrenceDate)
+```
+
+
+Questions: are these all migratory? Any year-round residents? Any of special concern? 
+Any especially problematic for detection on water or identification of spp?
+
+
+
+
+
+
+
+
+> SECOND graph - similar but showing last day of the season the species was observed each year.
+
+```{r Fig-SurveyDates2, echo=FALSE, eval=TRUE, cache=FALSE, fig.show= 'asis', fig.height=20, fig.width=12, fig.cap="The last sighting of each species each year.", warning=FALSE}
+
+print(plot_timing_2)
+```
+
+
+> THIRD graph - x axis is time of day, y axis is week of season, open circles for days with completed surveys, filled circles for surveys (times of day) when target species was observed in any year; facet on target spp. Or consider using the 'time of day' binning discussed in the Site Accessibility graphs (above). THIS IS SECONDARY PRIORITY - don't really like lumping all years together but no other ideas at the moment.
+
+
+Narrative on how well the current surveys are capturing the Spring arrival and Fall departure of each of the targeted species (\@ref(fig:Fig-SpeciesTiming)). Implications for informing Audubon Climate Change Watch or national phenology network, yadda yadd.
+
+
+```{r Fig-SpeciesTiming2, echo=FALSE, eval=FALSE, cache=TRUE, fig.show= 'asis', fig.height=25, fig.width=12, fig.cap="For each of the target species, the dates on which they were observed in any of the sample areas."}
+
+print(plot_phenology)
+```
+
+
+
+
+*Sample Frame* 
+Spatial: same coverage as Target Frame. Area split into eight survey areas [see @Hahr2004].
+Questions: Access to all units? Ease of observation of different units? Ease of distinguishing boundaries?
+*Madeleine later* Diagnostic analysis => value of all units - only some spp in unit X?; “unit by species occurrence” relationships?
+
+*Sample Selection process* - 
+Currently survey all of frame (‘census’ of units); no spatial sampling uncertainty. 
+All spatial uncertainty comes from Observation Process and detection issues.
+Temporal sampling uncertainty remains.
+
+Questions: feasible to reduce # of units? See Qs above about ‘unique contributions’ of each unit. Logistic considerations? What effort level is feasible?
+Diagnostic analysis => any ‘representative’ units? How would that be defined?
+
+
+
+
+Questions: design options for confounding factors?
+Duration across eight units: feasible to pull off? 
+issue of bird movement between units? Anyway to bound potential bias?
+Design options?
+
+
+
+Monitoring Design
+Membership Design (panels, etc.)
+Single Panel
+
+Revisitation Design
+W/in Year; varying effort levels (strata in time across seasons)
+Between Years
+Always Repeat (pure panel), every year
+Questions: feasbility of not doing every year? What are information goals and triggers?
+
+
+Response Design 
+Attributes & Measurements
+Focal targets vrs all species
+Priority Spp for region?
+PSG?
+At Risk Spp (CCRP?)
+Audubon AK spp of concern? See Audubon Climate Report. Relevant spp (intersection with spp list)
+
+
+
+###Observation Process
+Question: 
+How determine boundaries? Visual markers.
+How handle movement of birds into and out of unit? Check SOPs but basically ‘until things stop’. Problem is that that is an accumulating approach that will bias high areas with lots of productive habitat and/or well timed relative to changing tidal conditions and sequencing of survey.
+How handle tendency to record everything of note: e.g., recording observations in neighboring units when really supposed to be focused on this unit. E.g., variation in time observing and effort observing across units & sampling events. This fails to track actual observation activity (time) devoted to each unit as well as preferential bias to overestimate use in areas. Think about Forsell & Zweifelhofer?  Chat w/ Emily & Mark Otto & Andy?
+#### Covariates 
+- captured & not captured. Value, use in analyses; more reliable alternative data sources; alignment of spatial scales of interest and time scales of interest.
+
+Lack of control over time at each site; portion spent traveling between observation points, variation in number of observation points for each site.
+
+Variation in survey effort across sites, across per unit area, across surveys (days), etc.
+
+Major weather conditions (Northerlies, Southerlies) - simplify conditions to these
+Unit 1 - recording and impact of presence & # of cruise ships in dock, helicopter tours, etc., etc., other human disturbances.
+
+Distinguish value of covariates for act of (i) presence/absence assessment, (ii) abundance count, (iii) composition & breeding state.
+
+Check SOP to clarify categorization of conditions.
+
+Temp and wind greatly burden data collection process (slowing down greatly).
+Variation in observer #, training, and skill across surveys, across years
+
+*Madeleine early* Diagnostic analyses =>
+.distribution of time duration at each site by date and year
+.correlation across units?
+.average surface area per unit
+.something about sequencing of observation sites (e.g., confounding with tidal state)?
+.distribution of observers by survey date by year
+.distribution of observer experience(?)  by survey date by year?
+
+#### Detection issues associated with survey conditions
+>MADELIENE: Next couple plots are priority.
+
+.distribution of weather conditions
+.distribution of survey time by weather conditions
+.quick diagnostics to ID covariates seldom recorded, not consistently recorded, consistently valued (e.g., no basis for contrast), etc.
+.species specific counts w/in season by weather conditions and wave conditions
+.species occurrence by wave conditions & weather conditions
+.species age and composition by wave conditions & weather conditions
+.total # species by weather conditions, wave conditions; internally consistent contrasts to demonstrate value, or lack thereof, of current covariates.
+.richness by major weather conditions (Northerlies, Southerlies, etc.) and for each spp
+.diagnostic to ID key survey times to ensure high quality observers?
+.consistency in ‘breeding periods’ across years (as captured in data)
+
+```{r Covariates, eval=TRUE, cache = FALSE, include = FALSE}
+#source("../scripts/temp_covariates.R")
+```
+
+Value of site-specific covariate recordings vs available ‘local’ weather (Skagway weather observations from airport - wind direction & speed, temp, etc.)
+
+Ppt Codes: 0 - none, 1 - fog, 2 - drizzle, 3 - showers, 4 - light rain, 5 - moderate rain (steady), 6 - heavy rain, 7 - sleet, 8 - light snow, 9 - mod snow, 10 - heavy snow
+Beaufort scale codes: 0 - < 1 mph (air calm); 1 - 1-3 mph (smoke drift show direction of wind); 2 - 4-7 mph wind felt on face, leaves rustle; 3 - 8-12 mph leaves & small twigs in constant motion; 4 - 13-18 raises dust, loose paper, moves small branches; 5 - 19-24 small trees in leaf sway, crested wavelets form on inland waters;
+Wave height: 0 - calm; 1 - scaly ripples, no foam crests; 2 - small wavelets, crests glassy, no breaking; 3 - large wavelets, crests begin to break, scattered whitecaps; 4 - small waves, becoming longer, numerous whitecaps; 5 - moderate waves, many whitecaps, some spray
+SPP
+#
+Age (Adult, imm, juv, mixed, unknown)
+Composition - M, F, Fe/juve, Mixed, Unknown)
+Breeding Status - pairs, etcc; 24 potential codings see SOP #3.
+
+Recommendations => 
+Clearly record standardized observation locations on map and include in SOP to ensure consistency across observers and personnel.
+Issue of veg growth reducing visible portion of unit from each viewpoint - long-term confounding factor, etc.
+Value of covariates, recommendations on what to drop, what to include
+Observation quality notes to support assessment of extreme observations, etc.
+
+Detection issues (seeing and recording available birds)
+Design options for improving detection & measurement
+Hmm? Lit? Emily, Aaron C., Kathi, Mark Otto, Andy Royle?
+Feasible to do some sort of double observer process - coordinate immediately after survey?
+Only conduct intermittently per season rather than every time? E.g., like sightability functions?
+Major drivers of sightability?
+Capturing uncertainty on spp id
+Capturing uncertainty on spp count
+UAVs?
+Observer training & behavior classification
+Training materials from Kodiak or Homer or Cordova or Haines or Juneau or Yakutat or…?
+
+####Species identification issues
+Priority ID concerns:
+Commonly encountered species that can be difficult
+Work with Elaine & Heather & Laura to develop list of commonly confused species based on those commonly encountered (database or Skagway Bird Club sightings)
+E.g., scoters, scaup, murrelets, etc.)
+Target Spp of interest
+Training materials or other improvements
+Db error checking?
+Other?
+Other expected sources of bias
+Species ID
+Behavior classification
+Changes in equipment
+Summary Metrics
+Confounding factors & Covariates
+
+
+###Analysis Design
+Priority 
+Summaries of interest 
+(tie to Conceptual Model and Information Objectives)
+Associated analyses:
+
+Number of species sighted per year: 2003-2016 (source 2 found 2003-2009)
+.Waterbird and non-waterbird species
+.Positive association between species richness and year of survey, when excluding year 2014, which started later than usual. R-squared = .54.
+.Species richness within year: 2016
+.Individual and max. numbers of observed counts for each species for year 2016, with first and last sightings noted.
+.Peak abundance/species richness identified with observed species counts and individual sightings across surveys during 2016 season
+.Peak abundance (May 4) observed to be in tandem with spring euchalon (April 21-)
+.Species richness peaked May 4-11
+
+Observer bias: variation in number of surveys and length of monitoring season
+.2010: No seasonal technician; only sporadic surveys
+.2014: Surveys begun 1 month late (May 22)
+.Across years: observer turnover rate, varying experience
+
+Number of surveys across census units per year (2003-2009) & distribution of survey dates
+
+MADELEINE
+
+Percent of expected waterbird and breeding landbird species (174) confirmed (158; 91%)
+
+Diversity
+.Simpson’s Diversity Index (1/D) (2003-2009): heavily sensitive to species richness
+.Q statistic (2003-2009)
+.Simpson evenness measure: (1/D)/# species, where values approaching 1 signal more equal distribution (not sensitive to species richness)
+
+Comparisons across census units:
+.Unit characteristics
+.Area of unit (square km)
+.Shoreline habitat (meters)
+.Waterbird characteristics:
+.Average number of waterbirds per survey per square km
+.Diversity measures
+Analysis across dates each year:
+.Number of species; number of birds
+.Diversity measures
+
+Reporting schedule
+Questions: Who does the analyses? Interest in setting up as Reproducible Research draft report? 
+General delay in reporting? When normally completed? 
+
+
+Secondary
+Summaries of interest
+Associated analyses
+Reporting schedule
+
+
+Survey effort levels / Change detection targets / Power to detect changes
+Reiterate targets for ‘local’ inference vrs contribution to regional trends assessments
+
+
+
+1 Biotech conducts just this & amphi monitoring.
+
+
+### Data Management & Reporting Structures / Software / Workflows
+Data Models
+Design Requirements / User reporting needs
+
+
+Elaine: Can put stuff in but can’t get it out of existing ACCESS db. Problematic. Bottleneck for analyses and summaries.
+Ebird - boundaries don’t include Skagway burough. Rather, formerly unincorporated area including Skagway, Haines, and Angoon - too broad, not useful.
+
+The current database is written in Microsoft Access version XX for 32-bit operating systems. Software and machine operating systems have advanced enough for this to cause unnecessary burdens for accessing and importing the data for analysis and reporting in common statistical analysis environments (e.g., R). Recommend the Park request the ARO GIS shop to convert the database to an uptodate software. 
+
+*JOEL: Talk to Angie about what this would entail.*
+
+_Recommendations_ work with GIS shop to clean up db, improve reporting & query support; shiny app; reproducible research scripts to generate automatic reports? Shiny app to interface?
+
+
+
+```{r get-data, eval = FALSE}
+# Note the path that we need to use to access our data files when rendering this document
+my_data <- readr::read_csv("../data/raw_data/my_csv_file.csv")
+```
+
+# Discussion
+
+# Conclusion
+
+
+# Acknowledgements
+
+<!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
+##### pagebreak
+
+# References 
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+<div id="refs"></div>
+
+
+***
+#### Misc draft text currently removed
+_Decision Makers_
+Who are target audiences for this information?
+Who uses it or may use it?
+Local contact: C. Elaine Furbish, Skagway Bird Club, Google Site
+Predominantly historical park; limited resource staff and capacity
+Visible natural resource of interest to local community and visitors; interp and educational opportunity; topic of information requests; provides ‘community service’ given absence of any other agency with natural resource staff;
+Annual report (time lag?); National Resource Condition Assessment; other? State of the Park?
+Potential for contribution to regional, flyway, and WASO programs (e.g., CCRP & Audubon climate watch, etc.)
+Current sightings passed to local bird club & used by avian-interested visitors
+Used in quarterly regional ‘significant bird observations’, which in turn is used to develop the Alaska-wide summary for the journal North American Birds (published by the American Birding Association http://www.aba.org/nab ) and includes ‘...sightings of birds that are out of range or out of season or occur regularly in small numbers, noteworthy breeding records, unusually large or small numbers of a particular species, unusual migration dates, etc….’ (S. C. Heinl, 2017, Summary of SE AK Bird Observations, June-July 2017, accessed 2018 June 6).
+Queries to Heather Renner & Robin Corcoran re: PSG-type users, etc.
+Opportunity for community based monitoring to track projected spp impacts of climate change, change in phenology, occurrence, abundance, etc.?
+
+##### misc notes re: potential (Stakeholder, Info Needs) combos
+_Decisions_
+What types of decisions is it / will it be used for?
+(specify for each target audience/ end user)
+No specific decisions
+Current:
+KLGO - spp lists, phenology of occurrence (guidance to visitors), trends in richness (NRCA), abundance?
+Skagway bird club - spp list, current occurrences (activity re: rare & unusual)
+SE AK / Regional - spp lists; unusual sightings, etc. (spp occurrences & broad seasonal timing).
+AKR -
+WASO/NPS - ??CCRP?? Question to Gregor & Mel (AK Audubon). Could be used for garnering community engagement in Climate Watch & other national efforts associated with Audubon’s Climate Report. Not used in continental analyses.
+“One key message that I want to emphasize is that the focus of this work was purely on climate suitability.  What this means, as we indicate in the briefs’ “Important” box up front and “Caveats” section further back, is that significant changes in climate suitability, as measured here, will not always result in a species response, and all projections should be interpreted as potential trends. Multiple other factors mediate responses to climate change, including habitat availability, ecological processes and biotic interactions, dispersal capacity, species' evolutionary adaptive capacity, and phenotypic plasticity (e.g., behavioral adjustments). Ultimately, models can tell us where to focus our concern and which species are most likely to be affected, but monitoring is the only way to validate these projections and should inform any on-the-ground conservation action.” Gregor Schuurman, email to DENA
+
+Potential:
+KLGO: 
+(easy) - changes in occurrence (spp, season scale); changes in phenology (migration timing, by spp; breeding timing, by spp); broad (order of magnitude) changes in abundance (index); broad (?) changes in composition (by spp & timing of survey)?; species occurrence x unit (~habitat?) - refine expected lists per survey and develop targeted SOP training materials; 
+(harder) - finer changes in abundance; finer changes in composition and age; ??? 
+
+What Objectives are the decision makers hoping to achieve by using this information?
+
+Over what spatial scales is the information being used? 
+e.g., at the park, in the community, regional scale, flyway scale, nationally, internationally
+For each spatial scale of interest, what are the associated time scales of interest for detecting changes?
+E.g., annual, w/in season, spring vs fall, etc.
+
+Q: compiling and assessing regional trends in waterbirds in SE AK?
+Asked of Heather Renner (Ak Maritime), Robin Corcoran (Kodiak NWR)
+Answers:
+Not really; regular discussion at PSG but no one has taken it on. 
+Kathy Kuletz works on statewide trends in at sea seabird observations;  Piatt GLBA work (& Martin Renner); 
+Robin C: “There's always talk at the PSG meeting about the North Pacific seabird colony database, or some variation of that database for marine birds, but it never gets anywhere. Basically there is no money for a database manager. I've been submitting my data to Rob Kaler in Migratory Bird Management, but I think that's just for storage until the money for a database manager materializes. More recently Rob Suryan w/NOAA has been interested - for the North Pacific Pelagic Seabird Database. You might want to contact him, he's leading the Gulf Watch Alaska Long-Term Ecosystem Monitoring Program, and maybe interested in this work.”
+
+NPS/Audubon:
+Wu et al. 2018. Projected avifaunal responses to climate change across the U.S. NPS. PLOS ONE.   Appendices include projected park-specific turnover, colonization, and extirpations projections - potential to test with this survey. Would require discussions w/ CCRP & ARO - ideally as a coordinated effort with, say, AK Audubon and ACF(?) or LCCs as tracking metric.  
+Appendices include “Potential management goals and activities for parks, organized by trend group.”
+
+Melanie AK Audubon: IBA requires demonstrating higher than ‘usual’ densities (relative to surrounding area).
+
+Nicole Michel & Brooke Batemen Audubon National Science Team: of interest and possible use in national scale quantitative analyses or climate species distribution models. “Scaling up and integrating datasets across regions, including data from different goals, is something that we’re starting to do in other regions. “
+
+Occurrence, Richness
+Phenology (migration, breeding)
+Abundance - Even without the structure needed to estimate detection probability, if the same protocol is used annually this data could be used to produce long-term trend indices for the study area.
+(competing staff priorities - peak (?) usually aligns with hooligan run. Possibly reduce summer frequency?)
+
+Diagram the Conceptual Model of the system
+E.g., create an influence diagram, being sure to denote the
+Fundamental & Means Objective(s)
+Factors influencing their achievement (aka ‘system drivers’)
+Associated management or policy decisions and/or potential actions.
+Include a written summary of the literature upon which the conceptual model is based.
+
+#### Misc QUOTES for potential use later
+This protocol addresses one monitoring question with three objectives: (1) what is the annual nest density and reproductive (fledgling) success in known Hawaiian petrel colonies, (2) what are the long-term trends in colony distribution and density monitored in approximate 5-year intervals, and (3) are these affected by predator control? The first goal of monitoring is to obtain unbiased estimates of Hawaiian petrel nest density and reproductive (fledging) success from known colonies in HAVO and HALE in order to detect changes in colony growth or decline. The second goal of monitoring is to periodically (approximately every five years) obtain unbiased estimates of nest density from potential Hawaiian petrel habitat. This information can be used to assess changes in density and distribution of subcolonies across the landscape. The third goal is to estimate nest density and fledging success in areas undergoing different management regimes to assess effectiveness of management. Benchmark levels of these estimates could serve as warnings of the need for modified management or further investigation of these colonies. 
+
+From another report but quotes from Olsen et al. (1999):
+Olsen (et al. 1999) noted that “Most of the thought that goes into a monitoring program should occur at this preliminary planning stage. The objectives guide, if not completely determine the scope of inference of the study and the data collected, both of which are crucial for attaining the stated objectives.” Olsen goes on to say that a “clear and concise statement of monitoring objectives is essential to realize the necessary compromises, select appropriate locations for inclusion in the study, take relevant and meaningful measurements at these locations, and perform analyses that will provide a basis for the conclusions necessary for meeting the stated objectives.”
+
+Fancy, Gross, and Carter (2009):
+The development of monitoring objectives, which provide additional focus about the purpose or desired outcome of the monitoring effort, was an iterative process that sometimes required several years to refine. Early in the design process, monitoring objectives were stated in more general terms, such as “Determine trends in the incidence of disease and infestation in selected plant communities and populations”, whereas the final monitoring plan and protocols provided monitoring objectives that met the test of being realistic, specific, and measurable (e.g., “Estimate trends in the proportion, severity, and survivorship of limber pine trees infected with white pine blister rust at Craters of the Moon National Monument”; Garrett et al. 2007). 
+
+Structure from Northeast Coastal and Barrier Network
+https://irma.nps.gov/DataStore/Reference/Profile/2195238
+Justification => Vital Sign => Monitoring Goal => Monitoring Questions => Monitoring Objectives => Measures (eg pg 55 & 56)
+
+Clarify Objectives of the Decision Makers 
+Among the decision maker objectives identified in 1.b.ii, clarify 
+the Fundamental Objective(s) from 
+the Means Objectives, then
+diagram the Objectives Hierarchy.
+Identify the Attributes that need to be monitored to assess achievement of each of the objectives. (‘Concepts by Theory’, Ford 2001)
+Identify the Measurements selected to characterize each attribute. (‘Concepts by Data’, Ford 2001) [WHAT]
+Identify any Threshold values associated w/ each Measurement
+
+# To Do
+* Issues to Resolve with content (narrative, figures, analyses)
+  + Framework - review & incorporate relevant from I&M national program guidance for frequency of analyses & reporting, etc., etc.
+  + Winnow out target species that do not occurr w/ adequate frequency to report on. E.g., those only seen <3 or 5 years??? Look at phenology graphs and determine threshold to apply. Consider some species N-ward and S-ward migration routes may differ.
+  + finish script uploading AOU data csv object & using to order Target Species
+  + What is up with 2008 surveys? why such distinct timing?
+  + Think about Covariate EDA, if any...change in observers?
+  + Begin thinking about (Freq of Occurrence, Phenology, Abundance | target species) and then Richness - both Phenology (Day of Season) and across years.
+  + clean up structure of survey design section - consistent pattern in {Element Definition, Settings, Assessment}; as cleanly as possible separate space and time aspects of survey design (& effort) from spp-specific responses.
+  + covariate distribution graphs (lots of univariate & bivariate things; around line 534);
+  +plot of total # spp sighted each season across years (around line 600)
+
+# Issues to Resolve with Rmarkdown, Knitr, Github, etc.
+- conversion from paper.md to paper.pdf (pandoc issue?) 
+- adding files to .gitignore
+
+##### pagebreak
+
+
+### Colophon
+
+This report was generated on `r Sys.time()` using the following computational environment and dependencies: 
+
+```{r colophon, cache = FALSE}
+# which R packages and versions?
+devtools::session_info()
+```
+
+The current Git commit details are:
+
+```{r}
+# what commit is this file at? You may need to change the path value
+# if your Rmd is not in analysis/paper/
+#git2r::repository("../..")
+```
